@@ -2,10 +2,13 @@ NAME=a.out
 
 FLAGS = -Wall -Wextra -Werror
 
+
 all: $(NAME)
 
-$(NAME): lib
-	gcc $(FLAGS) ./libmat/libmat.a ./libcam/libcam.a ./libmath/libmath.a ./libvec/libvec.a ./shapes/shapes.a ./libray/libray.a main.c -o $(NAME)
+$(NAME): lib $(OBJ)
+	gcc  ./main.c ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a -lm $(FLAGS) 
+
+# 
 
 lib:
 	make -C ./libcam

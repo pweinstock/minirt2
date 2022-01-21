@@ -13,7 +13,7 @@ NAME = shapes.a
 all: $(NAME)
 
 $(NAME): ../libray/libray.a ../libmat/libmat.a $(OBJ)
-		ar rcs  $(NAME) $(OBJ) ../libray/libray.a ../libmat/libmat.a
+		ar rcs  $(NAME)  ../libmat/libmat.a ../libray/libray.a $(OBJ)
 
 ../libray/libray.a:
 	make -C ../libray

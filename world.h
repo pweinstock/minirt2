@@ -4,8 +4,10 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "libcam/cam.h"
-#include "shapes/shapes.h"
+// #include "libmat/material.h"
 #include "libmath/my_math.h"
+#include "libvec/t_vec3.h"
+#include "shapes/shapes.h"
 
 typedef struct s_world
 {

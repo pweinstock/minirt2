@@ -18,16 +18,16 @@
 
 void ft_readinput(t_world* world)
 {
-	int i;
-	int	j;
+	// int i;
+	// int	j;
 	int ball;
 	// double choose_mat;
 	// t_vec3 center;
 	ball = 0;
 
 	world->hittabels = (t_object *)malloc(sizeof(t_object) * 22 * 22 +1);
-	i = -11;
-	j = -11;
+	// i = -11;
+	// j = -11;
 
 	world->hittabels[ball].mat.scatter = scatter_lambertian;
 	world->hittabels[ball].mat.albedo = setvec(1, 0.1, 0.1);
@@ -205,7 +205,7 @@ void ft_make_imige(t_world *world)
 
 int main ()
 {
-	sranddev();
+	// sranddev();
 	t_world world;
 	ft_readinput(&world);
 	ft_make_imige(&world);

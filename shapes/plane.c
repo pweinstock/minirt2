@@ -4,26 +4,35 @@
 
 bool hit_plane(t_ray r, t_object* object, double t_min, double t_max, t_hit_record* rec)
 {
-	float denom = dot(object->orientation, r.dir);
-	if (denom > 1e-6)
+
+
+	double d = dot(object->center,object->orientation); //abstand urspring flaeche
+
+	double oben = d - dot(object->orientation, r.origin);
+	// if (oben == 0.0) // unendlich 
+	// 	return FALSE;
+	double unten = dot(r.dir, object->orientation);
+
+	if (unten == 0.00)
+		return FALSE;
+
+	double ret = oben / unten;
+
+
+	// dprintf(2, "%f min %f max %f rec.t %f strahl %f %f %f\n", ret ,t_min, t_max, rec->t, r.origin.v[0], r.origin.v[1], r.origin.v[2]);
+	if(ret < t_min || ret > t_max)
 	{
-
-		t_vec3 p = minus_vec_vec(object->center, r.origin);
-		double root = dot(p, object->orientation);
-
-		// dprintf(2,"%f %f %f %f\n", root, rec->t, t_min, t_max);
-		if(root > rec->t || t_min > root || t_max < root)
-		{
-			return FALSE;
-		}
-
-		rec->t = root;
-		rec->p = at(r, rec->t);
-		// t_vec3 outward_normal = division(minus_vec_vec(rec->p, object->center), object->radius);
-		// set_face_normal(rec, r, outward_normal);
-		rec->front_face = 0;
-		rec->material = &object->mat;
-		return TRUE;
+		// dprintf(2, "False\n");
+		return FALSE;
 	}
-	return FALSE;
+	rec->t = ret;
+	rec->p = at(r, rec->t);
+	// dprintf(2, "kolisions point %f %f %f", rec->p.v[0], rec->p.v[1], rec->p.v[2]);
+	t_vec3 outward_normal = minus_vec_vec(object->orientation, object->center);
+	set_face_normal(rec, r, outward_normal);
+	// rec->front_face = FALSE;
+	rec->material = &object->mat;
+	// dprintf(2, "true");
+	return TRUE;
+
 }

@@ -25,15 +25,24 @@ void ft_readinput(t_world* world)
 	// t_vec3 center;
 	ball = 0;
 
-	world->hittabels = (t_object *)malloc(sizeof(t_object) * 22 * 22 +1);
+	world->hittabels = (t_object *)malloc(sizeof(t_object) * 3);
 	// i = -11;
 	// j = -11;
 
 	world->hittabels[ball].mat.scatter = scatter_lambertian;
-	world->hittabels[ball].mat.albedo = setvec(1, 0.1, 0.1);
+	world->hittabels[ball].mat.albedo = setvec(0.5, 0.1, 0.1);
 	world->hittabels[ball].hit = hit_plane;
 	world->hittabels[ball].center = setvec(0, 0, 0);
 	world->hittabels[ball].orientation = setvec(1,1,1);
+	world->hittabels[ball].radius = 10;
+	ball++;
+
+	world->hittabels[ball].mat.scatter = scatter_lambertian;
+	world->hittabels[ball].mat.albedo 
+	= setvec(0.1, 0.1, 0.5);
+	world->hittabels[ball].hit = hit_plane;
+	world->hittabels[ball].center = setvec(0, 0, 0);
+	world->hittabels[ball].orientation = setvec(1,1,-1);
 	world->hittabels[ball].radius = 10;
 	ball++;
 	// while (i < 11)
@@ -82,7 +91,7 @@ void ft_readinput(t_world* world)
 	world->hittabels[ball].radius = 1;
 	world->hittabels[ball].hit = hit_sphere;
 	world->hittabels[ball].mat.scatter = scatter_lambertian;
-	world->hittabels[ball].mat.albedo = setvec(0.4, 0.2, 0.1);
+	world->hittabels[ball].mat.albedo = setvec(0.1, 0.9, 0.9);
 	world->hittabels[ball].center = setvec(0, 0, 0);
 	ball++;
 	// world->hittabels[ball].radius = 1;
@@ -105,13 +114,6 @@ void transphere(t_hit_record* rec, t_hit_record* tmp)
 	rec->t = tmp->t;
 	rec->front_face = tmp->front_face;
 }
-
-// bool compare(t_vec3 v, t_vec3 u)
-// {
-// 	if(v.v[0] == u.v[0] && v.v[1] == u.v[1] && v.v[2] == u.v[2])
-// 		return TRUE;
-// 	return FALSE;
-// }
 
 bool hit(t_ray r, t_world *world, double t_min, double t_max, t_hit_record* rec)
 {
@@ -140,7 +142,6 @@ t_vec3 ray_color(t_ray r, t_world *world, int depth)
 {
 	t_hit_record rec;
 
-
 	if (depth <= 0)
 		return setvec(0,0,0);
 
@@ -151,6 +152,7 @@ t_vec3 ray_color(t_ray r, t_world *world, int depth)
 
 		if (rec.material->scatter(r, rec, &attenuation, &scattered))
 		{
+			// dprintf(2, "depth %d attenustion %f %f %f\n", depth, attenuation.v[0], attenuation.v[1], attenuation.v[2]);
 			return multiply_vec_vec(attenuation, ray_color(scattered, world, depth - 1));
 		}
 		return setvec(0,0,0);
@@ -175,10 +177,10 @@ void write_color(t_vec3 color, int samples_per_pixel)
 
 void ft_make_imige(t_world *world)
 {
-	size_t hight = 400;
-	size_t width = 600;
-	unsigned int samples_per_pixel = 10;
-	const int max_depth = 5;
+	size_t hight = 200;
+	size_t width = 300;
+	unsigned int samples_per_pixel = 150;
+	const int max_depth = 100;
 
 	printf("P3\n%zu %zu\n255\n", width, hight);
 	for (int i = hight - 1; i>= 0; --i)
@@ -196,6 +198,7 @@ void ft_make_imige(t_world *world)
 				double v = (i + random_double()) / (hight -1);
 				t_ray r = get_ray(*world->cam, u, v);
 				color = plus_vec_vec(color, ray_color(r, world, max_depth));
+			// dprintf(2, "%f %f %f\n", color.v[0], color.v[1], color.v[2]);
 			}
 			write_color(color, samples_per_pixel);
 		}

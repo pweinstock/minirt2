@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 
+
 bool hit_plane(t_ray r, t_object* object, double t_min, double t_max, t_hit_record* rec)
 {
 
@@ -30,9 +31,13 @@ bool hit_plane(t_ray r, t_object* object, double t_min, double t_max, t_hit_reco
 	// dprintf(2, "kolisions point %f %f %f", rec->p.v[0], rec->p.v[1], rec->p.v[2]);
 	t_vec3 outward_normal = minus_vec_vec(object->orientation, object->center);
 	set_face_normal(rec, r, outward_normal);
-	// rec->front_face = FALSE;
 	rec->material = &object->mat;
-	// dprintf(2, "true");
 	return TRUE;
 
+}
+
+bool hit_circular_plane(t_ray r, t_object* object, double t_min, double t_max, t_hit_record* rec)
+{
+
+	if(hit_plane(r, object, t_min, t_max, rec));
 }

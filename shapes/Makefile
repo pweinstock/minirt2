@@ -2,11 +2,12 @@ CC=gcc
 
 SRC=./set_face_normal.c\
 	./sphere.c\
-	./plane.c
+	./plane.c \
+	./cylinder.c
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS += -Wall -Wextra -Werror
+CFLAGS += -Wall -Wextra -Werror -lm
 
 NAME = shapes.a
 

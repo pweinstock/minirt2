@@ -31,20 +31,22 @@ void ft_readinput(t_world* world)
 
 	world->hittabels[ball].mat.scatter = scatter_lambertian;
 	world->hittabels[ball].mat.albedo = setvec(0.5, 0.1, 0.1);
-	world->hittabels[ball].hit = hit_plane;
+	world->hittabels[ball].hit = hit_cylinder;
 	world->hittabels[ball].center = setvec(0, 0, 0);
-	world->hittabels[ball].orientation = setvec(1,1,1);
-	world->hittabels[ball].radius = 10;
+	world->hittabels[ball].orientation = setvec(0.4,0.1,0.1);
+	world->hittabels[ball].hight = 3;
+	initmatrix(&world->hittabels[ball]);
+	matrix_transponieren(&world->hittabels[ball]);
+	world->hittabels[ball].radius = 0.5;
 	ball++;
 
-	world->hittabels[ball].mat.scatter = scatter_lambertian;
-	world->hittabels[ball].mat.albedo 
-	= setvec(0.1, 0.1, 0.5);
-	world->hittabels[ball].hit = hit_plane;
-	world->hittabels[ball].center = setvec(0, 0, 0);
-	world->hittabels[ball].orientation = setvec(1,1,-1);
-	world->hittabels[ball].radius = 10;
-	ball++;
+	// world->hittabels[ball].mat.scatter = scatter_lambertian;
+	// world->hittabels[ball].mat.albedo = setvec(0.1, 0.1, 0.5);
+	// world->hittabels[ball].hit = hit_plane;
+	// world->hittabels[ball].center = setvec(0, 0, 0);
+	// world->hittabels[ball].orientation = setvec(1,1,-1);
+	// world->hittabels[ball].radius = 10;
+	// ball++;
 	// while (i < 11)
 	// {
 	// 	j = -11;
@@ -88,11 +90,11 @@ void ft_readinput(t_world* world)
 	// world->hittabels[ball].mat.ir = 1.5;
 	// world->hittabels[ball].center = setvec(0, 1, 0);
 	// ball++;
-	world->hittabels[ball].radius = 1;
+	world->hittabels[ball].radius = 0.1;
 	world->hittabels[ball].hit = hit_sphere;
 	world->hittabels[ball].mat.scatter = scatter_lambertian;
 	world->hittabels[ball].mat.albedo = setvec(0.1, 0.9, 0.9);
-	world->hittabels[ball].center = setvec(0, 0, 0);
+	world->hittabels[ball].center = setvec(0, 0, 2);
 	ball++;
 	// world->hittabels[ball].radius = 1;
 	// world->hittabels[ball].hit = hit_sphere;
@@ -152,7 +154,6 @@ t_vec3 ray_color(t_ray r, t_world *world, int depth)
 
 		if (rec.material->scatter(r, rec, &attenuation, &scattered))
 		{
-			// dprintf(2, "depth %d attenustion %f %f %f\n", depth, attenuation.v[0], attenuation.v[1], attenuation.v[2]);
 			return multiply_vec_vec(attenuation, ray_color(scattered, world, depth - 1));
 		}
 		return setvec(0,0,0);
@@ -179,7 +180,7 @@ void ft_make_imige(t_world *world)
 {
 	size_t hight = 200;
 	size_t width = 300;
-	unsigned int samples_per_pixel = 150;
+	unsigned int samples_per_pixel = 15;
 	const int max_depth = 100;
 
 	printf("P3\n%zu %zu\n255\n", width, hight);

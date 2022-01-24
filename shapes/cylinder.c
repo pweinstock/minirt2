@@ -138,20 +138,26 @@ bool hit_cylinder(t_ray r, t_object* object, double t_min, double t_max, t_hit_r
     x1 = (-b + sqrt_ret) / (2 * a);
     x2 = (-b - sqrt_ret) / (2 * a);
 
-    if(x1 < 0 || x2 < 0)
+    if(x1 < 0 && x2 < 0)
         return FALSE;
 
-    if (x1 < x2 )
+    if(fabs(at(r, x2).v[2]) > (object->hight / 2))
+    {
+        x2 = t_max;
+    }
+    if(fabs(at(r, x1).v[2]) > (object->hight / 2)) 
+    {
+        x1 = t_max;
+    }
+    if (x1 < x2)
         x2 = x1;
-
-    if(x2 > t_max || x2 < t_min)
+    if (hit_circular_plane(r, object, t_min, x2, rec))
+    {
+        return TRUE;
+    }
+    if(x2 >= t_max || x2 < t_min)
         return FALSE;
     col = at(r, x2);
-    if(fabs(col.v[2]) > (object->hight / 2))
-    {
-        // dprintf(2, "z= %f\n", fabs(col.v[2]));
-        return FALSE;
-    }
     rec->t = x2;
 	rec->p = vec_to_global(object, &col);
 	t_vec3 outward_normal = division(minus_vec_vec(col, object->center), object->radius);

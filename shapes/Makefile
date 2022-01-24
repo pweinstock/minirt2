@@ -3,7 +3,8 @@ CC=gcc
 SRC=./set_face_normal.c\
 	./sphere.c\
 	./plane.c \
-	./cylinder.c
+	./cylinder.c\
+	./transphere.c
 
 OBJ = $(SRC:.c=.o)
 

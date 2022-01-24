@@ -25,26 +25,37 @@ void ft_readinput(t_world* world)
 	// t_vec3 center;
 	ball = 0;
 
-	world->hittabels = (t_object *)malloc(sizeof(t_object) * 3);
+	world->hittabels = (t_object *)malloc(sizeof(t_object) * 6);
 	// i = -11;
 	// j = -11;
+	world->hittabels[ball].mat.scatter = scatter_lambertian;
+	world->hittabels[ball].mat.albedo = setvec(0.1, 0.1, 0.9);
+	world->hittabels[ball].hit = hit_cylinder;
+	world->hittabels[ball].center = setvec(0, 0, 0);
+	world->hittabels[ball].hight = 10;
+	world->hittabels[ball].radius = 0.1;
+	ball++;
 
 	world->hittabels[ball].mat.scatter = scatter_lambertian;
 	world->hittabels[ball].mat.albedo = setvec(0.5, 0.1, 0.1);
 	world->hittabels[ball].hit = hit_cylinder;
 	world->hittabels[ball].center = setvec(0, 0, 0);
-	world->hittabels[ball].orientation = setvec(0.4,0.1,0.1);
+	world->hittabels[ball].orientation = setvec(0.5, 0.1,0.9);
 	world->hittabels[ball].hight = 3;
 	initmatrix(&world->hittabels[ball]);
 	matrix_transponieren(&world->hittabels[ball]);
-	world->hittabels[ball].radius = 0.5;
+	world->hittabels[ball].radius = 1;
 	ball++;
 
+	world->hittabels[ball - 2].orientation = world->hittabels[ball - 1].orientation;
+	initmatrix(&world->hittabels[ball - 2]);
+	matrix_transponieren(&world->hittabels[ball - 2]);
+
 	// world->hittabels[ball].mat.scatter = scatter_lambertian;
-	// world->hittabels[ball].mat.albedo = setvec(0.1, 0.1, 0.5);
+	// world->hittabels[ball].mat.albedo = setvec(0.1, 0.5, 0.1);
 	// world->hittabels[ball].hit = hit_plane;
-	// world->hittabels[ball].center = setvec(0, 0, 0);
-	// world->hittabels[ball].orientation = setvec(1,1,-1);
+	// world->hittabels[ball].center = setvec(0, 0, -10);
+	// world->hittabels[ball].orientation = setvec(1,1,1);
 	// world->hittabels[ball].radius = 10;
 	// ball++;
 	// while (i < 11)
@@ -84,38 +95,31 @@ void ft_readinput(t_world* world)
 	// 	i++;
 	// }
 
-	// world->hittabels[ball].radius = 1.0;
-	// world->hittabels[ball].hit = hit_sphere;
-	// world->hittabels[ball].mat.scatter = scatter_dielectric;
-	// world->hittabels[ball].mat.ir = 1.5;
-	// world->hittabels[ball].center = setvec(0, 1, 0);
-	// ball++;
-	world->hittabels[ball].radius = 0.1;
+	world->hittabels[ball].radius = 1.0;
 	world->hittabels[ball].hit = hit_sphere;
-	world->hittabels[ball].mat.scatter = scatter_lambertian;
-	world->hittabels[ball].mat.albedo = setvec(0.1, 0.9, 0.9);
-	world->hittabels[ball].center = setvec(0, 0, 2);
+	world->hittabels[ball].mat.scatter = scatter_dielectric;
+	world->hittabels[ball].mat.ir = 1.5;
+	world->hittabels[ball].center = setvec(-4, 1, 0);
 	ball++;
-	// world->hittabels[ball].radius = 1;
-	// world->hittabels[ball].hit = hit_sphere;
-	// world->hittabels[ball].mat.scatter = scatter_metal;
-	// world->hittabels[ball].mat.albedo = random_vec3(0.5, 1);
-	// world->hittabels[ball].mat.fuzz = 0.1;
-	// world->hittabels[ball].center = setvec(4, 1, 0);
-	// ball++;
+	world->hittabels[ball].radius = 0.8;
+	world->hittabels[ball].hit = hit_sphere;
+	world->hittabels[ball].mat.scatter = scatter_dielectric;
+	world->hittabels[ball].mat.albedo = setvec(0.1, 0.9, 0.9);
+	world->hittabels[ball].center = setvec(-2, -2, 2);
+	ball++;
+	world->hittabels[ball].radius = 1;
+	world->hittabels[ball].hit = hit_sphere;
+	world->hittabels[ball].mat.scatter = scatter_metal;
+	world->hittabels[ball].mat.albedo = random_vec3(0.5, 1);
+	world->hittabels[ball].mat.fuzz = 0.1;
+	world->hittabels[ball].center = setvec(4, 1, 0);
+	ball++;
 
 	world->n_hittabels = ball;
-	world->cam = set_cam(setvec(0, 0, 10),setvec(0, 0,-1) , 40);
+	world->cam = set_cam(setvec(0, 0, 10),setvec(0, 0,-1) , 30);
 }
 
-void transphere(t_hit_record* rec, t_hit_record* tmp)
-{
-	rec->p = tmp->p;
-	rec->normal = tmp->normal;
-	rec->material = tmp->material;
-	rec->t = tmp->t;
-	rec->front_face = tmp->front_face;
-}
+
 
 bool hit(t_ray r, t_world *world, double t_min, double t_max, t_hit_record* rec)
 {

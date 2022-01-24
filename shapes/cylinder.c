@@ -8,13 +8,13 @@ void ratio_number(t_object *object, double *cos_a, double *cos_b, double *sin_a,
 {
     //a = Y-achse b= x-achse
 
-        *sin_a = object->orientation.v[0]/sqrt(object->orientation.v[0] * object->orientation.v[0] + object->orientation.v[2] * object->orientation.v[2]);
+        *sin_a = -object->orientation.v[0]/sqrt(object->orientation.v[0] * object->orientation.v[0] + object->orientation.v[2] * object->orientation.v[2]);
 
-        *sin_b = object->orientation.v[1]/sqrt(object->orientation.v[1] * object->orientation.v[1] + object->orientation.v[2] * object->orientation.v[2]);
-
-        *cos_a = object->orientation.v[2]/sqrt(object->orientation.v[0] * object->orientation.v[0] + object->orientation.v[2] * object->orientation.v[2]);
-        *cos_b = object->orientation.v[2]/sqrt(object->orientation.v[1] * object->orientation.v[1] + object->orientation.v[2] * object->orientation.v[2]);
-    
+        // *sin_b = object->orientation.v[1]/sqrt(object->orientation.v[1] * object->orientation.v[1] + object->orientation.v[2] * object->orientation.v[2]);
+        *sin_b = object->orientation.v[1]/length(&object->orientation);
+        *cos_a = -object->orientation.v[2]/sqrt(object->orientation.v[0] * object->orientation.v[0] + object->orientation.v[2] * object->orientation.v[2]);
+        // *cos_b = object->orientation.v[2]/sqrt(object->orientation.v[1] * object->orientation.v[1] + object->orientation.v[2] * object->orientation.v[2]);
+        *cos_b = sqrt(object->orientation.v[0] * object->orientation.v[0] + object->orientation.v[2] * object->orientation.v[2]) / length(&object->orientation);
     dprintf(2, "cos_b %f cos_a %f sin_b %f sin_a %f\n", *cos_b, *cos_a, *sin_b, *sin_a);
 
 
@@ -39,15 +39,15 @@ void initmatrix(t_object *object)
     ratio_number(object, &cos_a, &cos_b, &sin_a, &sin_b);
 
     object->matrix_to_global[0][0] = cos_a;
-    object->matrix_to_global[0][1] = 0;
-    object->matrix_to_global[0][2] = sin_a;
+    object->matrix_to_global[0][1] = sin_a * sin_b;
+    object->matrix_to_global[0][2] = sin_a * cos_b;
 
-    object->matrix_to_global[1][0] = -sin_a * -sin_b;
+    object->matrix_to_global[1][0] = 0;
     object->matrix_to_global[1][1] = cos_b;
-    object->matrix_to_global[1][2] = -sin_b * cos_a;
+    object->matrix_to_global[1][2] = -sin_b;
 
-    object->matrix_to_global[2][0] = -sin_a * cos_b;
-    object->matrix_to_global[2][1] = sin_b;
+    object->matrix_to_global[2][0] = -sin_a;
+    object->matrix_to_global[2][1] = sin_b * cos_a;
     object->matrix_to_global[2][2] = cos_a * cos_b;
 
     object->matrix_to_global[0][3] = object->center.v[0];

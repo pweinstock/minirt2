@@ -38,6 +38,9 @@ bool hit_circular_plane(t_ray r, t_object* object, double t_min, double t_max, t
 	t_object tmp_object;
 	double abstand;
 	t_vec3 local_col;
+	bool ret;
+
+	ret = FALSE;
 
 	tmp_object.center = setvec(0,0,object->hight/2);
 	tmp_object.orientation = setvec(0,0,1);
@@ -52,8 +55,9 @@ bool hit_circular_plane(t_ray r, t_object* object, double t_min, double t_max, t
 
 			transphere(rec, &tmp_rec);
 			local_col = at(r, tmp_rec.t);
+			t_max = tmp_rec.t;
 			rec->p = vec_to_global(object, &local_col);
-			return TRUE;
+			ret = TRUE;
 		}
 	}
 	
@@ -68,11 +72,9 @@ bool hit_circular_plane(t_ray r, t_object* object, double t_min, double t_max, t
 			transphere(rec, &tmp_rec);
 			local_col = at(r, tmp_rec.t);
 			rec->p = vec_to_global(object, &local_col);
-				// dprintf(2, "test");
-
-			return TRUE;
+			ret = TRUE;
 		}
 	}
 
-	return FALSE;
+	return ret;
 }

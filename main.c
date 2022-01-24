@@ -40,7 +40,7 @@ void ft_readinput(t_world* world)
 	world->hittabels[ball].mat.albedo = setvec(0.5, 0.1, 0.1);
 	world->hittabels[ball].hit = hit_cylinder;
 	world->hittabels[ball].center = setvec(0, 0, 0);
-	world->hittabels[ball].orientation = setvec(0.5, 0.1,0.9);
+	world->hittabels[ball].orientation = setvec(0.2,0.1,1);
 	world->hittabels[ball].hight = 3;
 	initmatrix(&world->hittabels[ball]);
 	matrix_transponieren(&world->hittabels[ball]);
@@ -95,28 +95,28 @@ void ft_readinput(t_world* world)
 	// 	i++;
 	// }
 
-	world->hittabels[ball].radius = 1.0;
-	world->hittabels[ball].hit = hit_sphere;
-	world->hittabels[ball].mat.scatter = scatter_dielectric;
-	world->hittabels[ball].mat.ir = 1.5;
-	world->hittabels[ball].center = setvec(-4, 1, 0);
-	ball++;
-	world->hittabels[ball].radius = 0.8;
-	world->hittabels[ball].hit = hit_sphere;
-	world->hittabels[ball].mat.scatter = scatter_dielectric;
-	world->hittabels[ball].mat.albedo = setvec(0.1, 0.9, 0.9);
-	world->hittabels[ball].center = setvec(-2, -2, 2);
-	ball++;
-	world->hittabels[ball].radius = 1;
-	world->hittabels[ball].hit = hit_sphere;
-	world->hittabels[ball].mat.scatter = scatter_metal;
-	world->hittabels[ball].mat.albedo = random_vec3(0.5, 1);
-	world->hittabels[ball].mat.fuzz = 0.1;
-	world->hittabels[ball].center = setvec(4, 1, 0);
-	ball++;
+	// world->hittabels[ball].radius = 1.0;
+	// world->hittabels[ball].hit = hit_sphere;
+	// world->hittabels[ball].mat.scatter = scatter_dielectric;
+	// world->hittabels[ball].mat.ir = 1.5;
+	// world->hittabels[ball].center = setvec(-4, 1, 0);
+	// ball++;
+	// world->hittabels[ball].radius = 0.8;
+	// world->hittabels[ball].hit = hit_sphere;
+	// world->hittabels[ball].mat.scatter = scatter_dielectric;
+	// world->hittabels[ball].mat.albedo = setvec(0.1, 0.9, 0.9);
+	// world->hittabels[ball].center = setvec(-2, -2, 2);
+	// ball++;
+	// world->hittabels[ball].radius = 1;
+	// world->hittabels[ball].hit = hit_sphere;
+	// world->hittabels[ball].mat.scatter = scatter_metal;
+	// world->hittabels[ball].mat.albedo = random_vec3(0.5, 1);
+	// world->hittabels[ball].mat.fuzz = 0.1;
+	// world->hittabels[ball].center = setvec(4, 1, 0);
+	// ball++;
 
 	world->n_hittabels = ball;
-	world->cam = set_cam(setvec(0, 0, 10),setvec(0, 0,-1) , 30);
+	world->cam = set_cam(setvec(0, 0, 10),setvec(0, 0,-1) , 20);
 }
 
 
@@ -184,7 +184,7 @@ void ft_make_imige(t_world *world)
 {
 	size_t hight = 200;
 	size_t width = 300;
-	unsigned int samples_per_pixel = 15;
+	unsigned int samples_per_pixel = 10;
 	const int max_depth = 100;
 
 	printf("P3\n%zu %zu\n255\n", width, hight);

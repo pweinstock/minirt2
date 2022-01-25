@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/01/25 17:28:20 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/01/25 19:17:10 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,52 +35,52 @@ void ft_readinput(t_world* world)
 	// world->hittabels[ball].hight = 20;
 	// world->hittabels[ball].radius = 0.1;
 	// ball++;
+	world->hittabels[ball].mat.scatter = scatter_lambertian;
+	world->hittabels[ball].mat.albedo = setvec(0.2, 0.8, 0.8);
+	world->hittabels[ball].hit = hit_plane;
+	world->hittabels[ball].center = setvec(0, 0, -20);
+	world->hittabels[ball].orientation = setvec(0,0,-1);
+	world->hittabels[ball].radius = 1;
+	ball++;
 
 	world->hittabels[ball].mat.scatter = scatter_lambertian;
 	world->hittabels[ball].mat.albedo = setvec(0.5, 0.1, 0.1);
 	world->hittabels[ball].hit = hit_cylinder;
-	world->hittabels[ball].center = setvec(0, 0, 1);
+	world->hittabels[ball].center = setvec(1, 1, 1); //problem 0.0, 0.0, 1
 	world->hittabels[ball].orientation = setvec(0.5,0.5,1);
-	world->hittabels[ball].hight = 3;
-	initmatrix(&world->hittabels[ball]);
-	matrix_transponieren(&world->hittabels[ball]);
-	world->hittabels[ball].radius = 0.5;
-	ball++;
-
-	world->hittabels[ball].mat.scatter = scatter_lambertian;
-	world->hittabels[ball].mat.albedo = setvec(0.1, 0.6, 0.1);
-	world->hittabels[ball].mat.fuzz = 0.9;
-	world->hittabels[ball].hit = hit_cylinder;
-	world->hittabels[ball].center = setvec(-1, -1, -1);
-	world->hittabels[ball].orientation = setvec(1,1,1);
-	world->hittabels[ball].hight = 3;
-	initmatrix(&world->hittabels[ball]);
-	matrix_transponieren(&world->hittabels[ball]);
-	world->hittabels[ball].radius = 0.5;
-	ball++;
-
-	world->hittabels[ball].mat.scatter = scatter_lambertian;
-	world->hittabels[ball].mat.albedo = setvec(0.1, 0.1, 0.5);
-	world->hittabels[ball].hit = hit_cylinder;
-	world->hittabels[ball].center = setvec(1, 1, 0.9);
-	world->hittabels[ball].orientation = setvec(1,-1,-1);
 	world->hittabels[ball].hight = 10;
 	initmatrix(&world->hittabels[ball]);
 	matrix_transponieren(&world->hittabels[ball]);
-	world->hittabels[ball].radius = 0.5;
+	world->hittabels[ball].radius = 0.1;
 	ball++;
+
+	// world->hittabels[ball].mat.scatter = scatter_lambertian;
+	// world->hittabels[ball].mat.albedo = setvec(0.1, 0.6, 0.1);
+	// world->hittabels[ball].mat.fuzz = 0.9;
+	// world->hittabels[ball].hit = hit_cylinder;
+	// world->hittabels[ball].center = setvec(-1, -1, -1);
+	// world->hittabels[ball].orientation = setvec(1,1,1);
+	// world->hittabels[ball].hight = 3;
+	// initmatrix(&world->hittabels[ball]);
+	// matrix_transponieren(&world->hittabels[ball]);
+	// world->hittabels[ball].radius = 0.5;
+	// ball++;
+
+	// world->hittabels[ball].mat.scatter = scatter_lambertian;
+	// world->hittabels[ball].mat.albedo = setvec(0.8, 0.5, 0.5);
+	// world->hittabels[ball].hit = hit_cylinder;
+	// world->hittabels[ball].center = setvec(1, 0, 0.9);
+	// world->hittabels[ball].orientation = setvec(1,-1,-2);
+	// world->hittabels[ball].hight = 10;
+	// initmatrix(&world->hittabels[ball]);
+	// matrix_transponieren(&world->hittabels[ball]);
+	// world->hittabels[ball].radius = 0.5;
+	// ball++;
 
 	// world->hittabels[ball - 2].orientation = world->hittabels[ball - 1].orientation;
 	// initmatrix(&world->hittabels[ball - 2]);
 	// matrix_transponieren(&world->hittabels[ball - 2]);
 
-	world->hittabels[ball].mat.scatter = scatter_lambertian;
-	world->hittabels[ball].mat.albedo = setvec(0.1, 0.8, 0.8);
-	world->hittabels[ball].hit = hit_plane;
-	world->hittabels[ball].center = setvec(0, 0, -10);
-	world->hittabels[ball].orientation = setvec(0,0,1);
-	world->hittabels[ball].radius = 10;
-	ball++;
 	// while (i < 11)
 	// {
 	// 	j = -11;
@@ -192,7 +192,7 @@ t_vec3 ray_color(t_ray r, t_world *world, int depth)
 
 	t_vec3 unit_direction = unit_vector(r.dir);
 	double t = 0.5 * (unit_direction.v[1] + 1.0);
-	return plus_vec_vec(multiply_vec_doub(setvec(1.0,1.0,1.0),(1.0 - t)), multiply_vec_doub(setvec(0.7, 0.7, 0.7) , t));
+	return plus_vec_vec(multiply_vec_doub(setvec(1.0,1.0,1.0),(1.0 - t)), multiply_vec_doub(setvec(0.5, 0.5, 0.5) , t));
 }
 
 void write_color(t_vec3 color, int samples_per_pixel)
@@ -209,10 +209,10 @@ void write_color(t_vec3 color, int samples_per_pixel)
 
 void ft_make_imige(t_world *world)
 {
-	size_t hight = 400;
-	size_t width = 600;
-	unsigned int samples_per_pixel = 1;
-	const int max_depth = 2;
+	size_t hight = 200;
+	size_t width = 300;
+	unsigned int samples_per_pixel = 50;
+	const int max_depth = 8;
 
 	printf("P3\n%zu %zu\n255\n", width, hight);
 	for (int i = hight - 1; i>= 0; --i)

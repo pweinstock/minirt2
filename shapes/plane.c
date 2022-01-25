@@ -25,7 +25,7 @@ bool hit_plane(t_ray r, t_object* object, double t_min, double t_max, t_hit_reco
 	rec->t = ret;
 	rec->p = at(r, rec->t);
 	// dprintf(2, "kolisions point %f %f %f", rec->p.v[0], rec->p.v[1], rec->p.v[2]);
-	t_vec3 outward_normal = minus_vec_vec(object->orientation, object->center);
+	t_vec3 outward_normal = object->orientation;
 	set_face_normal(rec, r, outward_normal);
 	rec->material = &object->mat;
 	return TRUE;

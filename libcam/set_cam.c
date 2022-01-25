@@ -21,8 +21,8 @@ t_camera *set_cam(t_vec3 origin, t_vec3 orientation, int degrees)
 	cam->u = unit_vector(cross(setvec(0,1,0), cam->w));
 	cam->v = cross(cam->w, cam->u);
 
-	double focus_dist = 1;
-	double aperture = 0.1;
+	double focus_dist = 10;
+	double aperture = 2;
 	cam->horizontal = multiply_vec_doub(cam->u, focus_dist * viewport_width);
 	cam->vertical = multiply_vec_doub(cam->v, focus_dist * viewport_height);
 	cam->lower_left_corner = minus_vec_vec(minus_vec_vec(minus_vec_vec(cam->origin, division(cam->horizontal, 2)), division(cam->vertical, 2)), multiply_vec_doub(cam->w, focus_dist));

@@ -9,7 +9,7 @@ bool hit_plane(t_ray r, t_object* object, double t_min, double t_max, t_hit_reco
 	double d = dot(object->center,object->orientation); //abstand urspring flaeche
 
 	double oben = d - dot(object->orientation, r.origin);
-	// if (oben == 0.0) // unendlich 
+	// if (oben == 0.0) // unendlich
 	// 	return FALSE;
 	double unten = dot(r.dir, object->orientation);
 	if (unten == 0.00)
@@ -53,14 +53,16 @@ bool hit_circular_plane(t_ray r, t_object* object, double t_min, double t_max, t
 		if ( abstand <= object->radius && tmp_rec.t < t_max) //length(&abstand)
 		{
 
-			transphere(rec, &tmp_rec);
-			local_col = at(r, tmp_rec.t);
 			t_max = tmp_rec.t;
+			transphere(rec, &tmp_rec);
+			rec->material = &object->mat;
+			local_col = at(r, tmp_rec.t);
 			rec->p = vec_to_global(object, &local_col);
+			rec->normal = vec_to_global(object, &rec->normal);
 			ret = TRUE;
 		}
 	}
-	
+
 	tmp_object.center = setvec(0,0,-object->hight/2);
 	tmp_object.orientation = setvec(0,0,-1);
 
@@ -70,8 +72,10 @@ bool hit_circular_plane(t_ray r, t_object* object, double t_min, double t_max, t
 		if ( abstand <= object->radius && tmp_rec.t < t_max)
 		{
 			transphere(rec, &tmp_rec);
+			rec->material = &object->mat;
 			local_col = at(r, tmp_rec.t);
 			rec->p = vec_to_global(object, &local_col);
+			rec->normal = vec_to_global(object, &rec->normal);
 			ret = TRUE;
 		}
 	}

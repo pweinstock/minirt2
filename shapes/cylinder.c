@@ -134,7 +134,7 @@ bool hit_cylinder(t_ray r, t_object* object, double t_min, double t_max, t_hit_r
     // dprintf(2, "sqrt_ret %f a %f b %f c %f\n", sqrt_ret, a, b, c);
     if(sqrt_ret != sqrt_ret)
         return FALSE;
-    
+
     x1 = (-b + sqrt_ret) / (2 * a);
     x2 = (-b - sqrt_ret) / (2 * a);
 
@@ -145,7 +145,7 @@ bool hit_cylinder(t_ray r, t_object* object, double t_min, double t_max, t_hit_r
     {
         x2 = t_max;
     }
-    if(fabs(at(r, x1).v[2]) > (object->hight / 2)) 
+    if(fabs(at(r, x1).v[2]) > (object->hight / 2))
     {
         x1 = t_max;
     }
@@ -160,11 +160,9 @@ bool hit_cylinder(t_ray r, t_object* object, double t_min, double t_max, t_hit_r
     col = at(r, x2);
     rec->t = x2;
 	rec->p = vec_to_global(object, &col);
-	t_vec3 outward_normal = division(minus_vec_vec(col, object->center), object->radius);
+	t_vec3 outward_normal = division(col, object->radius);
 	set_face_normal(rec, r, outward_normal);
     rec->normal = vec_to_global(object, &rec->normal);
 	rec->material = &object->mat;
 	return TRUE;
-    
-
 }

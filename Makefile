@@ -6,9 +6,8 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): lib $(OBJ)
-	gcc  ./main.c ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a -lm $(FLAGS) 
-	./a.out >test.ppm
-# 
+	gcc  ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a ./main.c $(FLAGS)
+	./a.out >test1.ppm
 
 lib:
 	make -C ./libcam

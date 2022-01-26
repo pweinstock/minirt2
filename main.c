@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/01/14 21:49:09 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/01/25 19:17:10 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,36 +28,59 @@ void ft_readinput(t_world* world)
 	world->hittabels = (t_object *)malloc(sizeof(t_object) * 6);
 	// i = -11;
 	// j = -11;
+	// world->hittabels[ball].mat.scatter = scatter_lambertian;
+	// world->hittabels[ball].mat.albedo = setvec(0.1, 0.1, 0.9);
+	// world->hittabels[ball].hit = hit_cylinder;
+	// world->hittabels[ball].center = setvec(0, 0, 0);
+	// world->hittabels[ball].hight = 20;
+	// world->hittabels[ball].radius = 0.1;
+	// ball++;
 	world->hittabels[ball].mat.scatter = scatter_lambertian;
-	world->hittabels[ball].mat.albedo = setvec(0.1, 0.1, 0.9);
-	world->hittabels[ball].hit = hit_cylinder;
-	world->hittabels[ball].center = setvec(0, 0, 0);
-	world->hittabels[ball].hight = 10;
-	world->hittabels[ball].radius = 0.1;
+	world->hittabels[ball].mat.albedo = setvec(0.2, 0.8, 0.8);
+	world->hittabels[ball].hit = hit_plane;
+	world->hittabels[ball].center = setvec(0, 0, -20);
+	world->hittabels[ball].orientation = setvec(0,0,-1);
+	world->hittabels[ball].radius = 1;
 	ball++;
 
 	world->hittabels[ball].mat.scatter = scatter_lambertian;
 	world->hittabels[ball].mat.albedo = setvec(0.5, 0.1, 0.1);
 	world->hittabels[ball].hit = hit_cylinder;
-	world->hittabels[ball].center = setvec(0, 0, 0);
-	world->hittabels[ball].orientation = setvec(0.2,0.1,1);
-	world->hittabels[ball].hight = 3;
+	world->hittabels[ball].center = setvec(1, 1, 1); //problem 0.0, 0.0, 1
+	world->hittabels[ball].orientation = setvec(0.5,0.5,1);
+	world->hittabels[ball].hight = 10;
 	initmatrix(&world->hittabels[ball]);
 	matrix_transponieren(&world->hittabels[ball]);
-	world->hittabels[ball].radius = 1;
+	world->hittabels[ball].radius = 0.1;
 	ball++;
 
-	world->hittabels[ball - 2].orientation = world->hittabels[ball - 1].orientation;
-	initmatrix(&world->hittabels[ball - 2]);
-	matrix_transponieren(&world->hittabels[ball - 2]);
+	// world->hittabels[ball].mat.scatter = scatter_lambertian;
+	// world->hittabels[ball].mat.albedo = setvec(0.1, 0.6, 0.1);
+	// world->hittabels[ball].mat.fuzz = 0.9;
+	// world->hittabels[ball].hit = hit_cylinder;
+	// world->hittabels[ball].center = setvec(-1, -1, -1);
+	// world->hittabels[ball].orientation = setvec(1,1,1);
+	// world->hittabels[ball].hight = 3;
+	// initmatrix(&world->hittabels[ball]);
+	// matrix_transponieren(&world->hittabels[ball]);
+	// world->hittabels[ball].radius = 0.5;
+	// ball++;
 
 	// world->hittabels[ball].mat.scatter = scatter_lambertian;
-	// world->hittabels[ball].mat.albedo = setvec(0.1, 0.5, 0.1);
-	// world->hittabels[ball].hit = hit_plane;
-	// world->hittabels[ball].center = setvec(0, 0, -10);
-	// world->hittabels[ball].orientation = setvec(1,1,1);
-	// world->hittabels[ball].radius = 10;
+	// world->hittabels[ball].mat.albedo = setvec(0.8, 0.5, 0.5);
+	// world->hittabels[ball].hit = hit_cylinder;
+	// world->hittabels[ball].center = setvec(1, 0, 0.9);
+	// world->hittabels[ball].orientation = setvec(1,-1,-2);
+	// world->hittabels[ball].hight = 10;
+	// initmatrix(&world->hittabels[ball]);
+	// matrix_transponieren(&world->hittabels[ball]);
+	// world->hittabels[ball].radius = 0.5;
 	// ball++;
+
+	// world->hittabels[ball - 2].orientation = world->hittabels[ball - 1].orientation;
+	// initmatrix(&world->hittabels[ball - 2]);
+	// matrix_transponieren(&world->hittabels[ball - 2]);
+
 	// while (i < 11)
 	// {
 	// 	j = -11;
@@ -116,7 +139,7 @@ void ft_readinput(t_world* world)
 	// ball++;
 
 	world->n_hittabels = ball;
-	world->cam = set_cam(setvec(0, 0, 10),setvec(0, 0,-1) , 20);
+	world->cam = set_cam(setvec(0, 0, 12),setvec(0, 0,-1) , 40);
 }
 
 
@@ -125,6 +148,7 @@ bool hit(t_ray r, t_world *world, double t_min, double t_max, t_hit_record* rec)
 {
 	size_t	i;
 	t_hit_record temp_rec;
+	temp_rec.material = NULL;
 	bool hit_anything = FALSE;
 	double closest_so_far;
 	closest_so_far = t_max;
@@ -140,6 +164,7 @@ bool hit(t_ray r, t_world *world, double t_min, double t_max, t_hit_record* rec)
 			transphere(rec, &temp_rec);
 		}
 		i++;
+		// dprintf(2, "\ri = %zu", i);
 	}
 	return hit_anything;
 }
@@ -149,7 +174,9 @@ t_vec3 ray_color(t_ray r, t_world *world, int depth)
 	t_hit_record rec;
 
 	if (depth <= 0)
+	{
 		return setvec(0,0,0);
+	}
 
 	if(hit(r ,world, 0.001, INFINITY, &rec))
 	{
@@ -165,7 +192,7 @@ t_vec3 ray_color(t_ray r, t_world *world, int depth)
 
 	t_vec3 unit_direction = unit_vector(r.dir);
 	double t = 0.5 * (unit_direction.v[1] + 1.0);
-	return plus_vec_vec(multiply_vec_doub(setvec(1.0,1.0,1.0),(1.0 - t)), multiply_vec_doub(setvec(0.5, 0.7, 1.0) , t));
+	return plus_vec_vec(multiply_vec_doub(setvec(1.0,1.0,1.0),(1.0 - t)), multiply_vec_doub(setvec(0.5, 0.5, 0.5) , t));
 }
 
 void write_color(t_vec3 color, int samples_per_pixel)
@@ -184,8 +211,8 @@ void ft_make_imige(t_world *world)
 {
 	size_t hight = 200;
 	size_t width = 300;
-	unsigned int samples_per_pixel = 10;
-	const int max_depth = 100;
+	unsigned int samples_per_pixel = 50;
+	const int max_depth = 8;
 
 	printf("P3\n%zu %zu\n255\n", width, hight);
 	for (int i = hight - 1; i>= 0; --i)
@@ -199,8 +226,8 @@ void ft_make_imige(t_world *world)
 
 			for (size_t a = 0; a < samples_per_pixel; a++)
 			{
-				double u = (j + random_double()) / (width -1);
-				double v = (i + random_double()) / (hight -1);
+				double u = (double)(j + 0.5 /* + random_double()*/)  / (width -1);
+				double v = (double)(i + 0.5 /* + random_double()*/)  / (hight -1);
 				t_ray r = get_ray(*world->cam, u, v);
 				color = plus_vec_vec(color, ray_color(r, world, max_depth));
 			// dprintf(2, "%f %f %f\n", color.v[0], color.v[1], color.v[2]);

@@ -21,7 +21,7 @@ bool scatter_lambertian(t_ray in, struct s_hit_record rec, t_vec3 *attenuation, 
 	}
 	transmitted(&scattered->origin, &rec.p);
 	transmitted(&scattered->dir, &scatter_direction);
-	transmitted(attenuation, &rec.material->albedo);
+	transmitted(attenuation, &rec.material->color);
 	(void)in;
 	return TRUE;
 }

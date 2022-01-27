@@ -26,7 +26,7 @@ bool hit_sphere(t_ray r, t_object* object, double t_min, double t_max, t_hit_rec
 		}
 	}
 	rec->t = root;
-	rec->p = at(r, rec->t);
+	rec->p = at(r, rec->t - 0.001);
 	t_vec3 outward_normal = division( minus_vec_vec(rec->p, object->center), object->radius);
 	set_face_normal(rec, r, outward_normal);
 	rec->material = &object->mat;

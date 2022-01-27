@@ -18,12 +18,11 @@ bool hit_cylinder(t_ray r, t_object* object, double t_min, double t_max, t_hit_r
     r.origin = vec_to_local(object, &r.origin);
 
     a = r.dir.v[0] * r.dir.v[0] + r.dir.v[1] * r.dir.v[1];
-    // dprintf(2, "a %f r.dir %f r.dir %f\n", a, r.dir.v[0], r.dir.v[1]);
-
     b = 2 * (r.origin.v[0]*r.dir.v[0] + r.origin.v[1]*r.dir.v[1]);
     c = r.origin.v[0] * r.origin.v[0] + r.origin.v[1] * r.origin.v[1] - object->radius * object->radius;
 
     sqrt_ret = sqrt(b * b - 4 * a * c);
+	// dprintf(2, "%f %f\n", sqrt_ret, a);
     if(sqrt_ret != sqrt_ret || sqrt_ret == 0 || a == 0)
         return FALSE;
     // dprintf(2, "sqrt_ret %f a %f b %f c %f\n", sqrt_ret, a, b, c);

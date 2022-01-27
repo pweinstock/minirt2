@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plot_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 17:03:27 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/01/26 14:23:22 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/01/27 14:47:02 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int	create_trgb(int t, t_color color)
 {
+
 	if (color.r > 255) /// in der specular berechnung ändern;
 		color.r = 255;
 	if (color.g > 255)

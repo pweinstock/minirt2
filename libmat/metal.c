@@ -8,6 +8,6 @@ bool scatter_metal(t_ray in, struct s_hit_record rec, t_vec3 *attenuation, t_ray
 	t_vec3 scatt_tmp;
 	scatt_tmp = plus_vec_vec(reflected, multiply_vec_doub(random_in_unit_sphere(), rec.material->fuzz));
 	transmitted(&scattered->dir, &scatt_tmp);
-	transmitted(attenuation, &rec.material->albedo);
+	transmitted(attenuation, &rec.material->color);
 	return(dot(scattered->dir, rec.normal) > 0);
 }

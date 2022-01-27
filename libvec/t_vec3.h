@@ -10,10 +10,26 @@ typedef enum
     TRUE
 } bool;
 
-typedef struct s_vec3
+struct u_color
+{
+	double r;
+	double g;
+	double b;
+};
+
+struct u_vec
+{
+	double x;
+	double y;
+	double z;
+};
+
+typedef union s_vec3
 {
     double v[3];
-}           t_vec3;
+	struct u_vec vec;
+	struct u_color col;
+}           t_vec3, t_color;
 
 t_vec3 cross(t_vec3 u, t_vec3 v);
 t_vec3 division(t_vec3 v, double t);

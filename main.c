@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/01/25 19:17:10 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/01/26 21:37:38 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,50 +28,59 @@ void ft_readinput(t_world* world)
 	world->hittabels = (t_object *)malloc(sizeof(t_object) * 6);
 	// i = -11;
 	// j = -11;
-	// world->hittabels[ball].mat.scatter = scatter_lambertian;
-	// world->hittabels[ball].mat.albedo = setvec(0.1, 0.1, 0.9);
-	// world->hittabels[ball].hit = hit_cylinder;
-	// world->hittabels[ball].center = setvec(0, 0, 0);
-	// world->hittabels[ball].hight = 20;
-	// world->hittabels[ball].radius = 0.1;
-	// ball++;
 	world->hittabels[ball].mat.scatter = scatter_lambertian;
-	world->hittabels[ball].mat.albedo = setvec(0.2, 0.8, 0.8);
-	world->hittabels[ball].hit = hit_plane;
-	world->hittabels[ball].center = setvec(0, 0, -20);
-	world->hittabels[ball].orientation = setvec(0,0,-1);
-	world->hittabels[ball].radius = 1;
-	ball++;
-
-	world->hittabels[ball].mat.scatter = scatter_lambertian;
-	world->hittabels[ball].mat.albedo = setvec(0.5, 0.1, 0.1);
+	world->hittabels[ball].mat.albedo = setvec(0.1, 0.1, 0.9);
 	world->hittabels[ball].hit = hit_cylinder;
-	world->hittabels[ball].center = setvec(1, 1, 1); //problem 0.0, 0.0, 1
-	world->hittabels[ball].orientation = setvec(0.5,0.5,1);
-	world->hittabels[ball].hight = 10;
-	initmatrix(&world->hittabels[ball]);
-	matrix_transponieren(&world->hittabels[ball]);
+	world->hittabels[ball].center = setvec(0, 0, 0);
+	world->hittabels[ball].hight = 20;
 	world->hittabels[ball].radius = 0.1;
 	ball++;
 
 	// world->hittabels[ball].mat.scatter = scatter_lambertian;
-	// world->hittabels[ball].mat.albedo = setvec(0.1, 0.6, 0.1);
-	// world->hittabels[ball].mat.fuzz = 0.9;
+	// world->hittabels[ball].mat.albedo = setvec(0.5, 0.5, 0.5);
+	// world->hittabels[ball].hit = hit_plane;
+	// world->hittabels[ball].center = setvec(0, 0, -10);
+	// world->hittabels[ball].orientation = setvec(0,0,1);
+	// ball++;
+
+
+	world->hittabels[ball].radius = 1.1;
+	world->hittabels[ball].hit = hit_sphere;
+	world->hittabels[ball].mat.scatter = scatter_light;
+	world->hittabels[ball].mat.albedo = setvec(0.2, 0.2, 0.5);
+	world->hittabels[ball].center = setvec(0, 0, 0);
+	ball++;
+
+
+	// world->hittabels[ball].mat.scatter = scatter_lambertian;
+	// world->hittabels[ball].mat.albedo = setvec(0.2, 0.6, 0.2);
 	// world->hittabels[ball].hit = hit_cylinder;
-	// world->hittabels[ball].center = setvec(-1, -1, -1);
-	// world->hittabels[ball].orientation = setvec(1,1,1);
-	// world->hittabels[ball].hight = 3;
+	// world->hittabels[ball].center = setvec(0, 0, 0);
+	// world->hittabels[ball].orientation = setvec(1,0,0);
+	// world->hittabels[ball].hight = 4;
+	// world->hittabels[ball].radius = 0.5;
 	// initmatrix(&world->hittabels[ball]);
 	// matrix_transponieren(&world->hittabels[ball]);
-	// world->hittabels[ball].radius = 0.5;
 	// ball++;
+
+	world->hittabels[ball].mat.scatter = scatter_metal;
+	world->hittabels[ball].mat.albedo = setvec(0.8, 0.1, 0.1);
+	world->hittabels[ball].mat.fuzz = 0.9;
+	world->hittabels[ball].hit = hit_cone;
+	world->hittabels[ball].center = setvec(0, 0, 0); //problem 0.0, 0.0, 1
+	world->hittabels[ball].orientation = setvec(1,0,1);
+	world->hittabels[ball].hight = 10;
+	initmatrix(&world->hittabels[ball]);
+	matrix_transponieren(&world->hittabels[ball]);
+	world->hittabels[ball].radius = 4;
+	ball++;
 
 	// world->hittabels[ball].mat.scatter = scatter_lambertian;
 	// world->hittabels[ball].mat.albedo = setvec(0.8, 0.5, 0.5);
 	// world->hittabels[ball].hit = hit_cylinder;
 	// world->hittabels[ball].center = setvec(1, 0, 0.9);
 	// world->hittabels[ball].orientation = setvec(1,-1,-2);
-	// world->hittabels[ball].hight = 10;
+	// world->hittabels[ball].hight = 3;
 	// initmatrix(&world->hittabels[ball]);
 	// matrix_transponieren(&world->hittabels[ball]);
 	// world->hittabels[ball].radius = 0.5;
@@ -124,12 +133,6 @@ void ft_readinput(t_world* world)
 	// world->hittabels[ball].mat.ir = 1.5;
 	// world->hittabels[ball].center = setvec(-4, 1, 0);
 	// ball++;
-	// world->hittabels[ball].radius = 0.8;
-	// world->hittabels[ball].hit = hit_sphere;
-	// world->hittabels[ball].mat.scatter = scatter_dielectric;
-	// world->hittabels[ball].mat.albedo = setvec(0.1, 0.9, 0.9);
-	// world->hittabels[ball].center = setvec(-2, -2, 2);
-	// ball++;
 	// world->hittabels[ball].radius = 1;
 	// world->hittabels[ball].hit = hit_sphere;
 	// world->hittabels[ball].mat.scatter = scatter_metal;
@@ -162,6 +165,8 @@ bool hit(t_ray r, t_world *world, double t_min, double t_max, t_hit_record* rec)
 			hit_anything = TRUE;
 			closest_so_far = temp_rec.t;
 			transphere(rec, &temp_rec);
+			// dprintf(2, "%zu %f\n", i, closest_so_far);
+			// rec->material = &world->hittabels[i].mat;
 		}
 		i++;
 		// dprintf(2, "\ri = %zu", i);
@@ -175,24 +180,23 @@ t_vec3 ray_color(t_ray r, t_world *world, int depth)
 
 	if (depth <= 0)
 	{
+		dprintf(2, "fehler");
 		return setvec(0,0,0);
 	}
 
-	if(hit(r ,world, 0.001, INFINITY, &rec))
-	{
-		t_ray scattered;
-		t_vec3 attenuation;
+	if(!hit(r ,world, 0.001, INFINITY, &rec))
+		return (setvec(0.1,0.1,0.1));
 
-		if (rec.material->scatter(r, rec, &attenuation, &scattered))
-		{
-			return multiply_vec_vec(attenuation, ray_color(scattered, world, depth - 1));
-		}
-		return setvec(0,0,0);
-	}
+	t_ray scattered;
+	t_vec3 attenuation;
 
-	t_vec3 unit_direction = unit_vector(r.dir);
-	double t = 0.5 * (unit_direction.v[1] + 1.0);
-	return plus_vec_vec(multiply_vec_doub(setvec(1.0,1.0,1.0),(1.0 - t)), multiply_vec_doub(setvec(0.5, 0.5, 0.5) , t));
+	if (!rec.material->scatter(r, rec, &attenuation, &scattered))
+		return setvec(1,1,1);
+
+			// dprintf(2, "farbe %f %f %f \n", attenuation.v[0], attenuation.v[1], attenuation.v[2]);
+	return multiply_vec_vec( plus_vec_vec(attenuation, rec.material->albedo), ray_color(scattered, world, depth - 1));
+
+
 }
 
 void write_color(t_vec3 color, int samples_per_pixel)
@@ -211,8 +215,8 @@ void ft_make_imige(t_world *world)
 {
 	size_t hight = 200;
 	size_t width = 300;
-	unsigned int samples_per_pixel = 50;
-	const int max_depth = 8;
+	unsigned int samples_per_pixel = 100;
+	const int max_depth = 14;
 
 	printf("P3\n%zu %zu\n255\n", width, hight);
 	for (int i = hight - 1; i>= 0; --i)
@@ -226,9 +230,10 @@ void ft_make_imige(t_world *world)
 
 			for (size_t a = 0; a < samples_per_pixel; a++)
 			{
-				double u = (double)(j + 0.5 /* + random_double()*/)  / (width -1);
-				double v = (double)(i + 0.5 /* + random_double()*/)  / (hight -1);
+				double u = (double)(j + random_double())  / (width -1);
+				double v = (double)(i + random_double())  / (hight -1);
 				t_ray r = get_ray(*world->cam, u, v);
+				r.dir = unit_vector(r.dir);
 				color = plus_vec_vec(color, ray_color(r, world, max_depth));
 			// dprintf(2, "%f %f %f\n", color.v[0], color.v[1], color.v[2]);
 			}

@@ -36,8 +36,13 @@ bool hit_cylinder(t_ray r, t_object* object, double t_min, double t_max, t_hit_r
 void initmatrix(t_object *object);
 void matrix_transponieren(t_object *object);
 void transphere(t_hit_record* rec, t_hit_record* tmp);
-bool hit_circular_plane(t_ray r, t_object* object, double t_min, double t_max, t_hit_record* rec);
+bool hit_zylinder_planes(t_ray r, t_object* object, double t_min, double t_max, t_hit_record* rec);
 t_vec3 vec_to_global(t_object* object, t_vec3 *p);
+t_vec3 vec_to_local(t_object* object, t_vec3 *tmp);
+bool hit_cone(t_ray r, t_object* object, double t_min, double t_max, t_hit_record* rec);
+bool hit_cone_plane(t_ray r, t_object* object, double t_min, double t_max, t_hit_record* rec);
+
+
 
 
 #endif

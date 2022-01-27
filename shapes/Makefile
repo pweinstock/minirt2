@@ -4,7 +4,9 @@ SRC=./set_face_normal.c\
 	./sphere.c\
 	./plane.c \
 	./cylinder.c\
-	./transphere.c
+	./transphere.c\
+	./cone.c\
+	./matrix.c
 
 OBJ = $(SRC:.c=.o)
 

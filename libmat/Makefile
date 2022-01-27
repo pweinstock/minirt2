@@ -3,7 +3,8 @@ CC=gcc
 SRC=./dielectric.c\
 	./helper.c\
 	./lambertian.c\
-	./metal.c
+	./metal.c\
+	./light.c
 
 OBJ = $(SRC:.c=.o)
 

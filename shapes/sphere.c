@@ -10,7 +10,7 @@ bool hit_sphere(t_ray r, t_object* object, double t_min, double t_max, t_hit_rec
 	double c = length_squared(&oc) - ((object->radius) * (object->radius));
 
 	double discriminant = half_b * half_b - a * c;
-	if(discriminant < 0)
+	if(discriminant < 0 )// || a == 0
 	{
 		return FALSE;
 	}
@@ -27,7 +27,7 @@ bool hit_sphere(t_ray r, t_object* object, double t_min, double t_max, t_hit_rec
 	}
 	rec->t = root;
 	rec->p = at(r, rec->t);
-	t_vec3 outward_normal = division(minus_vec_vec(rec->p, object->center), object->radius);
+	t_vec3 outward_normal = division( minus_vec_vec(rec->p, object->center), object->radius);
 	set_face_normal(rec, r, outward_normal);
 	rec->material = &object->mat;
 	return TRUE;

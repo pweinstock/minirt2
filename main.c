@@ -167,6 +167,7 @@ bool hit(t_ray r, t_world *world, double t_min, double t_max, t_hit_record* rec)
 	bool hit_anything = FALSE;
 	double closest_so_far;
 	closest_so_far = t_max;
+	rec->t = t_max;
 
 	i = 0;
 
@@ -207,18 +208,27 @@ double ComputeLightning(t_world *world, t_ray* reflected_ray, t_ray* ray, double
 		}
 		else
 		{
+			t_vec3 test = minus_vec_vec(world->lights[i].position, reflected_ray->origin);
+
 			if (world->lights[i].type == POINT)
-				L = set_ray(reflected_ray->origin, unit_vector(minus_vec_vec(world->lights[i].position, reflected_ray->origin)));
+				L = set_ray(reflected_ray->origin, unit_vector(test));
 			else
 				L = set_ray(reflected_ray->origin, world->lights[i].direction);
-			if (hit(L ,world, 0.001, INFINITY, &record))
+			hit(L ,world, 0.001, INFINITY, &record);
+			if ((record.t != INFINITY && world->lights[i].type == DIRECTIONAL) 
+				|| (world->lights[i].type == POINT && record.t < length(&test)))
 			{
+				// printf("%d %f %f\n", world->lights[i].type, record.t, length(&test));
 				i++;
 				continue ;
 			}
-			n_dot_l = dot(reflected_ray->dir, L.dir);
+			n_dot_l = dot(reflected_ray->dir, test);
 			if (n_dot_l > 0)
-				intensity += world->lights[i].intensity * n_dot_l / (length(&reflected_ray->dir) * length(&L.dir));
+			{
+				intensity += world->lights[i].intensity * n_dot_l / (length(&reflected_ray->dir) * length(&test));
+			}
+			// else
+			// printf("%f reflect dir %f %f %f test %f %f %f\n", n_dot_l, reflected_ray->dir.v[0], reflected_ray->dir.v[1], reflected_ray->dir.v[2], test.v[0], test.v[1], test.v[2]);
 			// if (specular != -1)
 			// {
 			// 	//R = vec_sub(vec_mult(vec_mult(N, 2), dot(N, L)), L);
@@ -301,7 +311,7 @@ void ray_average_color(t_world* world, t_camera* cam ,int x, int y)
 	color.v[0] = sqrt(scale * color.v[0]);
 	color.v[1] = sqrt(scale * color.v[1]);
 	color.v[2] = sqrt(scale * color.v[2]);
-	// write_color(color, cam->fd);
+	write_color(color, cam->fd);
 	my_mlx_pixel_put(&cam->img, x, HIGHT - y, color);
 }
 
@@ -309,23 +319,22 @@ void ray_average_color(t_world* world, t_camera* cam ,int x, int y)
 void ft_make_imige(t_world *world)
 {
 	size_t x;
-	size_t y;
+	int y;
 	size_t c;
 	int	fd;
 	char *file;
-	file = "datei0";
+	file = "dat.ppm";
 	c = 0;
 
 	while(c < world->n_cam)
 	{
-		// file[5] += (char)c;
-		fd = open(file, O_EXCL | O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		dprintf(fd, "P3\n%d %d\n255\n", WIDTH, HIGHT);
 		world->cam[c].fd = fd;
 		world->cam[c].img.img = mlx_new_image(world->mlx, WIDTH, HIGHT); //		world->cam[c].img.img = mlx_new_image(&world->cam[c].mlx_img, WIDTH, HIGHT);
 		world->cam[c].img.addr = mlx_get_data_addr(world->cam[c].img.img, &world->cam[c].img.bits_per_pixel, &world->cam[c].img.line_length, &world->cam[c].img.endian);
-		y = 0;
-		while (y < HIGHT)
+		y = HIGHT - 1;
+		while (y >= 0)
 		{
 			x = 0;
 			// printf("\rScanlines remaining: %zu", y);
@@ -334,7 +343,7 @@ void ft_make_imige(t_world *world)
 				ray_average_color(world, &world->cam[c], x, y);
 				x++;
 			}
-			y++;
+			y--;
 		}
 		// printf("Done.\n");
 		close(fd);
@@ -359,6 +368,7 @@ int main (int argc, char *argv[])
 		return (1);
 	}
 	t_world world;
+	world.name = argv[1];
 	world.mlx = mlx_init();
 	world.mlx_win = mlx_new_window(world.mlx, WIDTH, HIGHT, "miniRT");
 	parser(argv[1], &world);

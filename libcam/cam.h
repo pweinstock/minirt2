@@ -18,7 +18,6 @@ typedef struct s_camera
     t_vec3 horizontal;
     t_vec3 vertical;
     t_vec3 u, v, w;
-	void	*mlx_img;
 	t_data	img;
     double lens_radius;
 	int		fd;

@@ -9,14 +9,14 @@
 #include "libvec/t_vec3.h"
 #include "shapes/shapes.h"
 #include <fcntl.h>
-#include "minilibx_macos/mlx.h"
+#include "mlx_linux/mlx.h"
 
 #ifndef WIDTH
-#define WIDTH 600
+#define WIDTH 200
 #endif
 
 #ifndef HIGHT
-#define HIGHT 400
+#define HIGHT 200
 #endif
 
 #ifndef SAMPLES_PER_PIXEL
@@ -54,6 +54,7 @@ typedef struct s_world
 	void	*mlx;
 	void	*mlx_win;
 	t_color backround;
+	char	*name;
 }               t_world;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, t_color color);

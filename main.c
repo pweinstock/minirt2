@@ -301,7 +301,7 @@ void ray_average_color(t_world* world, t_camera* cam ,int x, int y)
 	color.v[0] = sqrt(scale * color.v[0]);
 	color.v[1] = sqrt(scale * color.v[1]);
 	color.v[2] = sqrt(scale * color.v[2]);
-	write_color(color, cam->fd);
+	// write_color(color, cam->fd);
 	my_mlx_pixel_put(&cam->img, x, HIGHT - y, color);
 }
 
@@ -322,8 +322,7 @@ void ft_make_imige(t_world *world)
 		fd = open(file, O_EXCL | O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		dprintf(fd, "P3\n%d %d\n255\n", WIDTH, HIGHT);
 		world->cam[c].fd = fd;
-
-		world->cam[c].img.img = mlx_new_image(&world->cam[c].mlx_img, WIDTH, HIGHT);
+		world->cam[c].img.img = mlx_new_image(world->mlx, WIDTH, HIGHT); //		world->cam[c].img.img = mlx_new_image(&world->cam[c].mlx_img, WIDTH, HIGHT);
 		world->cam[c].img.addr = mlx_get_data_addr(world->cam[c].img.img, &world->cam[c].img.bits_per_pixel, &world->cam[c].img.line_length, &world->cam[c].img.endian);
 		y = 0;
 		while (y < HIGHT)

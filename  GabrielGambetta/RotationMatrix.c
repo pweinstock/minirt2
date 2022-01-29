@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 18:07:39 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/01/26 14:57:18 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/01/29 17:40:34 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,47 @@ t_vec vec_to_local(t_vec center, t_vec orientation, t_vec vec)
 
 	return ret;
 }
+
+t_vec		rotation_x(t_vec vec, double a)
+{
+	t_vec	new_vec;
+
+	a = a * PI / 180;
+	new_vec.x = vec.x;
+	new_vec.y = vec.y * cos(a) - vec.z * sin(a);
+	new_vec.z = vec.y * sin(a) + vec.z * cos(a);
+	return (new_vec);
+}
+
+t_vec		rotation_y(t_vec vec, double b)
+{
+	t_vec	new_vec;
+
+	b = b * PI / 180;
+	new_vec.x = vec.x * cos(b) + vec.z * sin(b);
+	new_vec.y = vec.y;
+	new_vec.z = vec.x * -sin(b) + vec.z * cos(b);
+	return (new_vec);
+}
+
+t_vec		rotation_z(t_vec vec, double c)
+{
+	t_vec	new_vec;
+
+	c = c * PI / 180;
+	new_vec.x = vec.x * cos(c) - vec.y * sin(c);
+	new_vec.y = vec.x * sin(c) + vec.y * cos(c);
+	new_vec.z = vec.z;
+	return (new_vec);
+}
+
+t_vec		rotation(t_vec vec, double a, double b, double c)
+{
+	t_vec new_vec;
+
+	new_vec = rotation_x(vec, a);
+	new_vec = rotation_y(new_vec, b);
+	new_vec = rotation_z(new_vec, c);
+	return (new_vec);
+}
+

@@ -11,7 +11,10 @@
 # define POINT 2
 # define DIRECTIONAL 3
 # define SPHERE 4
-# define CYLINDER 5
+# define PLANE 5
+# define CYLINDER 6
+# define CAP 7
+# define PI 3.141592653589793
 
 typedef struct	s_data {
 	void	*img;
@@ -94,6 +97,7 @@ t_intersection	ClosestIntersection(t_scene scene, t_vec O, t_vec D, double t_min
 double	ComputeLightning(t_scene scene, t_vec P, t_vec N, t_vec V, double s);
 double	IntersectRaySphere(t_vec O, t_vec D, t_sphere sphere);
 double	IntersectRayCylinder(t_vec O, t_vec D, t_sphere cylinder);
+double	IntersectRayPlane(t_vec orig, t_vec dir, t_sphere sphere);
 t_color	TraceRay(t_vec O, t_vec D, t_scene scene, double t_min, double t_max, int recursion_depth);
 
 //plot_scene
@@ -101,7 +105,10 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, t_color color);
 
 //RotationMatrix
 t_vec vec_to_local(t_vec center, t_vec orientation, t_vec vec);
-
+t_vec		rotation_x(t_vec vec, double a);
+t_vec		rotation_y(t_vec vec, double b);
+t_vec		rotation_z(t_vec vec, double c);
+t_vec		rotation(t_vec vec, double a, double b, double c);
 //math
 double length(t_vec a);
 

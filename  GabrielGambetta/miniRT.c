@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 11:52:04 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/01/26 19:31:36 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/01/29 18:12:30 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,13 @@ t_intersection	ClosestIntersection(t_scene scene, t_vec O, t_vec D, double t_min
 	closest_t = 2147483647;
 	flag = 0;
 	i = 0;
-	while (i < 4)
+	while (i < 8)
 	{
 		// t1 = IntersectRaySphere(O, D, scene.spheres[i]);
 		if (scene.spheres[i].type == SPHERE)
 			t1 = IntersectRaySphere(O, D, scene.spheres[i]);
+		else if (scene.spheres[i].type == PLANE)
+			t1 = IntersectRayPlane(O, D, scene.spheres[i]);
 		else if (scene.spheres[i].type == CYLINDER)
 			t1 = IntersectRayCylinder(O, D, scene.spheres[i]);
 		if (t1 > t_min && t1 < t_max && t1 < closest_t)
@@ -222,91 +224,106 @@ double	IntersectRaySphere(t_vec O, t_vec D, t_sphere sphere)
 		return (t2);
 }
 
-double  IntersectRayCylinder(t_vec orig, t_vec dir, t_sphere sphere/*, double intersections[2]*/)
+double	IntersectRayPlane(t_vec orig, t_vec dir, t_sphere sphere)
 {
-	t_vec RC;
-	t_vec n;
-	t_vec O;
-	double ln;
-	double d;
-	//t_bool hit;
-	double t;
-	double s;
-	double radius = sphere.radius;
-	t_vec axis = sphere.orientation;
-	t_vec base = sphere.center;
-	double  distance[2];
-	double	t1;
-	double	t2;
-		
-	RC = vec_sub(orig, base); // vector from camera to middle of object
-	n = vec_cross(dir, axis); // check whether direction and axis are parallel
-	if ((ln = length(n)) == 0.) // check whether dir and axis are parallel 
-	    return (2147483647);
-	n = vec_divide(n, length(n));
-	d = fabs(dot(RC, n));
-	//hit = (d <= radius);
-	//if (hit)
-	if(d <= radius)
-	{
-	    O = vec_cross(RC, axis);
-	    t = -dot(O, n) / ln;
-	    O = vec_cross(n, axis);
-	    O = vec_divide(O, length(O));
-	    s = fabs(sqrt(radius * radius - d * d) / dot(dir, O));
-	    t1 = t - s;
-	    t2 = t + s;
-	    distance[0] = dot(axis, vec_sub(vec_mult(dir, t1), vec_sub(base, orig)));
-	    distance[1] = dot(axis, vec_sub(vec_mult(dir, t2), vec_sub(base, orig)));
-	    if ((distance[0] < 0 || distance[0] > sphere.height) && (distance[1] < 0 || distance[1] > sphere.height))
-	        return (2147483647);
-		if (t1 <= t2)
-			return (t1);
-		else
-			return (t2);
-	    //return (intersections);
-	}
-    // intersections[0] = check_endcaps_cyl(intersections[0], obj, orig, dir);
-    // intersections[1] = check_endcaps_cyl(intersections[1], obj, orig, dir);
-    // if (intersections[0] == -1 && intersections[1] == -1)
-    //  return(NULL);
-    // else
-    //  return (intersections);
-    return (2147483647);
+	double	denom;
+	double	numer;
+	double	t;
+
+	denom = dot(sphere.orientation, dir);
+	numer = dot(vec_sub(orig, sphere.center), sphere.orientation);
+	t = -numer / denom;
+	if (t >= 0)
+		return (t);
+	else
+		return (2147483647);
 }
 
-/*double	IntersectRayCylinder(t_vec O, t_vec D, t_sphere cylinder)
+double  IntersectRayCylinder(t_vec orig, t_vec dir, t_sphere sphere)
 {
+	t_vec	cross1;
+	t_vec	cross2;
 	double	a;
 	double	b;
 	double	c;
 	double	discriminant;
 	double	t1;
 	double	t2;
-	t_vec O_local;
-	t_vec D_local;
+	double	d1;
+	double	d2;
 
-	
-	O_local = vec_to_local(cylinder.center, cylinder.orientation, O);
-	D_local = vec_to_local(cylinder.center, cylinder.orientation, D);
-
-	a = D_local.x * D_local.x + D_local.y * D_local.y;
-	b = 2 * (O_local.x*D_local.x + O_local.y*O_local.y);
-	c = O_local.x * O_local.x + O_local.y * O_local.y - cylinder.radius * cylinder.radius;
-
-	discriminant = b * b - 4 * a * c;
-	
-	if (discriminant < 0 || a == 0)
+	cross1 = vec_cross(dir, sphere.orientation);
+	cross2 = vec_cross(vec_sub(orig, sphere.center), sphere.orientation);
+	a = dot(cross1, cross1);
+	b = 2 * dot(cross1, cross2);
+	c = dot(cross2, cross2) - pow(sphere.radius / 2, 2) * dot(sphere.orientation, sphere.orientation);
+	discriminant = pow(b, 2) - (4 * a * c);
+	if (discriminant < 0)
 		return (2147483647);
-	t1 = (-b + sqrt(discriminant)) / (2 * a);
-	t2 = (-b - sqrt(discriminant)) / (2 * a);
-
+	t1 = (-b - sqrt(discriminant)) / (2 * a);
+	t2 = (-b + sqrt(discriminant)) / (2 * a);
+	d1 = dot(sphere.orientation, vec_sub(vec_mult(dir, t1), vec_sub(sphere.center, orig)));
+	d2 = dot(sphere.orientation, vec_sub(vec_mult(dir, t2), vec_sub(sphere.center, orig)));
+	if ((d1 < 0 || d1 > sphere.height) && (d2 < 0 || d2 > sphere.height))
+			return (2147483647);
 	if (t1 <= t2)
 		return (t1);
 	else
 		return (t2);
+}
 
-}*/
+// double  IntersectRayCylinder(t_vec orig, t_vec dir, t_sphere sphere/*, double intersections[2]*/)
+// {
+// 	t_vec RC;
+// 	t_vec n;
+// 	t_vec O;
+// 	double ln;
+// 	double d;
+// 	//t_bool hit;
+// 	double t;
+// 	double s;
+// 	double radius = sphere.radius;
+// 	t_vec axis = sphere.orientation;
+// 	t_vec base = sphere.center;
+// 	double  distance[2];
+// 	double	t1;
+// 	double	t2;
+		
+// 	RC = vec_sub(orig, base); // vector from camera to middle of object
+// 	n = vec_cross(dir, axis); // check whether direction and axis are parallel
+// 	if ((ln = length(n)) == 0.) // check whether dir and axis are parallel 
+// 	    return (2147483647);
+// 	n = vec_divide(n, length(n));
+// 	d = fabs(dot(RC, n));
+// 	//hit = (d <= radius);
+// 	//if (hit)
+// 	if(d <= radius)
+// 	{
+// 	    O = vec_cross(RC, axis);
+// 	    t = -dot(O, n) / ln;
+// 	    O = vec_cross(n, axis);
+// 	    O = vec_divide(O, length(O));
+// 	    s = fabs(sqrt(radius * radius - d * d) / dot(dir, O));
+// 	    t1 = t - s;
+// 	    t2 = t + s;
+// 	    distance[0] = dot(axis, vec_sub(vec_mult(dir, t1), vec_sub(base, orig)));
+// 	    distance[1] = dot(axis, vec_sub(vec_mult(dir, t2), vec_sub(base, orig)));
+// 	    if ((distance[0] < 0 || distance[0] > sphere.height) && (distance[1] < 0 || distance[1] > sphere.height))
+// 	        return (2147483647);
+// 		if (t1 <= t2)
+// 			return (t1);
+// 		else
+// 			return (t2);
+// 	    //return (intersections);
+// 	}
+//     // intersections[0] = check_endcaps_cyl(intersections[0], obj, orig, dir);
+//     // intersections[1] = check_endcaps_cyl(intersections[1], obj, orig, dir);
+//     // if (intersections[0] == -1 && intersections[1] == -1)
+//     //  return(NULL);
+//     // else
+//     //  return (intersections);
+//     return (2147483647);
+// }
 
 t_vec	SphereReflection(t_vec P, t_vec center)
 {
@@ -317,21 +334,18 @@ t_vec	SphereReflection(t_vec P, t_vec center)
 	return (N);
 }
 
-t_vec	CylinderReflection(t_vec P, t_vec center, double radius)
+t_vec	CylinderReflection(t_vec P, t_vec center, t_vec orientation)
 {
 	t_vec	N;
+	t_vec	axe;
 
-	(void)radius;
 	N = vec_sub(P, center);
-	//N = vec_divide(N, radius);
-	//N = vec_divide(N, length(N));
-
-	//https://github.com/gmzorz/MiniRT/blob/main/sources/intersect/cylinder_intersect_bonus.c
-
-
-	//normalize(vsubstract(vsubstract(scal_x_vec(x, d), scal_x_vec(dist, lst->fig.cy.nv)), vsubstract(lst->fig.cy.c, o)));
-
-
+	N = vec_sub(P, center);
+	axe = vec_mult(orientation, fabs(dot(N, orientation)));
+	if (dot(N, orientation) < 0)
+		axe = vec_mult(axe, -1);
+	N = vec_sub(N, axe);
+	N = vec_divide(N, length(N));
 	return (N);
 }
 
@@ -353,8 +367,10 @@ t_color	TraceRay(t_vec O, t_vec D, t_scene scene, double t_min, double t_max, in
 	// N = vec_divide(N, length(N));
 	if (intersection.closest_sphere.type == SPHERE)
 		N = SphereReflection(P, intersection.closest_sphere.center);
-	else /*if (intersection.closest_sphere.type == CYLINDER)*/
-		N = CylinderReflection(P, intersection.closest_sphere.center, intersection.closest_sphere.radius);
+	else if (intersection.closest_sphere.type == CYLINDER)
+		N = CylinderReflection(P, intersection.closest_sphere.center, intersection.closest_sphere.orientation);
+	else
+		N = intersection.closest_sphere.orientation;
 	//return (color_multi(intersection.closest_sphere.color, ComputeLightning(scene, P, N, vec_mult(ray.direction, -1), intersection.closest_sphere.specular)));
 	local_color = color_multi(intersection.closest_sphere.color, ComputeLightning(scene, P, N, vec_mult(D, -1), intersection.closest_sphere.specular));
 	r = intersection.closest_sphere.reflective;
@@ -385,7 +401,7 @@ int	main(void)
 	void	*mlx_win;
 	t_data	img;
 
-	camera.x = 0;
+	camera.x = 2;
 	camera.y = 0;
 	camera.z = 0;
 	
@@ -415,6 +431,7 @@ int	main(void)
 			D.x = w * viewport.width / canvas.width;
 			D.y = h * viewport.height / canvas.height;
 			D.z = d;
+			D = rotation(D, 0, 0, 0);
 			color = TraceRay(camera, D, scene, 1, 2147483647, 10);
 			//write_color(color);
 			my_mlx_pixel_put(&img, (int)(w + (canvas.width / 2)), (int)(h + (canvas.height / 2)), color);

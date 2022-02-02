@@ -5,6 +5,8 @@
 		"limits": "c",
 		"ratio": "c",
 		"ios": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"bitset": "c",
+		"shapes.h": "c"
 	}
 }

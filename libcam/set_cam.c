@@ -10,8 +10,7 @@ t_camera *set_cam(t_vec3 origin, t_vec3 orientation, int degrees)
 	cam = (t_camera *)malloc(sizeof(t_camera));
 	cam->origin = origin;
 	(void)orientation;
-	t_vec3 lookat = setvec(0, 0, 0);  //plus_vec_vec(origin, orientation);
-	// dprintf(2, "%f %f %f\n", lookat.v[0], lookat.v[1], lookat.v[2]);
+	t_vec3 lookat = setvec(0, 0, 0);
 	double theta = degrees_to_radians(degrees);
 	double h = tan(theta/2);
 	double viewport_height = 2 * h;

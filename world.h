@@ -9,18 +9,18 @@
 #include "libvec/t_vec3.h"
 #include "shapes/shapes.h"
 #include <fcntl.h>
-#include "mlx_linux/mlx.h"
+#include "minilibx_macos/mlx.h"
 
 #ifndef WIDTH
-#define WIDTH 200
+#define WIDTH 400
 #endif
 
 #ifndef HIGHT
-#define HIGHT 200
+#define HIGHT 400
 #endif
 
 #ifndef SAMPLES_PER_PIXEL
-#define SAMPLES_PER_PIXEL 10
+#define SAMPLES_PER_PIXEL 300
 #endif
 
 #ifndef MAX_DEPTH
@@ -59,6 +59,12 @@ typedef struct s_world
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, t_color color);
 int	create_trgb(int t, t_color color);
+bool hit(t_ray r, t_world *world, double t_max, t_hit_record* rec);
+void ray_average_color(t_world* world, t_camera* cam ,int x, int y);
+double ComputeLightning(t_world *world, t_hit_record* rec, t_ray* ray);
+void write_color(t_vec3 color, int fd);
+
+
 
 #endif
 

@@ -6,7 +6,9 @@ SRC=./set_face_normal.c\
 	./cylinder.c\
 	./transphere.c\
 	./cone.c\
-	./matrix.c
+	./matrix.c\
+	./fill_t_p.c\
+	./matrix_init.c
 
 OBJ = $(SRC:.c=.o)
 

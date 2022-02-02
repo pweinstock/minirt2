@@ -6,15 +6,15 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:13:09 by shackbei          #+#    #+#             */
-/*   Updated: 2022/01/14 15:00:35 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:22:18 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_vec3.h"
 
-double dot(t_vec3 u, t_vec3 v)
+double	dot(t_vec3 u, t_vec3 v)
 {
-    return u.v[0] * v.v[0]
-        + u.v[1] * v.v[1]
-        + u.v[2] * v.v[2];
+	return (u.v[0] * v.v[0]
+		+ u.v[1] * v.v[1]
+		+ u.v[2] * v.v[2]);
 }

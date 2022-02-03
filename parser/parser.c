@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:44:09 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/02 20:15:43 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/03 20:20:55 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,6 @@ int	plane(char *line, t_world *world)
 	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
 	world->hittabels[world->n_hittabels].mat.specular = -1;
 	world->hittabels[world->n_hittabels].mat.reflective = 0;
-	//printf("center: %f, %f, %f\n", plane.orientation.v[0], plane.orientation.v[1], plane.orientation.v[2]);
 	free(data);
 	return (0);
 }
@@ -199,7 +198,7 @@ int	cylinder(char *line, t_world *world)
 	world->hittabels[world->n_hittabels].hight = ft_atof(data[4]);
 	world->hittabels[world->n_hittabels].mat.color = division(strtovec(data[5]), 255);
 	world->hittabels[world->n_hittabels].hit = hit_cylinder;
-	world->hittabels[world->n_hittabels].mat.scatter = scatter_light;
+	world->hittabels[world->n_hittabels].mat.scatter = scatter_metal;
 	initmatrix(&world->hittabels[world->n_hittabels]);
 	matrix_transponieren(&world->hittabels[world->n_hittabels]);
 	world->hittabels[world->n_hittabels].mat.specular = -1;
@@ -210,7 +209,6 @@ int	cylinder(char *line, t_world *world)
 		world->hittabels[world->n_hittabels].hit = hit_cone;
 		world->hittabels[world->n_hittabels].hight *= 2;
 	}
-	// printf("%f %f %f", world->hittabels[world->n_hittabels].center.v[0], world->hittabels[world->n_hittabels].center.v[1], world->hittabels[world->n_hittabels].center.v[2]);
 	free(data);
 	return (0);
 }
@@ -262,7 +260,7 @@ void	count_objects(t_world *world, int fd)
 	}
 }
 
-bool	fil_world(t_world *world, int fd)
+t_bool	fil_world(t_world *world, int fd)
 {
 	char*	line;
 
@@ -294,9 +292,11 @@ int	parser(char *file, t_world *world)
 	}
 	count_objects(world, fd);
 	close(fd);
-	world->hittabels = (t_object *)malloc(sizeof(t_object) * world->n_hittabels);
-	world->cam = (t_camera *)malloc(sizeof(t_camera) * world->n_cam);
-	world->lights = (t_light *)malloc(sizeof(t_light) * world->n_lights);
+	world->hittabels = (t_object *)malloc(sizeof(t_object) * world->n_hittabels
+		+ sizeof(t_camera) * world->n_cam
+		+ sizeof(t_light) * world->n_lights);
+	world->cam = (t_camera *)(world->hittabels + sizeof(t_object) * world->n_hittabels);
+	world->lights = (t_light *)(world->cam + sizeof(t_camera) * world->n_cam);
 	world->n_hittabels = 0;
 	world->n_cam = 0;
 	world->n_lights = 0;
@@ -304,6 +304,6 @@ int	parser(char *file, t_world *world)
 	fil_world(world, fd);
 	close(fd);
 	world->backround = setvec(1, 1, 1);
-	printf("vertig %zu\n", world->n_hittabels);
+	printf("fertig %zu\n", world->n_hittabels);
 	return (0);
 }

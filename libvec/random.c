@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:13:09 by shackbei          #+#    #+#             */
-/*   Updated: 2022/01/31 21:18:43 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/03 12:08:35 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ double	random_doublem(double min, double max)
 t_vec3	random_vec3(double min, double max)
 {
 	return (setvec(random_doublem(min, max),
-		random_doublem(min, max), random_doublem(min, max)));
+			random_doublem(min, max), random_doublem(min, max)));
 }

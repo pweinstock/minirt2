@@ -6,14 +6,14 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:17:31 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/01 13:09:16 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/03 11:41:28 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
 #include <math.h>
 
-bool	hit_sphere(t_ray r, t_object *object, double t_max, t_hit_record *rec)
+t_bool	hit_sphere(t_ray r, t_object *object, double t_max, t_hit_record *rec)
 {
 	t_vec3	oc;
 	double	discriminant_sqrtd;

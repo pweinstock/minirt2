@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 21:43:52 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/02 20:20:37 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/03 11:41:28 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	hit_cylinder_coat(t_ray r, t_object *object, double t_max)
 	return (x[1]);
 }
 
-bool	hit_cylinder(t_ray r, t_object *object, double t_max, t_hit_record *rec)
+t_bool	hit_cylinder(t_ray r, t_object *object, double t_max, t_hit_record *rec)
 {
 	double	x;
 

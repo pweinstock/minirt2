@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 21:13:08 by shackbei          #+#    #+#             */
-/*   Updated: 2022/01/31 21:13:10 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/03 12:07:47 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 # include <stdint.h>
 # include <stdlib.h>
 
-typedef enum
+typedef enum bol
 {
 	FALSE,
 	TRUE
-} bool;
+}	t_bool;
 
-struct u_color
+struct s_color
 {
 	double	r;
 	double	g;
 	double	b;
 };
 
-struct u_vec
+struct s_vec
 {
 	double	x;
 	double	y;
@@ -39,9 +39,9 @@ struct u_vec
 typedef union s_vec3
 {
 	double			v[3];
-	struct u_vec	vec;
-	struct u_color	col;
-}	t_vec3,	t_color;
+	struct s_vec	vec;
+	struct s_color	col;
+} t_vec3,	t_color;
 
 t_vec3	cross(t_vec3 u, t_vec3 v);
 t_vec3	division(t_vec3 v, double t);

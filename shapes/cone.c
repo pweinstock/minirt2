@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 13:42:24 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/02 20:21:34 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/03 11:41:28 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ double	hit_cone_coat(t_ray r, t_object *object, double t_max)
 	return (x[1]);
 }
 
-bool	hit_cone(t_ray r, t_object *object, double t_max, t_hit_record *rec)
+t_bool	hit_cone(t_ray r, t_object *object, double t_max, t_hit_record *rec)
 {
 	double	x;
 	t_vec3	outward_normal;

@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/02 20:51:38 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/03 20:32:44 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,21 @@ void	ft_make_imige(t_world *world)
 {
 	size_t	c;
 	int		fd;
+	int		fd1;
 	char	*file;
+	char	*file1;
 
 	file = "dat.ppm";
+	file1 = "da1t.ppm";
 	c = 0;
 	while (c < world->n_cam)
 	{
 		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		dprintf(fd, "P3\n%d %d\n255\n", WIDTH, HIGHT);
+		fd1 = open(file1, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		dprintf(fd1, "P3\n%d %d\n255\n", WIDTH, HIGHT);
 		world->cam[c].fd = fd;
+		world->cam[c].fd1 = fd1;
 		// world->cam[c].img.img = mlx_new_image(world->mlx, WIDTH, HIGHT); //		world->cam[c].img.img = mlx_new_image(&world->cam[c].mlx_img, WIDTH, HIGHT);
 		// world->cam[c].img.addr = mlx_get_data_addr(world->cam[c].img.img, &world->cam[c].img.bits_per_pixel, &world->cam[c].img.line_length, &world->cam[c].img.endian);
 		count_pixel(world, c);

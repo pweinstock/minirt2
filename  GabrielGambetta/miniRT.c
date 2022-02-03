@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 11:52:04 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/01/29 18:12:30 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/03 11:41:28 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,7 @@ double  IntersectRayCylinder(t_vec orig, t_vec dir, t_sphere sphere)
 // 	t_vec O;
 // 	double ln;
 // 	double d;
-// 	//t_bool hit;
+// 	//t_t_bool hit;
 // 	double t;
 // 	double s;
 // 	double radius = sphere.radius;
@@ -288,10 +288,10 @@ double  IntersectRayCylinder(t_vec orig, t_vec dir, t_sphere sphere)
 // 	double  distance[2];
 // 	double	t1;
 // 	double	t2;
-		
+
 // 	RC = vec_sub(orig, base); // vector from camera to middle of object
 // 	n = vec_cross(dir, axis); // check whether direction and axis are parallel
-// 	if ((ln = length(n)) == 0.) // check whether dir and axis are parallel 
+// 	if ((ln = length(n)) == 0.) // check whether dir and axis are parallel
 // 	    return (2147483647);
 // 	n = vec_divide(n, length(n));
 // 	d = fabs(dot(RC, n));
@@ -404,7 +404,7 @@ int	main(void)
 	camera.x = 2;
 	camera.y = 0;
 	camera.z = 0;
-	
+
 	canvas.height = 1200;
 	canvas.width = 1200;
 

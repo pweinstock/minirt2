@@ -14,7 +14,7 @@ all: $(NAME)
 
 $(NAME): lib $(OBJ)
 	gcc ./parser/parser.a ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a $(SRC) $(FLAGS) $(MLXFLAGS)
-	./a.out test.rt
+	./a.out test1.rt
 
 lib:
 	make -C ./parser

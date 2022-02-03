@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:32:52 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/02 20:18:57 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/03 11:41:28 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ typedef struct s_hit_record
 	t_vec3		normal;
 	t_material	*material;
 	double		t;
-	bool		front_face;
+	t_bool		front_face;
 }	t_hit_record;
 
 typedef struct s_object
 {
-	bool (*hit)(t_ray r, struct s_object * object,
+	t_bool (*hit)(t_ray r, struct s_object * object,
 		double t_max, t_hit_record * rec);
 	t_material	mat;
 	t_vec3		center;
@@ -43,19 +43,19 @@ typedef struct s_object
 }			t_object;
 
 void	set_face_normal( t_hit_record *rec, t_ray r, t_vec3 outward_nornal);
-bool	hit_plane(t_ray r, t_object *object, double t_max, t_hit_record *rec);
-bool	hit_sphere(t_ray r, t_object *object, double t_max, t_hit_record *rec);
-bool	hit_cylinder(t_ray r, t_object *object,
+t_bool	hit_plane(t_ray r, t_object *object, double t_max, t_hit_record *rec);
+t_bool	hit_sphere(t_ray r, t_object *object, double t_max, t_hit_record *rec);
+t_bool	hit_cylinder(t_ray r, t_object *object,
 			double t_max, t_hit_record *rec);
 void	initmatrix(t_object *object);
 void	matrix_transponieren(t_object *object);
 void	transphere(t_hit_record *rec, t_hit_record *tmp);
-bool	hit_zylinder_planes(t_ray r, t_object *object,
+t_bool	hit_zylinder_planes(t_ray r, t_object *object,
 			double t_max, t_hit_record *rec);
 t_vec3	vec_to_global(t_object *object, t_vec3 *p);
 t_vec3	vec_to_local(t_object *object, t_vec3 *tmp);
-bool	hit_cone(t_ray r, t_object *object, double t_max, t_hit_record *rec);
-bool	hit_cone_plane(t_ray r, t_object *object,
+t_bool	hit_cone(t_ray r, t_object *object, double t_max, t_hit_record *rec);
+t_bool	hit_cone_plane(t_ray r, t_object *object,
 			double t_max, t_hit_record *rec);
 void	fill_t_p(t_hit_record *rec, double t, t_ray r);
 t_vec3	uni_vec_to_global(t_object *object, t_vec3 *p);

@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:52:11 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/02 20:19:01 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/03 11:41:28 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ typedef struct s_material
 	double	ir;
 	double	specular;
 	double	reflective;
-	bool (*scatter)(t_ray in, struct s_hit_record rec,
+	t_bool (*scatter)(t_ray in, struct s_hit_record rec,
 		t_vec3 * attenuation, t_ray * scattered);
 }				t_material;
 
-bool	scatter_dielectric(t_ray in, struct s_hit_record rec,
+t_bool	scatter_dielectric(t_ray in, struct s_hit_record rec,
 			t_vec3 *attenuation, t_ray *scattered);
-bool	scatter_lambertian(t_ray in, struct s_hit_record rec,
+t_bool	scatter_lambertian(t_ray in, struct s_hit_record rec,
 			t_vec3 *attenuation, t_ray *scattered);
-bool	scatter_metal(t_ray in, struct s_hit_record rec,
+t_bool	scatter_metal(t_ray in, struct s_hit_record rec,
 			t_vec3 *attenuation, t_ray *scattered);
-bool	scatter_light(t_ray in, struct s_hit_record rec,
+t_bool	scatter_light(t_ray in, struct s_hit_record rec,
 			t_vec3 *attenuation, t_ray *scattered);
 t_vec3	reflect(t_vec3 v, t_vec3 n);
 

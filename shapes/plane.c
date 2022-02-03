@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:38:44 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/02 20:20:18 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/03 21:06:32 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <math.h>
 #include <stdio.h>
 
-bool	hit_plane(t_ray r, t_object *object, double t_max, t_hit_record *rec)
+t_bool	hit_plane(t_ray r, t_object *object, double t_max, t_hit_record *rec)
 {
 	double	d;
 	double	oben;
@@ -24,12 +24,14 @@ bool	hit_plane(t_ray r, t_object *object, double t_max, t_hit_record *rec)
 
 	d = dot(object->center, object->orientation);
 	oben = d - dot(object->orientation, r.origin);
-	if (oben == 0)
+	// printf("d%f  r.oringin %f \n", d, r.origin.v[2]);
+	if (oben == 0.0)
 		return (FALSE);
 	unten = dot(object->orientation, r.dir);
-	if (unten == 0)
+	if (unten == 0.0)
 		return (FALSE);
 	ret = oben / unten;
+	// printf("test  %f  oben%f unten%f\n", ret, oben, unten);
 	if (ret < T_MIN || ret > t_max)
 		return (FALSE);
 	fill_t_p(rec, ret, r);
@@ -39,11 +41,11 @@ bool	hit_plane(t_ray r, t_object *object, double t_max, t_hit_record *rec)
 	return (TRUE);
 }
 
-bool	hit_circular_plane(t_ray r, t_object *object,
+t_bool	hit_circular_plane(t_ray r, t_object *object,
 			double t_max, t_hit_record *rec)
 {
 	double			abstand;
-	bool			ret;
+	t_bool			ret;
 	t_hit_record	tmp_rec;
 
 	ret = FALSE;
@@ -59,11 +61,11 @@ bool	hit_circular_plane(t_ray r, t_object *object,
 	return (FALSE);
 }
 
-bool	hit_cone_plane(t_ray r, t_object *object,
+t_bool	hit_cone_plane(t_ray r, t_object *object,
 			double t_max, t_hit_record *rec)
 {
 	t_object	tmp_object;
-	bool		ret;
+	t_bool		ret;
 
 	ret = FALSE;
 	tmp_object.center = setvec(0, 0, object->hight / 2);
@@ -78,11 +80,11 @@ bool	hit_cone_plane(t_ray r, t_object *object,
 	return (ret);
 }
 
-bool	hit_zylinder_planes(t_ray r, t_object *object,
+t_bool	hit_zylinder_planes(t_ray r, t_object *object,
 			double t_max, t_hit_record *rec)
 {
 	t_object	tmp_object;
-	bool		ret;
+	t_bool		ret;
 	int			i;
 
 	i = 2;

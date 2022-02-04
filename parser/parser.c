@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:44:09 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/03 21:09:02 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:17:34 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,31 +93,31 @@ int	camera(char *line, t_world *world)
 	t_camera* cam;
 
 	cam = &world->cam[world->n_cam];
-
 	data = ft_split(line, '	');
-	cam->origin = strtovec(data[1]);
-	cam->w = unit_vector(minus_vec_vec(cam->origin, strtovec(data[2])));
-	// cam->w = strtovec(data[2]);
-	cam->u = unit_vector(cross(setvec(0,1,0), cam->w));
-	cam->v = cross(cam->w, cam->u);
+	set_cam(cam, strtovec(data[1]), strtovec(data[2]), (double)ft_atoi(data[3]));
+	// cam->origin = strtovec(data[1]);
+	// cam->w = unit_vector(minus_vec_vec(cam->origin, strtovec(data[2])));
+	// // cam->w = strtovec(data[2]);
+	// cam->u = unit_vector(cross(setvec(0,1,0), cam->w));
+	// cam->v = cross(cam->w, cam->u);
 
-	double theta = degrees_to_radians(ft_atoi(data[3]));
-	double h = tan(theta/2);
-	double viewport_height = 2 * h;
-	double viewport_width = (double)WIDTH/HIGHT * viewport_height;
+	// double theta = degrees_to_radians(ft_atoi(data[3]));
+	// double h = tan(theta/2);
+	// double viewport_height = 2 * h;
+	// double viewport_width = (double)WIDTH/HIGHT * viewport_height;
 
-	double focus_dist = 1;
-	double aperture = 2;
-	cam->horizontal = multiply_vec_doub(cam->u, focus_dist * viewport_width);
-	cam->vertical = multiply_vec_doub(cam->v, focus_dist * viewport_height);
-	cam->lower_left_corner = minus_vec_vec(minus_vec_vec(minus_vec_vec(cam->origin, division(cam->horizontal, 2)), division(cam->vertical, 2)), multiply_vec_doub(cam->w, focus_dist));
+	// double focus_dist = 1;
+	// double aperture = 2;
+	// cam->horizontal = multiply_vec_doub(cam->u, focus_dist * viewport_width);
+	// cam->vertical = multiply_vec_doub(cam->v, focus_dist * viewport_height);
+	// cam->lower_left_corner = minus_vec_vec(minus_vec_vec(minus_vec_vec(cam->origin, division(cam->horizontal, 2)), division(cam->vertical, 2)), multiply_vec_doub(cam->w, focus_dist));
 
-	cam->lens_radius = aperture / 2;
+	// cam->lens_radius = aperture / 2;
 
-		printf("%f %f %f", world->cam[world->n_cam].origin.v[0], world->cam[world->n_cam].origin.v[1], world->cam[world->n_cam].origin.v[2]);
+	// 	printf("%f %f %f", world->cam[world->n_cam].origin.v[0], world->cam[world->n_cam].origin.v[1], world->cam[world->n_cam].origin.v[2]);
 
-	//camera.horizontal = ft_atoi(data[3]);					//problem
-	//printf("center: %f, %f, %f\n", camera.lower_left_corner.v[0], camera.lower_left_corner.v[1], camera.lower_left_corner.v[2]);
+	// //camera.horizontal = ft_atoi(data[3]);					//problem
+	// //printf("center: %f, %f, %f\n", camera.lower_left_corner.v[0], camera.lower_left_corner.v[1], camera.lower_left_corner.v[2]);
 	free(data);
 	return (0);
 }
@@ -163,7 +163,7 @@ int	sphere(char *line, t_world *world)
 	world->hittabels[world->n_hittabels].hit = hit_sphere;
 	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
 	world->hittabels[world->n_hittabels].mat.specular = -1;
-	world->hittabels[world->n_hittabels].mat.reflective = 0;
+	world->hittabels[world->n_hittabels].mat.reflective = 0.5;
 	world->hittabels[world->n_hittabels].mat.ir = 1.5;
 	// printf("center: %f, %f, %f\n", sphere.color.v[0], sphere.color.v[1], sphere.color.v[2]);
 	// printf("diameter %f\n", sphere.diameter);

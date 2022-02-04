@@ -1,6 +1,7 @@
 CC=gcc
 
 SRC=./get_ray.c\
+	./setcam.c
 
 OBJ = $(SRC:.c=.o)
 

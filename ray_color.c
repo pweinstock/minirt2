@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/03 21:14:40 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/03 22:02:54 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ void	ray_average_color(t_world *world, t_camera *cam, int x, int y)
 	color1.v[0] = sqrt(color1.v[0] / SAMPLES_PER_PIXEL);
 	color1.v[1] = sqrt(color1.v[1] / SAMPLES_PER_PIXEL);
 	color1.v[2] = sqrt(color1.v[2] / SAMPLES_PER_PIXEL);
-	write_color(color, cam->fd);
-	write_color(color1, cam->fd1);
-	// my_mlx_pixel_put(&cam->img, x, HIGHT - y, color);
+	if (BONUS)
+	{
+		write_color(color, cam->fd);
+		write_color(color1, cam->fd1);
+	}
+	my_mlx_pixel_put(&cam->img, x, HIGHT - y, color);
 }

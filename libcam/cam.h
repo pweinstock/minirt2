@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:48:54 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/03 15:00:43 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/04 01:12:47 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ typedef struct s_camera
 	double	lens_radius;
 	int		fd;
 	int		fd1;
+	double degrees;
+	t_vec3 orientation;
 }	t_camera;
 
 t_ray		get_ray(t_camera cam, double s, double t);
-t_camera	*set_cam(t_vec3 origin, t_vec3 orientation, int degrees);
+void set_cam(t_camera *cam, t_vec3 origin, t_vec3 orientation, double degrees);
+
 
 #endif

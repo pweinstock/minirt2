@@ -20,11 +20,15 @@
 #endif
 
 #ifndef SAMPLES_PER_PIXEL
-#define SAMPLES_PER_PIXEL 10
+#define SAMPLES_PER_PIXEL 2
 #endif
 
 #ifndef MAX_DEPTH
 #define MAX_DEPTH 2
+#endif
+
+#ifndef BONUS
+#define BONUS 0
 #endif
 
 enum light_typ
@@ -49,6 +53,7 @@ typedef struct s_world
 	size_t	n_hittabels;
     t_camera *cam;
 	size_t n_cam;
+	size_t current_cam;
 	t_light		*lights;
 	size_t		n_lights;
 	void	*mlx;

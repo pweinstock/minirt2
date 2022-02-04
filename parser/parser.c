@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:44:09 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/01/29 16:50:37 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:40:22 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,32 +93,36 @@ int	camera(char *line, t_world *world)
 	t_camera* cam;
 
 	cam = &world->cam[world->n_cam];
-
 	data = ft_split(line, '	');
-	cam->origin = strtovec(data[1]);
-	cam->w = unit_vector(minus_vec_vec(cam->origin, strtovec(data[2])));
-	cam->u = unit_vector(cross(setvec(0,1,0), cam->w));
-	cam->v = cross(cam->w, cam->u);
+	set_cam(cam, strtovec(data[1]), strtovec(data[2]), (double)ft_atoi(data[3]));
+	// cam->origin = strtovec(data[1]);
+	// cam->w = unit_vector(minus_vec_vec(cam->origin, strtovec(data[2])));
+	// // cam->w = strtovec(data[2]);
+	// cam->u = unit_vector(cross(setvec(0,1,0), cam->w));
+	// cam->v = cross(cam->w, cam->u);
 
-	double theta = degrees_to_radians(ft_atoi(data[3]));
-	double h = tan(theta/2);
-	double viewport_height = 2 * h;
-	double viewport_width = (double)WIDTH/HIGHT * viewport_height;
+	// double theta = degrees_to_radians(ft_atoi(data[3]));
+	// double h = tan(theta/2);
+	// double viewport_height = 2 * h;
+	// double viewport_width = (double)WIDTH/HIGHT * viewport_height;
 
 	// double focus_dist = 1;
 	// double aperture = 2;
-	cam->horizontal = multiply_vec_doub(cam->u, focus_dist * viewport_width);
-	cam->vertical = multiply_vec_doub(cam->v, focus_dist * viewport_height);
-	cam->lower_left_corner = minus_vec_vec(minus_vec_vec(minus_vec_vec(cam->origin, division(cam->horizontal, 2)), division(cam->vertical, 2)), multiply_vec_doub(cam->w, focus_dist));
+	// cam->horizontal = multiply_vec_doub(cam->u, focus_dist * viewport_width);
+	// cam->vertical = multiply_vec_doub(cam->v, focus_dist * viewport_height);
+	// cam->lower_left_corner = minus_vec_vec(minus_vec_vec(minus_vec_vec(cam->origin, division(cam->horizontal, 2)), division(cam->vertical, 2)), multiply_vec_doub(cam->w, focus_dist));
 
-	cam->lens_radius = aperture / 2;
-	//camera.horizontal = ft_atoi(data[3]);					//problem
-	//printf("center: %f, %f, %f\n", camera.lower_left_corner.v[0], camera.lower_left_corner.v[1], camera.lower_left_corner.v[2]);
+	// cam->lens_radius = aperture / 2;
+
+	// 	printf("%f %f %f", world->cam[world->n_cam].origin.v[0], world->cam[world->n_cam].origin.v[1], world->cam[world->n_cam].origin.v[2]);
+
+	// //camera.horizontal = ft_atoi(data[3]);					//problem
+	// //printf("center: %f, %f, %f\n", camera.lower_left_corner.v[0], camera.lower_left_corner.v[1], camera.lower_left_corner.v[2]);
 	free(data);
 	return (0);
 }
 
-int	light(char *line, t_world *world)
+int	light_l(char *line, t_world *world)
 {
 	char	**data;
 
@@ -133,6 +137,21 @@ int	light(char *line, t_world *world)
 	return (0);
 }
 
+int	light_d(char *line, t_world *world)
+{
+	char	**data;
+
+	data = ft_split(line, '	');
+	world->lights[world->n_lights].direction = strtovec(data[1]);
+	world->lights[world->n_lights].intensity = ft_atof(data[2]);
+	world->lights[world->n_lights].color = strtovec(data[3]);
+	world->lights[world->n_lights].type = DIRECTIONAL;
+	// printf("center: %f, %f, %f\n", light.color.v[0], light.color.v[1], light.color.v[2]);
+	// printf("diameter %f\n", light.diameter);
+	free(data);
+	return (0);
+}
+
 int	sphere(char *line, t_world *world)
 {
 	char	**data;
@@ -140,11 +159,12 @@ int	sphere(char *line, t_world *world)
 	data = ft_split(line, '	');
 	world->hittabels[world->n_hittabels].center = strtovec(data[1]);
 	world->hittabels[world->n_hittabels].radius = ft_atof(data[2]) / 2;
-	world->hittabels[world->n_hittabels].mat.color = strtovec(data[3]);
+	world->hittabels[world->n_hittabels].mat.color = division(strtovec(data[3]), 255);
 	world->hittabels[world->n_hittabels].hit = hit_sphere;
 	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
-	world->hittabels[world->n_hittabels].mat.specular = 0;
-	world->hittabels[world->n_hittabels].mat.reflective = -1;
+	world->hittabels[world->n_hittabels].mat.specular = -1;
+	world->hittabels[world->n_hittabels].mat.reflective = 0.5;
+	world->hittabels[world->n_hittabels].mat.ir = 1.5;
 	// printf("center: %f, %f, %f\n", sphere.color.v[0], sphere.color.v[1], sphere.color.v[2]);
 	// printf("diameter %f\n", sphere.diameter);
 	free(data);
@@ -158,11 +178,11 @@ int	plane(char *line, t_world *world)
 	data = ft_split(line, '	');
 	world->hittabels[world->n_hittabels].center = strtovec(data[1]);
 	world->hittabels[world->n_hittabels].orientation = strtovec(data[2]);
-	world->hittabels[world->n_hittabels].mat.color = strtovec(data[3]);
+	world->hittabels[world->n_hittabels].mat.color = division(strtovec(data[3]), 255);
 	world->hittabels[world->n_hittabels].hit = hit_plane;
 	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
-	world->hittabels[world->n_hittabels].mat.specular = 0;
-	world->hittabels[world->n_hittabels].mat.reflective = -1;
+	world->hittabels[world->n_hittabels].mat.specular = -1;
+	world->hittabels[world->n_hittabels].mat.reflective = 0;
 	//printf("center: %f, %f, %f\n", plane.orientation.v[0], plane.orientation.v[1], plane.orientation.v[2]);
 	free(data);
 	return (0);
@@ -177,73 +197,91 @@ int	cylinder(char *line, t_world *world)
 	world->hittabels[world->n_hittabels].orientation = strtovec(data[2]);
 	world->hittabels[world->n_hittabels].radius = ft_atof(data[3]) / 2;
 	world->hittabels[world->n_hittabels].hight = ft_atof(data[4]);
-	world->hittabels[world->n_hittabels].mat.color = strtovec(data[5]);
+	world->hittabels[world->n_hittabels].mat.color = division(strtovec(data[5]), 255);
 	world->hittabels[world->n_hittabels].hit = hit_cylinder;
 	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
 	initmatrix(&world->hittabels[world->n_hittabels]);
 	matrix_transponieren(&world->hittabels[world->n_hittabels]);
-	world->hittabels[world->n_hittabels].mat.specular = 0;
-	world->hittabels[world->n_hittabels].mat.reflective = -1;
-	// printf("center: %f, %f, %f\n", cylinder.color.v[0], cylinder.color.v[1], cylinder.color.v[2]);
+	world->hittabels[world->n_hittabels].mat.specular = -1;
+	world->hittabels[world->n_hittabels].mat.reflective = 0;
+		world->hittabels[world->n_hittabels].mat.ir = 1.5;
+	if (line[1] == 'o')
+	{
+		world->hittabels[world->n_hittabels].hit = hit_cone;
+		world->hittabels[world->n_hittabels].hight *= 2;
+	}
+	// printf("%f %f %f", world->hittabels[world->n_hittabels].center.v[0], world->hittabels[world->n_hittabels].center.v[1], world->hittabels[world->n_hittabels].center.v[2]);
 	free(data);
 	return (0);
 }
 
-void count_object(t_world *world, char *line)
+void	count_object(t_world *world, char *line)
 {
-	if (line[0] == 'A' || line[0] == 'L')
-			world->n_lights++;
+	if (line[0] == 'A' || line[0] == 'L' || line[0] == 'D')
+		world->n_lights++;
 	else if (line[0] == 'C')
 		world->n_cam++;
 	else if ((line[1] && line[0] == 's' && line[1] == 'p')
-			|| (line[0] == 'p' && line[1] == 'l')
-			|| (line[0] == 'c' && line[1] == 'y'))
+		|| (line[0] == 'p' && line[1] == 'l')
+		|| (line[0] == 'c' &&( line[1] == 'y'
+			|| line[1] == 'o')))
 		world->n_hittabels++;
 }
 
 int	identifier(char *line, t_world *world)
 {
-	if (line[0] == 'A')
+	if (line[0] == '\n')
+		return (1);
+	else if (line[0] == 'A' && line[1] == '	')
 		ambient(line, world);
-	else if (line[0] == 'C')
+	else if (line[0] == 'C' && line[1] == '	')
 		camera(line, world);
-	else if (line[0] == 'L')
-		light(line, world);
-	else if (line[1] && line[0] == 's' && line[1] == 'p')
+	else if (line[0] == 'L' && line[1] == '	')
+		light_l(line, world);
+	else if (line[0] == 'D' && line[1] == '	')
+		light_d(line, world);
+	else if (line[0] == 's' && line[1] == 'p' && line[2] == '	')
 		sphere(line, world);
-	else if (line[1] && line[0] == 'p' && line[1] == 'l')
+	else if (line[0] == 'p' && line[1] == 'l' && line[2] == '	')
 		plane(line, world);
-	else if (line[1] && line[0] == 'c' && line[1] == 'y')
+	else if (line[0] == 'c' && (line[1] == 'y' || line[1] == 'o') && line[2] == '	')
 		cylinder(line, world);
+	else
+		{
+			printf("%s: No such identifier", world->name);
+			return (0);
+		}
 	count_object(world, line);
 	return (1);
 }
 
-
-void count_objects(t_world *world, int fd)
+void	count_objects(t_world *world, int fd)
 {
-	char *line;
+	char	*line;
+
 	while (42)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			return;
+			return ;
 		count_object(world, line);
 		free(line);
 	}
 }
 
-bool fil_world(t_world *world, int fd)
+t_bool	fil_world(t_world *world, int fd)
 {
-	char* line;
+	char*	line;
+
 	while (42)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 		{
-			break;
+			break ;
 		}
-		identifier(line, world);
+		if (!identifier(line, world))
+			return (FALSE);
 		free(line);
 	}
 	return (TRUE);
@@ -252,28 +290,36 @@ bool fil_world(t_world *world, int fd)
 int	parser(char *file, t_world *world)
 {
 	int	fd;
+
 	world->n_hittabels = 0;
 	world->n_cam = 0;
 	world->n_lights = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		printf("file can't open\n");
-		return(1);
+		perror("open");
+		return (0);
 	}
 	count_objects(world, fd);
 	close(fd);
-	world->hittabels = (t_object *)malloc(sizeof(t_object) * world->n_hittabels);
-	world->cam = (t_camera *)malloc(sizeof(t_camera) * world->n_cam);
-	world->lights = (t_light *)malloc(sizeof(t_light) * world->n_lights);
+	world->hittabels = (t_object *)malloc(sizeof(t_object) * world->n_hittabels + sizeof(t_camera) * world->n_cam + sizeof(t_light) * world->n_lights);
+	if (!world->hittabels)
+	{
+		perror("malloc");
+		return (0);
+	}
+	//world->cam = (t_camera *)malloc(sizeof(t_camera) * world->n_cam);
+	//world->lights = (t_light *)malloc(sizeof(t_light) * world->n_lights);
+	world->cam = (t_camera *)world->hittabels + world->n_hittabels * sizeof(t_object);
+	world->lights = (t_light *)world->cam + world->n_cam * sizeof(t_camera);
 	world->n_hittabels = 0;
 	world->n_cam = 0;
 	world->n_lights = 0;
 	fd = open(file, O_RDONLY);
-	fil_world(world, fd);
+	if (!fil_world(world, fd))
+		return (0);
 	close(fd);
-	world->backround = setvec(0,0,0);
-
+	world->backround = setvec(1, 1, 1);
 	printf("vertig %zu\n", world->n_hittabels);
-	return (0);
+	return (1);
 }

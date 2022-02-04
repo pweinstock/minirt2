@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 15:41:18 by shackbei          #+#    #+#             */
-/*   Updated: 2022/01/27 18:25:08 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:29:07 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-int	get_behind_nl(char (*temp)/*[BUFFER_SIZE + 1]*/)
+int	get_behind_nl(char *temp)
 {
 	int	i;
 	int	j;
@@ -32,7 +32,7 @@ int	get_behind_nl(char (*temp)/*[BUFFER_SIZE + 1]*/)
 	return (0);
 }
 
-char	*get_next_line_malloc(char (*temp)/*[BUFFER_SIZE + 1]*/, char **outp,
+char	*get_next_line_malloc(char (*temp), char **outp,
 								int *i)
 {
 	char	*temp1;

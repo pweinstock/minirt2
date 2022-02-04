@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   fill_t_p.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 21:08:55 by shackbei          #+#    #+#             */
-/*   Updated: 2022/01/31 21:08:56 by shackbei         ###   ########.fr       */
+/*   Created: 2022/02/01 13:04:28 by shackbei          #+#    #+#             */
+/*   Updated: 2022/02/01 18:04:10 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	 RAY_H
-# define	RAY_H
+#include "shapes.h"
 
-# include "../libvec/t_vec3.h"
-
-typedef struct s_ray
+void	fill_t_p(t_hit_record *rec, double t, t_ray r)
 {
-	t_vec3	origin;
-	t_vec3	dir;
-}	t_ray;
-
-t_vec3	at(t_ray p, double t);
-t_ray	set_ray(t_vec3 origin, t_vec3 dir);
-
-#endif
+	rec->t = t;
+	rec->p = at(r, t);
+}

@@ -6,13 +6,13 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:13:09 by shackbei          #+#    #+#             */
-/*   Updated: 2022/01/14 15:00:32 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:21:52 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_vec3.h"
 
-t_vec3 invert(t_vec3 v)
+t_vec3	invert(t_vec3 v)
 {
-	return setvec(-v.v[0], -v.v[1], -v.v[2]);
+	return (setvec(-v.v[0], -v.v[1], -v.v[2]));
 }

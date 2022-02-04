@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:42:25 by shackbei          #+#    #+#             */
-/*   Updated: 2022/01/27 18:16:22 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:28:37 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-#define BUFFER_SIZE 50
+# define BUFFER_SIZE 50
 
 char	*get_next_line(int fd);
 int		get_behind_nl(char (temp)[BUFFER_SIZE + 1]);

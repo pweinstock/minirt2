@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unit_vector.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/31 21:09:33 by shackbei          #+#    #+#             */
+/*   Updated: 2022/01/31 21:09:34 by shackbei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "t_vec3.h"
 
-t_vec3 unit_vector(t_vec3 v)
+t_vec3	unit_vector(t_vec3 v)
 {
-	return division(v, length(&v));
+	return (division(v, length(&v)));
 }

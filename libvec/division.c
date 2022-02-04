@@ -6,13 +6,13 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:13:09 by shackbei          #+#    #+#             */
-/*   Updated: 2022/01/14 15:00:38 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:22:31 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_vec3.h"
 
-t_vec3 division(t_vec3 v, double t)
+t_vec3	division(t_vec3 v, double t)
 {
-	return multiply_vec_doub(v, (1/t));
+	return (multiply_vec_doub(v, (1 / t)));
 }

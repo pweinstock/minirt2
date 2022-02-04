@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 17:03:27 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/01/27 20:05:22 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:43:49 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 int	create_trgb(int t, t_color color)
 {
-	color.col.r = (int)(256 * clamp(color.v[0], 0.0, 0.999));
-	color.col.g = (int)(256 * clamp(color.v[1], 0.0, 0.999));
-	color.col.b = (int)(256 * clamp(color.v[2], 0.0, 0.999));
+	double	r;
+	double	g;
+	double	b;
 
-
+	r = (int)(256 * clamp(color.v[0], 0.0, 0.999));
+	g = (int)(256 * clamp(color.v[1], 0.0, 0.999));
+	b = (int)(256 * clamp(color.v[2], 0.0, 0.999));
 	if (color.col.r > 255) /// in der specular berechnung ändern;
 		color.col.r = 255;
 	if (color.col.g > 255)
 		color.col.g = 255;
 	if (color.col.b > 255)
 		color.col.b = 255;
-	return (t << 24 | (int)color.col.r << 16 | (int)color.col.g << 8 | (int)color.col.b);
+	return (t << 24 | (int)r << 16 | (int)g << 8 | (int)b);
 }
-
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, t_color color)
 {
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	//*(unsigned int *)dst = color;
 	*(unsigned int *)dst = create_trgb(0, color);
 }

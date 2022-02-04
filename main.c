@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/04 01:22:26 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:36:27 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,8 +167,8 @@ int	main(int argc, char *argv[])
 	mlx_key_hook(world.mlx_win, ft_free_all_esc, &world);
 	mlx_hook(world.mlx_win, 04, 0, ft_inden, &world);
 	mlx_loop(world.mlx);
-	free(world.cam);
+	//free(world.cam);
 	free(world.hittabels);
-	free(world.lights);
+	//free(world.lights);
 	return (0);
 }

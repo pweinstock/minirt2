@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:44:09 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/04 14:17:34 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:29:22 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,9 +294,9 @@ int	parser(char *file, t_world *world)
 	}
 	count_objects(world, fd);
 	close(fd);
-	world->hittabels = (t_object *)malloc(sizeof(t_object) * world->n_hittabels);
-	world->cam = (t_camera *)malloc(sizeof(t_camera) * world->n_cam);
-	world->lights = (t_light *)malloc(sizeof(t_light) * world->n_lights);
+	world->hittabels = (t_object *)malloc(sizeof(t_object) * world->n_hittabels + sizeof(t_camera) * world->n_cam + sizeof(t_light) * world->n_lights);
+	world->cam = (t_camera *)(world->hittabels + sizeof(t_object) * world->n_hittabels);
+	world->lights = (t_light *)(world->cam + sizeof(t_camera) * world->n_cam);
 	world->n_hittabels = 0;
 	world->n_cam = 0;
 	world->n_lights = 0;

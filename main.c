@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/04 17:38:53 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:51:34 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,7 @@ void	ft_make_imiges(t_world *world)
 			fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			dprintf(fd, "P3\n%d %d\n255\n", WIDTH, HIGHT);
 			fd1 = open(file1, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-			dprintf(fd1,"BM");
-			write(fd,"BM",2);
-			write(fd1, HIGHT * WIDTH * 4 / 8, 4);
-			write(fd1, 0, 4);
-			write(fd1, 54, 4);
-			write(fd1, 40, 4);
-			write(fd1, WIDTH, 4);
-			write(fd1, HIGHT, 4);
-			write(fd1, 0, 2);
-			write(fd1, 4, 2);
-			write(fd1, 0, 4);
-			write(fd1, 0, 4);
-			write(fd1, 0, 4);
-			write(fd1, 0, 4);
-			write(fd1, 0, 4);
-			write(fd1, 0, 4);
-			// dprintf(fd1, "P3\n%d %d\n255\n", WIDTH, HIGHT);
+			dprintf(fd1, "P3\n%d %d\n255\n", WIDTH, HIGHT);
 			world->cam[world->current_cam].fd = fd;
 			world->cam[world->current_cam].fd1 = fd1;
 		}

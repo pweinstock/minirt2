@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:44:09 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/04 14:29:22 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:45:40 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,20 +230,27 @@ void	count_object(t_world *world, char *line)
 
 int	identifier(char *line, t_world *world)
 {
-	if (line[0] == 'A')
+	if (line[0] == '\n')
+		return (1);
+	else if (line[0] == 'A' && line[1] == '	')
 		ambient(line, world);
-	else if (line[0] == 'C')
+	else if (line[0] == 'C' && line[1] == '	')
 		camera(line, world);
-	else if (line[0] == 'L')
+	else if (line[0] == 'L' && line[1] == '	')
 		light_l(line, world);
-	else if (line[0] == 'D')
+	else if (line[0] == 'D' && line[1] == '	')
 		light_d(line, world);
-	else if (line[1] && line[0] == 's' && line[1] == 'p')
+	else if (line[0] == 's' && line[1] == 'p' && line[2] == '	')
 		sphere(line, world);
-	else if (line[1] && line[0] == 'p' && line[1] == 'l')
+	else if (line[0] == 'p' && line[1] == 'l' && line[2] == '	')
 		plane(line, world);
-	else if (line[1] && line[0] == 'c' && (line[1] == 'y' || line[1] == 'o'))
+	else if (line[0] == 'c' && (line[1] == 'y' || line[1] == 'o') && line[2] == '	')
 		cylinder(line, world);
+	else
+		{
+			printf("%s: No such identifier", world->name);
+			return (0);
+		}
 	count_object(world, line);
 	return (1);
 }
@@ -273,7 +280,8 @@ t_bool	fil_world(t_world *world, int fd)
 		{
 			break ;
 		}
-		identifier(line, world);
+		if (!identifier(line, world))
+			return (FALSE);
 		free(line);
 	}
 	return (TRUE);
@@ -289,21 +297,29 @@ int	parser(char *file, t_world *world)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		printf("file can't open\n");
-		return (1);
+		perror("open");
+		return (0);
 	}
 	count_objects(world, fd);
 	close(fd);
 	world->hittabels = (t_object *)malloc(sizeof(t_object) * world->n_hittabels + sizeof(t_camera) * world->n_cam + sizeof(t_light) * world->n_lights);
-	world->cam = (t_camera *)(world->hittabels + sizeof(t_object) * world->n_hittabels);
-	world->lights = (t_light *)(world->cam + sizeof(t_camera) * world->n_cam);
+	if (!world->hittabels)
+	{
+		perror("malloc");
+		return (0);
+	}
+	//world->cam = (t_camera *)malloc(sizeof(t_camera) * world->n_cam);
+	//world->lights = (t_light *)malloc(sizeof(t_light) * world->n_lights);
+	world->cam = (t_camera *)world->hittabels + world->n_hittabels * sizeof(t_object);
+	world->lights = (t_light *)world->cam + world->n_cam * sizeof(t_camera);
 	world->n_hittabels = 0;
 	world->n_cam = 0;
 	world->n_lights = 0;
 	fd = open(file, O_RDONLY);
-	fil_world(world, fd);
+	if (!fil_world(world, fd))
+		return (0);
 	close(fd);
 	world->backround = setvec(1, 1, 1);
 	printf("vertig %zu\n", world->n_hittabels);
-	return (0);
+	return (1);
 }

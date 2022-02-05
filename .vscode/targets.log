@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Sat Feb  5 11:44:01 2022
+# Make data base, printed on Sat Feb  5 17:52:15 2022
 
 # Variables
 
@@ -17,7 +17,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # makefile (from `Makefile', line 3)
-SRC = ./hit.c ./light.c ./main.c ./plot_scene.c ./ray_color.c 
+SRC = ./hit.c ./light.c ./main.c ./plot_scene.c ./ray_color.c ./bit_map.c ./hooks.c ./free_all.c
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
@@ -39,15 +39,13 @@ MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cc9m00332d/T/vscode-ipc-3824ab7a-690e-40d7-bec6-d9ec8bce3b65.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cc9m00332d/T/vscode-ipc-5babad1b-4651-4102-91c9-6a5e5696553d.sock
 # environment
 VSCODE_CWD = /
 # environment
 PATH = /Users/shackbei/.brew/bin:/Users/shackbei/.brew/bin:/Users/shackbei/.brew/bin:/Users/shackbei/.brew/bin:/Users/shackbei/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
-# environment
-LaunchInstanceID = D19A8D4F-EA61-4BF0-BF4D-4DF957D616E0
 # environment
 VSCODE_LOG_STACK = false
 # environment
@@ -58,8 +56,8 @@ ELECTRON_RUN_AS_NODE = 1
 SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.avmyhEBoLw/Listeners
 # automatic
 %F = $(notdir $%)
-# makefile (from `Makefile', line 11)
-MLXFLAGS = ./minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
+# makefile (from `Makefile', line 15)
+MLXFLAGS = ./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -121,15 +119,13 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000007.Electron
+XPC_SERVICE_NAME = com.microsoft.VSCode.5872
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
 __CF_USER_TEXT_ENCODING = 0x18C4D:0x0:0x0
-# environment
-COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
 # environment
@@ -140,13 +136,11 @@ VSCODE_BROWSER_CODE_LOADING = bypassHeatCheck
 PAGER = less
 # environment
 LC_ALL = C
-# environment
-SECURITYSESSIONID = 186c0
 # automatic
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
-# makefile (from `Makefile', line 9)
+# makefile (from `Makefile', line 13)
 FLAGS = -Wall -Wextra -Werror -g
 # default
 .INCLUDE_DIRS = /usr/local/include
@@ -155,9 +149,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 61366
+VSCODE_PID = 85615
 # variable set hash-table stats:
-# Load=72/1024=7%, Rehash=0, Collisions=2/101=2%
+# Load=69/1024=7%, Rehash=0, Collisions=2/98=2%
 
 # Pattern-specific Variable Values
 
@@ -165,9 +159,9 @@ VSCODE_PID = 61366
 
 # Directories
 
-# . (device 16777225, inode 1938541): 32 files, no impossibilities.
+# . (device 16777225, inode 1938541): 35 files, no impossibilities.
 
-# 32 files, no impossibilities in 1 directories.
+# 35 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -193,7 +187,7 @@ all: a.out
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-04 22:23:01
+#  Last modified 2022-02-05 17:51:39
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -201,12 +195,12 @@ Makefile:
 
 a.out: lib
 #  Implicit rule search has not been done.
-#  Last modified 2022-02-05 01:10:53
+#  Last modified 2022-02-05 17:51:40
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/2=0%
-#  commands to execute (from `Makefile', line 16):
+#  commands to execute (from `Makefile', line 20):
 	gcc ./parser/parser.a ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a $(SRC) $(FLAGS) $(MLXFLAGS)
 	
 
@@ -214,7 +208,7 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 40):
+#  commands to execute (from `Makefile', line 44):
 	make fclean -C ./parser
 	make fclean -C ./libcam
 	make fclean -C ./libmat
@@ -248,7 +242,7 @@ lib:
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/10=10%
-#  commands to execute (from `Makefile', line 20):
+#  commands to execute (from `Makefile', line 24):
 	make -C ./parser
 	make -C ./libcam
 	make -C ./libmat
@@ -273,7 +267,7 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 30):
+#  commands to execute (from `Makefile', line 34):
 	rm -f ./a.out
 	make clean -C ./parser
 	make clean -C ./libcam
@@ -297,6 +291,6 @@ clean:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Feb  5 11:44:01 2022
+# Finished Make data base on Sat Feb  5 17:52:15 2022
 
  

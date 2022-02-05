@@ -3,20 +3,21 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "libcam/cam.h"
 // #include "libmat/material.h"
 #include "libmath/mymath.h"
 #include "libvec/t_vec3.h"
 #include "shapes/shapes.h"
 #include <fcntl.h>
-#include "minilibx_macos/mlx.h"
+#include ".minilibx_macos/mlx.h"
 
 #ifndef WIDTH
-#define WIDTH 600
+#define WIDTH 800
 #endif
 
 #ifndef HIGHT
-#define HIGHT 600
+#define HIGHT 1200
 #endif
 
 #ifndef MLX_HIGHT
@@ -75,15 +76,22 @@ typedef struct s_world
 	void	*mlx_win;
 	t_color backround;
 	char	*name;
-	int		picture[HIGHT][WIDTH];
 }               t_world;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, t_color color);
 int	create_trgb(int t, t_color color);
 t_bool hit(t_ray r, t_world *world, double t_max, t_hit_record* rec);
-t_color ray_average_color(t_world* world, t_camera* cam ,int x, int y);
+t_color	ray_average_color(t_world *world, t_camera *cam, double u, double v);
 double ComputeLightning(t_world *world, t_hit_record* rec, t_ray* ray);
 void write_color(t_vec3 color, int fd);
+void	ft_make_bmp(int (*arr)[HIGHT][WIDTH]);
+int	ft_inden(int	key, int x, int y, t_world *world);
+int key_hook(int keycode, t_world *world);
+int	ft_free_all(t_world *world);
+void	count_pixel(t_world *world, int hight, int width, int (*arr)[HIGHT][WIDTH]);
+void ft_make_mlx_imige(t_world *world);
+
+
 
 
 

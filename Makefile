@@ -5,10 +5,14 @@ SRC=./hit.c\
 		./main.c\
 		./plot_scene.c\
 		./ray_color.c\
+		./bit_map.c\
+		./hooks.c\
+		./free_all.c
+
 
 FLAGS = -Wall -Wextra -Werror -g
 
-MLXFLAGS =		./minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
+MLXFLAGS =		./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 
 all: $(NAME)
 

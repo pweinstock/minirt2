@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 01:10:21 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/05 17:38:38 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,37 +60,67 @@ t_vec3	ray_color_sh(t_ray r, t_world *world, int depth)
 				attenuation), light));
 }
 
-t_color	ray_average_color(t_world *world, t_camera *cam, int x, int y)
+t_color	ray_average_color(t_world *world, t_camera *cam, double u, double v)
 {
 	t_color	color;
-	t_color	color1;
 	size_t	i;
-	double	u;
-	double	v;
 	t_ray	r;
 
 	i = 0;
 	color = setvec(0, 0, 0);
 	while (i < SAMPLES_PER_PIXEL)
 	{
-		u = (double)(x + random_double()) / (MLX_WIDTH - 1);
-		v = (double)(y + random_double()) / (MLX_HIGHT - 1);
 		r = get_ray(*cam, u, v);
 		color = plus_vec_vec(color, ray_color_ph(r, world, MAX_DEPTH));
-		color1 = plus_vec_vec(color1, ray_color_sh(r, world, MAX_DEPTH));
 		i++;
 	}
 	color.v[0] = sqrt(color.v[0] / SAMPLES_PER_PIXEL);
 	color.v[1] = sqrt(color.v[1] / SAMPLES_PER_PIXEL);
 	color.v[2] = sqrt(color.v[2] / SAMPLES_PER_PIXEL);
-
-	color1.v[0] = sqrt(color1.v[0] / SAMPLES_PER_PIXEL);
-	color1.v[1] = sqrt(color1.v[1] / SAMPLES_PER_PIXEL);
-	color1.v[2] = sqrt(color1.v[2] / SAMPLES_PER_PIXEL);
-	if (BONUS)
-	{
-		write_color(color, cam->fd);
-		write_color(color1, cam->fd1);
-	}
 	return (color);
+}
+
+void	count_pixel(t_world *world, int hight, int width, int (*arr)[HIGHT][WIDTH])
+{
+	t_color average_color;
+	int	x;
+	int	y;
+	double	u;
+	double	v;
+
+	y = hight - 1;
+	while (y >= 0)
+	{
+		x = 0;
+		while (x < width)
+		{
+			if (arr == NULL)
+			{
+				u = (double)(x + random_double()) / (MLX_WIDTH - 1);
+				v = (double)(y + random_double()) / (MLX_HIGHT - 1);
+				average_color = ray_average_color(world, &world->cam[world->current_cam], u, v);
+				my_mlx_pixel_put(&world->cam[world->current_cam].img, x, MLX_HIGHT - y - 1, average_color);
+			}
+			else
+			{
+				u = (double)(x + random_double()) / (WIDTH - 1);
+				v = (double)(y + random_double()) / (HIGHT - 1);
+				average_color = ray_average_color(world, &world->cam[world->current_cam], u, v);
+				(*arr)[y][x] = create_trgb(0, average_color);
+			}
+			x++;
+		}
+		y--;
+	}
+}
+
+void ft_make_mlx_imige(t_world *world)
+{
+		world->current_cam = 0;
+
+	world->cam[world->current_cam].img.img = mlx_new_image(world->mlx, MLX_WIDTH, MLX_HIGHT);
+	world->cam[world->current_cam].img.addr = mlx_get_data_addr(world->cam[world->current_cam].img.img, &world->cam[world->current_cam].img.bits_per_pixel, &world->cam[world->current_cam].img.line_length, &world->cam[world->current_cam].img.endian);
+	count_pixel(world, MLX_HIGHT, MLX_WIDTH, NULL);
+	mlx_put_image_to_window(world->mlx, world->mlx_win, world->cam[world->current_cam].img.img, 0, 0);
+	mlx_destroy_image(world->mlx, world->cam[world->current_cam].img.img);
 }

@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:38:44 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/03 21:06:32 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/05 17:50:06 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,12 @@ t_bool	hit_plane(t_ray r, t_object *object, double t_max, t_hit_record *rec)
 
 	d = dot(object->center, object->orientation);
 	oben = d - dot(object->orientation, r.origin);
-	// printf("d%f  r.oringin %f \n", d, r.origin.v[2]);
 	if (oben == 0.0)
 		return (FALSE);
 	unten = dot(object->orientation, r.dir);
 	if (unten == 0.0)
 		return (FALSE);
 	ret = oben / unten;
-	// printf("test  %f  oben%f unten%f\n", ret, oben, unten);
 	if (ret < T_MIN || ret > t_max)
 		return (FALSE);
 	fill_t_p(rec, ret, r);

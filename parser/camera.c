@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/16 10:01:14 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/05 19:46:02 by pweinsto         ###   ########.fr       */
+/*   Created: 2022/02/05 19:36:53 by pweinsto          #+#    #+#             */
+/*   Updated: 2022/02/05 19:51:34 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-int	ft_atoi(const char *str)
+int	camera(char *line, t_world *world)
 {
-	size_t	i;
-	int		sign;
-	size_t	sum;
+	char		**data;
+	t_camera	*cam;
 
-	i = 0;
-	sign = 1;
-	sum = 0;
-	if (str[i] == '-' || str[i] == '+')
+	if (world->C_flag == TRUE)
 	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (ft_isdigit(str[i]))
-	{
-		sum = (sum * 10) + (str[i] - 48);
-		i++;
-	}
-	if (str[i] != 0 && str[i] != '.')
-	{
-		printf("Error\n%c: Is not a number", str[i]);
+		printf("Error\nCamera already exists\n");
 		exit(0);
 	}
-	return (sum * sign);
+	cam = &world->cam[world->n_cam];
+	data = ft_split_space(line);
+	ft_array_length(data, 4, "C");
+	set_cam(cam, strtovec(data[1]), strtovec(data[2]), \
+	(double)ft_atoi(data[3]));
+	free(data);
+	world->C_flag = TRUE;
+	return (0);
 }

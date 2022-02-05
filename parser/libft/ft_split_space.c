@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:57:11 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/05 13:24:46 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:47:02 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static size_t	ft_count_strings(char const *s)
 		else
 		{
 			count += 1;
-			while (((s[i] < 9 || s[i] > 13) && s[i]!= 32) && s[i] != 0)
+			while (((s[i] < 9 || s[i] > 13) && s[i] != 32) && s[i] != 0)
 				i++;
 		}
 	}
@@ -40,7 +40,7 @@ static int	ft_all_delimiter(char const *s)
 	i = 0;
 	while (s[i] != 0)
 	{
-		if ((s[i] < 9 || s[i] > 13) && s[i]!= 32)
+		if ((s[i] < 9 || s[i] > 13) && s[i] != 32)
 			return (0);
 		i++;
 	}
@@ -71,7 +71,7 @@ static char	**ft_split_loop(char **ptr, char const *s)
 		else
 		{
 			start = i;
-			while (((s[i] < 9 || s[i] > 13) && s[i]!= 32) && s[i] != 0)
+			while (((s[i] < 9 || s[i] > 13) && s[i] != 32) && s[i] != 0)
 				i++;
 			end = i;
 			ptr[j] = ft_substr(s, start, end - start);

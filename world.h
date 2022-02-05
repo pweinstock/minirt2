@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:54:53 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 19:01:08 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/05 20:34:17 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,17 @@
 # endif
 
 # ifndef HIGHT
-#  define HIGHT 1200
+#  define HIGHT 800
 # endif
 
 # ifndef MLX_HIGHT
-#  define MLX_HIGHT (HIGHT/3)
+#  define MLX_HIGHT 200
+// #  define MLX_HIGHT 200
 # endif
 
 # ifndef MLX_WIDTH
-#  define MLX_WIDTH (WIDTH/3)
+#  define MLX_WIDTH 200
+// #  define MLX_WIDTH (WIDTH/3)
 # endif
 
 # ifndef SAMPLES_PER_PIXEL

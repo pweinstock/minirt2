@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:44:09 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/05 14:15:15 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/05 17:58:18 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,47 @@ t_vec3	strtovec(char *str)
 	return (vec);
 }
 
+void	color_check(t_vec3 color)
+{
+	if (color.col.r < 0 || color.col.r > 255
+		|| color.col.g < 0 || color.col.g > 255
+		|| color.col.b < 0 || color.col.b > 255)
+		{
+			printf("Error\ncolor: Values out of range\n");
+			exit(0);
+		}
+	return ;
+}
+
+void	light_intensity_ceck(t_world *world)
+{
+	if (world->lights[world->n_lights].intensity < 0)
+	{
+		printf("Error\nintensity: Values out of range\n");
+		exit(0);
+	}
+	color_check(world->lights[world->n_lights].color);
+	world->r += world->lights[world->n_lights].color.col.r * world->lights[world->n_lights].intensity;
+	world->g += world->lights[world->n_lights].color.col.g * world->lights[world->n_lights].intensity;
+	world->b += world->lights[world->n_lights].color.col.b * world->lights[world->n_lights].intensity;
+	if (world->r > 255 || world->g > 255 || world->b > 255)
+	{
+		printf("Error\nintensity: Values out of range\n");
+		exit(0);
+	}
+	return ;
+}
+
 int	ambient(char *line, t_world *world)
 {
 	char	**data;
 	char	**color;
 
+	if (world->A_flag == TRUE)
+	{
+		printf("Error\nAmbient lighting already exists\n");
+		exit(0);
+	}
 	data = ft_split_space(line);
 	if (ft_array_length(data) != 3)
 	{
@@ -98,10 +134,11 @@ int	ambient(char *line, t_world *world)
 	world->lights[world->n_lights].color.col.g = ft_atoi(color[1]);
 	world->lights[world->n_lights].color.col.b = ft_atoi(color[2]);
 	world->lights[world->n_lights].type = AMBIENT;
-	// printf("diameter: %f\n", ambient.diameter);
-	// printf("color: %f\n", ambient.color.v[2]);
+	//color_check(world->lights[world->n_lights].color);
+	light_intensity_ceck(world);
 	free(data);
 	free(color);
+	world->A_flag = TRUE;
 	return (0);
 }
 
@@ -110,6 +147,11 @@ int	camera(char *line, t_world *world)
 	char	**data;
 	t_camera* cam;
 
+	if (world->C_flag == TRUE)
+	{
+		printf("Error\nCamera already exists\n");
+		exit(0);
+	}
 	cam = &world->cam[world->n_cam];
 	data = ft_split_space(line);
 	if (ft_array_length(data) != 4)
@@ -142,6 +184,7 @@ int	camera(char *line, t_world *world)
 	// //camera.horizontal = ft_atoi(data[3]);					//problem
 	// //printf("center: %f, %f, %f\n", camera.lower_left_corner.v[0], camera.lower_left_corner.v[1], camera.lower_left_corner.v[2]);
 	free(data);
+	world->C_flag = TRUE;
 	return (0);
 }
 
@@ -149,6 +192,11 @@ int	light_l(char *line, t_world *world)
 {
 	char	**data;
 
+	if (world->L_flag == TRUE)
+	{
+		printf("Error\nlighting already exists\n");
+		exit(0);
+	}
 	data = ft_split_space(line);
 	if (ft_array_length(data) != 4)
 	{
@@ -161,7 +209,9 @@ int	light_l(char *line, t_world *world)
 	world->lights[world->n_lights].type = POINT;
 	// printf("center: %f, %f, %f\n", light.color.v[0], light.color.v[1], light.color.v[2]);
 	// printf("diameter %f\n", light.diameter);
+	light_intensity_ceck(world);
 	free(data);
+	world->L_flag = TRUE;
 	return (0);
 }
 
@@ -181,6 +231,7 @@ int	light_d(char *line, t_world *world)
 	world->lights[world->n_lights].type = DIRECTIONAL;
 	// printf("center: %f, %f, %f\n", light.color.v[0], light.color.v[1], light.color.v[2]);
 	// printf("diameter %f\n", light.diameter);
+	light_intensity_ceck(world);
 	free(data);
 	return (0);
 }
@@ -349,16 +400,14 @@ int	parser(char *file, t_world *world)
 	}
 	count_objects(world, fd);
 	close(fd);
-	world->hittabels = (t_object *)malloc(sizeof(t_object) * world->n_hittabels + sizeof(t_camera) * world->n_cam + sizeof(t_light) * world->n_lights);
+	world->hittabels = (t_object *)malloc(sizeof(t_object) * world->n_hittabels);
 	if (!world->hittabels)
 	{
 		perror("Error\nmalloc");
 		return (0);
 	}
-	//world->cam = (t_camera *)malloc(sizeof(t_camera) * world->n_cam);
-	//world->lights = (t_light *)malloc(sizeof(t_light) * world->n_lights);
-	world->cam = (t_camera *)world->hittabels + world->n_hittabels * sizeof(t_object);
-	world->lights = (t_light *)world->cam + world->n_cam * sizeof(t_camera);
+	world->cam = (t_camera *)malloc(sizeof(t_camera) * world->n_cam);
+	world->lights = (t_light *)malloc(sizeof(t_light) * world->n_lights);
 	world->n_hittabels = 0;
 	world->n_cam = 0;
 	world->n_lights = 0;

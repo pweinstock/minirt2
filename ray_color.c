@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/03 22:02:54 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/05 01:10:21 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_vec3	ray_color_sh(t_ray r, t_world *world, int depth)
 				attenuation), light));
 }
 
-void	ray_average_color(t_world *world, t_camera *cam, int x, int y)
+t_color	ray_average_color(t_world *world, t_camera *cam, int x, int y)
 {
 	t_color	color;
 	t_color	color1;
@@ -73,9 +73,9 @@ void	ray_average_color(t_world *world, t_camera *cam, int x, int y)
 	color = setvec(0, 0, 0);
 	while (i < SAMPLES_PER_PIXEL)
 	{
-		u = (double)(x + random_double()) / (WIDTH - 1);
-		v = (double)(y + random_double()) / (HIGHT - 1);
-		r = get_ray(*world->cam, u, v);
+		u = (double)(x + random_double()) / (MLX_WIDTH - 1);
+		v = (double)(y + random_double()) / (MLX_HIGHT - 1);
+		r = get_ray(*cam, u, v);
 		color = plus_vec_vec(color, ray_color_ph(r, world, MAX_DEPTH));
 		color1 = plus_vec_vec(color1, ray_color_sh(r, world, MAX_DEPTH));
 		i++;
@@ -92,5 +92,5 @@ void	ray_average_color(t_world *world, t_camera *cam, int x, int y)
 		write_color(color, cam->fd);
 		write_color(color1, cam->fd1);
 	}
-	my_mlx_pixel_put(&cam->img, x, HIGHT - y, color);
+	return (color);
 }

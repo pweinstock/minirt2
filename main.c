@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 12:16:15 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:57:13 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,12 +139,12 @@ int	ft_inden(int	key, int x, int y, t_world *world)
 	return (0);
 }
 
-void make_pictur(t_world *world)
-{
-	int arr[HIGHT][WIDTH];
-	count_pixel(world, HIGHT, WIDTH, &arr);
-	ft_make_bmp(&arr);
-}
+// void make_pictur(t_world *world)
+// {
+// 	int arr[HIGHT][WIDTH];
+// 	count_pixel(world, HIGHT, WIDTH, &arr);
+// 	ft_make_bmp(&arr);
+// }
 
 
 int key_hook(int keycode, t_world *world)
@@ -162,11 +162,11 @@ int key_hook(int keycode, t_world *world)
 	else if(keycode == KEY_ESC)
 		ft_free_all(world);
 	set_cam(cam, cam->origin, cam->orientation, cam->degrees);
-	if(keycode == KEY_P)
-	{
-		make_pictur(world);
-	}
-	else
+	// if(keycode == KEY_P)
+	// {
+	// 	make_pictur(world);
+	// }
+	// else
 		ft_make_mlx_imige(world);
 	// printf("test %d \n", keycode);
 	return (0);

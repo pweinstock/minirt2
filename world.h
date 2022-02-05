@@ -76,6 +76,13 @@ typedef struct s_world
 	void	*mlx_win;
 	t_color backround;
 	char	*name;
+	int		picture[HIGHT][WIDTH];
+	t_bool		A_flag;
+	t_bool		L_flag;
+	t_bool		C_flag;
+	double	r;
+	double	g;
+	double	b;
 }               t_world;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, t_color color);

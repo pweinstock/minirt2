@@ -4,6 +4,7 @@ SRC =	./parser.c \
 		./libft/ft_atoi.c \
 		./libft/ft_isdigit.c \
 		./libft/ft_split.c \
+		./libft/ft_split_space.c \
 		./libft/ft_strlen.c \
 		./libft/ft_substr.c \
 		./get_next_line/get_next_line.c \

@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 17:38:30 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/05 18:02:59 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ int	main(int argc, char *argv[])
 	mlx_hook(world.mlx_win, 04, 0, ft_inden, &world);
 	mlx_key_hook(world.mlx_win, key_hook, &world);
 	mlx_loop(world.mlx);
-	free(world.hittabels);
+	ft_free_all(&world);
 	return (1);
 }

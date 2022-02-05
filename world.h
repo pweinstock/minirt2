@@ -12,15 +12,23 @@
 #include "minilibx_macos/mlx.h"
 
 #ifndef WIDTH
-#define WIDTH 200
+#define WIDTH 600
 #endif
 
 #ifndef HIGHT
-#define HIGHT 200
+#define HIGHT 600
+#endif
+
+#ifndef MLX_HIGHT
+#define MLX_HIGHT (HIGHT / 3)
+#endif
+
+#ifndef MLX_WIDTH
+#define MLX_WIDTH (WIDTH / 3)
 #endif
 
 #ifndef SAMPLES_PER_PIXEL
-#define SAMPLES_PER_PIXEL 2
+#define SAMPLES_PER_PIXEL 1
 #endif
 
 #ifndef MAX_DEPTH
@@ -30,6 +38,13 @@
 #ifndef BONUS
 #define BONUS 0
 #endif
+
+#define KEY_W 13
+#define KEY_A 0
+#define KEY_S 1
+#define KEY_D 2
+#define KEY_ESC 53
+#define KEY_P 35
 
 enum light_typ
 {
@@ -60,12 +75,13 @@ typedef struct s_world
 	void	*mlx_win;
 	t_color backround;
 	char	*name;
+	int		picture[HIGHT][WIDTH];
 }               t_world;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, t_color color);
 int	create_trgb(int t, t_color color);
 t_bool hit(t_ray r, t_world *world, double t_max, t_hit_record* rec);
-void ray_average_color(t_world* world, t_camera* cam ,int x, int y);
+t_color ray_average_color(t_world* world, t_camera* cam ,int x, int y);
 double ComputeLightning(t_world *world, t_hit_record* rec, t_ray* ray);
 void write_color(t_vec3 color, int fd);
 

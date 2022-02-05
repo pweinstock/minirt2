@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 17:38:38 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:34:53 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ t_vec3	ray_color_sh(t_ray r, t_world *world, int depth)
 	t_vec3			attenuation;
 
 	if (depth <= 0)
-		return (setvec(1,1,1));
+		return (setvec(1, 1, 1));
 	if (!hit(r, world, INFINITY, &rec))
-		return (setvec(1,1,1));
+		return (setvec(1, 1, 1));
 	light = ComputeLightning(world, &rec, &r);
 	if (!rec.material->scatter(r, rec, &attenuation, &scattered))
 		return (setvec(light, light, light));
-	return (multiply_vec_doub( multiply_vec_vec(
+	return (multiply_vec_doub(multiply_vec_vec(
 				ray_color_sh(scattered, world, depth - 1),
 				attenuation), light));
 }
@@ -80,11 +80,12 @@ t_color	ray_average_color(t_world *world, t_camera *cam, double u, double v)
 	return (color);
 }
 
-void	count_pixel(t_world *world, int hight, int width, int (*arr)[HIGHT][WIDTH])
+void	count_pixel(t_world *w, int hight,
+			int width, int (*arr)[HIGHT][WIDTH])
 {
-	t_color average_color;
-	int	x;
-	int	y;
+	t_color	col;
+	int		x;
+	int		y;
 	double	u;
 	double	v;
 
@@ -94,33 +95,32 @@ void	count_pixel(t_world *world, int hight, int width, int (*arr)[HIGHT][WIDTH])
 		x = 0;
 		while (x < width)
 		{
+			u = (double)(x + random_double()) / (width - 1);
+			v = (double)(y + random_double()) / (hight - 1);
+			col = ray_average_color(w, &w->cam[w->current_cam], u, v);
 			if (arr == NULL)
-			{
-				u = (double)(x + random_double()) / (MLX_WIDTH - 1);
-				v = (double)(y + random_double()) / (MLX_HIGHT - 1);
-				average_color = ray_average_color(world, &world->cam[world->current_cam], u, v);
-				my_mlx_pixel_put(&world->cam[world->current_cam].img, x, MLX_HIGHT - y - 1, average_color);
-			}
+				my_mlx_pixel_put(&w->cam[w->current_cam].img,
+					 x, MLX_HIGHT - y - 1, col);
 			else
-			{
-				u = (double)(x + random_double()) / (WIDTH - 1);
-				v = (double)(y + random_double()) / (HIGHT - 1);
-				average_color = ray_average_color(world, &world->cam[world->current_cam], u, v);
-				(*arr)[y][x] = create_trgb(0, average_color);
-			}
+				(*arr)[y][x] = create_trgb(0, col);
 			x++;
 		}
 		y--;
 	}
 }
 
-void ft_make_mlx_imige(t_world *world)
+void	ft_make_mlx_imige(t_world *world)
 {
-		world->current_cam = 0;
+	size_t	n;
 
-	world->cam[world->current_cam].img.img = mlx_new_image(world->mlx, MLX_WIDTH, MLX_HIGHT);
-	world->cam[world->current_cam].img.addr = mlx_get_data_addr(world->cam[world->current_cam].img.img, &world->cam[world->current_cam].img.bits_per_pixel, &world->cam[world->current_cam].img.line_length, &world->cam[world->current_cam].img.endian);
+	world->current_cam = 0;
+	n = world->current_cam;
+	world->cam[n].img.img = mlx_new_image(world->mlx, MLX_WIDTH, MLX_HIGHT);
+	world->cam[n].img.addr = mlx_get_data_addr(world->cam[n].img.img,
+			&world->cam[n].img.bits_per_pixel, &world->cam[n].img.line_length,
+			&world->cam[n].img.endian);
 	count_pixel(world, MLX_HIGHT, MLX_WIDTH, NULL);
-	mlx_put_image_to_window(world->mlx, world->mlx_win, world->cam[world->current_cam].img.img, 0, 0);
-	mlx_destroy_image(world->mlx, world->cam[world->current_cam].img.img);
+	mlx_put_image_to_window(world->mlx, world->mlx_win,
+		world->cam[n].img.img, 0, 0);
+	mlx_destroy_image(world->mlx, world->cam[n].img.img);
 }

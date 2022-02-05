@@ -2,7 +2,7 @@
 
 int	ft_free_all(t_world *world)
 {
-	int pid;
+	int	pid;
 
 	pid = 0;
 	free(world->hittabels);

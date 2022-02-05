@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 18:02:59 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:01:28 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	main(int argc, char *argv[])
 	world.mlx = mlx_init();
 	world.mlx_win = mlx_new_window(world.mlx, MLX_WIDTH, MLX_HIGHT, "miniRT");
 	parser(argv[1], &world);
-
 	ft_make_mlx_imige(&world);
 	world.current_cam = 0;
 	mlx_hook(world.mlx_win, 17, 0, ft_free_all, &world);

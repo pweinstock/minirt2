@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 10:01:14 by pweinsto          #+#    #+#             */
-/*   Updated: 2021/06/25 17:24:42 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/05 13:43:15 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	ft_atoi(const char *str)
 	i = 0;
 	sign = 1;
 	sum = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || (str[i] == 32))
-		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
@@ -33,6 +31,11 @@ int	ft_atoi(const char *str)
 	{
 		sum = (sum * 10) + (str[i] - 48);
 		i++;
+	}
+	if(str[i] != 0 && str[i] != '.')
+	{
+		printf("Error\n%c: Is not a number", str[i]);
+		exit(0);
 	}
 	return (sum * sign);
 }

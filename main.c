@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/04 17:36:27 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:57:09 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_make_imiges(t_world *world)
 	char	*file1;
 
 	file = "dat.ppm";
-	file1 = "dat1.ppm";
+	file1 = "dat1.bmp";
 	while (world->current_cam < world->n_cam)
 	{
 		if (BONUS)
@@ -81,9 +81,7 @@ void	ft_make_imiges(t_world *world)
 
 int	ft_free_all(t_world *world)
 {
-	free(world->cam);
 	free(world->hittabels);
-	free(world->lights);
 	mlx_destroy_window(world->mlx, world->mlx_win);
 	exit(EXIT_SUCCESS);
 }
@@ -91,9 +89,7 @@ int	ft_free_all(t_world *world)
 int	ft_free_all_esc(int keycode, t_world *world)
 {
 	keycode = 0;
-	free(world->cam);
 	free(world->hittabels);
-	free(world->lights);
 	mlx_destroy_window(world->mlx, world->mlx_win);
 	exit(EXIT_SUCCESS);
 }
@@ -103,7 +99,7 @@ int	ft_free_all_esc(int keycode, t_world *world)
 t_vec3	ft_rx(t_vec3 in, double deg)
 {
 	t_vec3 ret;
-
+	printf("deg = %f\n", deg);
 	ret.vec.x = in.vec.x;
 	ret.vec.y = in.vec.y * cos(deg) - in.vec.z * sin(deg);
 	ret.vec.z = in.vec.y * sin(deg) + in.vec.z * cos(deg);
@@ -114,8 +110,8 @@ t_vec3	ft_ry(t_vec3 in, double deg)
 {
 	t_vec3 ret;
 
-	ret.vec.y = in.vec.y;
 	ret.vec.x = in.vec.x * cos(deg) + in.vec.z * sin(deg);
+	ret.vec.y = in.vec.y;
 	ret.vec.z = -in.vec.x * sin(deg) + in.vec.z * cos(deg);
 	return ret;
 
@@ -128,22 +124,24 @@ int	ft_inden(int	key, int x, int y, t_world *world)
 	world->current_cam = 0;
 	cam = &world->cam[world->current_cam];
 	if (key == 5)
-		set_cam(cam, cam->origin, cam->orientation, cam->degrees * 0.9);
+	{
+		if (cam->degrees > 10)
+			set_cam(cam, cam->origin, cam->orientation, cam->degrees * 0.9);
+	}
 	else if (key == 4)
-		set_cam(cam, cam->origin, cam->orientation, cam->degrees * 1.1);
+	{
+		if (cam->degrees < 160)
+			set_cam(cam, cam->origin, cam->orientation, cam->degrees * 1.1);
+	}
 	else if (key == 1)
 	{
-		new_orientation = ft_rx(cam->orientation, (x - HIGHT + HIGHT/2)* 0.1);
-		new_orientation = ft_ry(cam->orientation, (y - WIDTH + WIDTH/2)*0.1);
+		new_orientation = ft_rx(cam->orientation, -(double)(y - HIGHT/2) / HIGHT/2);
+		printf("%f %f %f\n", new_orientation.col.r, new_orientation.col.g, new_orientation.col.b);
+		new_orientation = ft_ry(new_orientation, -(double)(x - WIDTH/2) / WIDTH/2);
 		set_cam(cam, cam->origin, new_orientation, cam->degrees);
 	}
-	// else if (key == 3)
-	// {
-	// 	area->axis.xe = x;
-	// 	area->axis.ye = y;
-	// }
 	ft_make_imige(world);
-	printf("%d %d %d %f\n", x, y, key, cam->degrees);
+	printf("%d %d %d %f\n", x, y, key, -(double)(y - HIGHT/2) / (double)90);
 	return (0);
 }
 

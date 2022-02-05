@@ -5,15 +5,16 @@
 void set_cam(t_camera *cam, t_vec3 origin, t_vec3 orientation, double degrees)
 {
 	cam->origin = origin;
-	cam->degrees = degrees;
 	cam->orientation = orientation;
+	cam->degrees = degrees;
 
 	double theta = degrees_to_radians(cam->degrees);
 	double h = tan(theta/2);
 	double viewport_height = 2 * h;
 	double viewport_width = (double)WIDTH/HIGHT * viewport_height;
 
-	cam->w = unit_vector(minus_vec_vec(cam->origin, orientation));
+	// cam->w = unit_vector(minus_vec_vec(cam->origin, orientation));
+	cam->w = invert(orientation);
 	cam->u = unit_vector(cross(setvec(0,1,0), cam->w));
 	cam->v = cross(cam->w, cam->u);
 

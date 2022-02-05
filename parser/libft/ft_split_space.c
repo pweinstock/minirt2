@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_space.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:57:11 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/05 13:03:19 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/05 13:24:46 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static size_t	ft_count_strings(char const *s, char c)
+#include <stdio.h>
+static size_t	ft_count_strings(char const *s)
 {
 	size_t	i;
 	size_t	count;
@@ -21,41 +21,41 @@ static size_t	ft_count_strings(char const *s, char c)
 	count = 0;
 	while (s[i] != 0)
 	{
-		if (s[i] == c)
+		if ((s[i] >= 9 && s[i] <= 13) || (s[i] == 32))
 			i++;
 		else
 		{
 			count += 1;
-			while (s[i] != c && s[i] != 0)
+			while (((s[i] < 9 || s[i] > 13) && s[i]!= 32) && s[i] != 0)
 				i++;
 		}
 	}
 	return (count);
 }
 
-static int	ft_all_delimiter(char const *s, char c)
+static int	ft_all_delimiter(char const *s)
 {
 	size_t	i;
 
 	i = 0;
 	while (s[i] != 0)
 	{
-		if (s[i] != c)
+		if ((s[i] < 9 || s[i] > 13) && s[i]!= 32)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-static char	**ft_create_malloc(char const *s, char c)
+static char	**ft_create_malloc(char const *s)
 {
 	char	**ptr;
 
-	ptr = (char **)malloc((sizeof(char *) * (ft_count_strings(s, c) + 1)));
+	ptr = (char **)malloc((sizeof(char *) * (ft_count_strings(s) + 1)));
 	return (ptr);
 }
 
-static char	**ft_split_loop(char **ptr, char const *s, char c)
+static char	**ft_split_loop(char **ptr, char const *s)
 {
 	size_t	i;
 	size_t	j;
@@ -66,12 +66,12 @@ static char	**ft_split_loop(char **ptr, char const *s, char c)
 	j = 0;
 	while (s[i] != 0)
 	{
-		if (s[i] == c)
+		if ((s[i] >= 9 && s[i] <= 13) || (s[i] == 32))
 			i++;
 		else
 		{
 			start = i;
-			while (s[i] != c && s[i] != 0)
+			while (((s[i] < 9 || s[i] > 13) && s[i]!= 32) && s[i] != 0)
 				i++;
 			end = i;
 			ptr[j] = ft_substr(s, start, end - start);
@@ -83,20 +83,20 @@ static char	**ft_split_loop(char **ptr, char const *s, char c)
 	return (ptr);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_space(char const *s)
 {
 	char	**ptr;
 	size_t	i;
 	size_t	len;
 
-	if (!s || ft_all_delimiter(s, c) == 1)
+	if (!s || ft_all_delimiter(s) == 1)
 		return (0);
-	ptr = ft_create_malloc(s, c);
+	ptr = ft_create_malloc(s);
 	if (!ptr)
 		return (0);
-	ptr = ft_split_loop(ptr, s, c);
+	ptr = ft_split_loop(ptr, s);
 	i = 0;
-	len = ft_count_strings(s, c);
+	len = ft_count_strings(s);
 	while (i < len)
 	{
 		if (ptr[i] == 0)

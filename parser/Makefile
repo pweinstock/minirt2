@@ -1,6 +1,11 @@
 CC=gcc
 
 SRC =	./parser.c \
+		./parser_helper.c \
+		./parser_utils.c \
+		./light.c \
+		./camera.c \
+		./object.c \
 		./libft/ft_atoi.c \
 		./libft/ft_isdigit.c \
 		./libft/ft_split.c \

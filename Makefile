@@ -7,7 +7,8 @@ SRC=./hit.c\
 		./ray_color.c\
 		./bit_map.c\
 		./hooks.c\
-		./free_all.c
+		./free_all.c\
+		./make_image.c
 
 
 FLAGS = -Wall -Wextra -Werror -g

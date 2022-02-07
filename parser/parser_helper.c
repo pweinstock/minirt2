@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:41:28 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/05 20:02:23 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:48:32 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	count_object(t_world *world, char *line)
 {
 	if (line[0] == 'A' || line[0] == 'L' || line[0] == 'D')
 		world->n_lights++;
-	else if (line[0] == 'C')
-		world->n_cam++;
 	else if ((line[1] && line[0] == 's' && line[1] == 'p')
 		|| (line[0] == 'p' && line[1] == 'l')
 		|| (line[0] == 'c' && (line[1] == 'y' || line[1] == 'o')))
@@ -67,12 +65,6 @@ void	init_array(t_world *world)
 	world->hittabels = \
 	(t_object *)malloc(sizeof(t_object) * world->n_hittabels);
 	if (!world->hittabels)
-	{
-		perror("Error\nmalloc");
-		exit(0);
-	}
-	world->cam = (t_camera *)malloc(sizeof(t_camera) * world->n_cam);
-	if (!world->cam)
 	{
 		perror("Error\nmalloc");
 		exit(0);

@@ -1,3 +1,13 @@
 {
-	"makefile.extensionOutputFolder": "./.vscode"
+	"makefile.extensionOutputFolder": "./.vscode",
+	"files.associations": {
+		"ios": "c"
+	},
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "/Users/shackbei/Documents/code/Projects/miniRT",
+			"binaryPath": "/Users/shackbei/Documents/code/Projects/miniRT/a.out",
+			"binaryArgs": ["test1.rt"]
+		}
+	]
 }

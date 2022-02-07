@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:44:51 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 19:44:52 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/07 21:52:15 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,19 @@
 
 static void	make_pictur(t_world *world)
 {
-	int	arr[HIGHT][WIDTH];
+	int				arr[HIGHT][WIDTH];
+	t_picture_part	part;
 
-	count_pixel(world, HIGHT, WIDTH, &arr);
+	part.x.from = 0;
+	part.x.to = WIDTH;
+	part.x.current = 0;
+	part.y.from = 0;
+	part.y.to = HIGHT;
+	part.y.current = HIGHT;
+	part.ges_y.from = 0;
+	part.ges_y.to = HIGHT;
+	part.ges_y.current = HIGHT;
+	count_pixel(world, &part, &arr, NULL);
 	ft_make_bmp(&arr);
 	ft_free_all(world);
 }
@@ -27,7 +37,7 @@ int	key_hook(int keycode, t_world *world)
 	int			pid;
 	t_camera	*ca;
 
-	ca = &world->cam[world->current_cam];
+	ca = &world->cam;
 	if (keycode == KEY_W)
 		ca->origin = plus_vec_vec(ca->origin, multiply_vec_doub(ca->v, 0.5));
 	else if (keycode == KEY_S)
@@ -46,7 +56,7 @@ int	key_hook(int keycode, t_world *world)
 			make_pictur(world);
 	}
 	else
-		ft_make_mlx_imige(world);
+		ft_make_mlx_imiges(world);
 	return (0);
 }
 
@@ -75,7 +85,7 @@ int	ft_inden(int	key, int x, int y, t_world *world)
 	t_camera	*cam;
 	int			vor;
 
-	cam = &world->cam[world->current_cam];
+	cam = &world->cam;
 	if (key == 5)
 		cam->origin = minus_vec_vec(cam->origin,
 				multiply_vec_doub(cam->orientation, 0.5));
@@ -91,6 +101,6 @@ int	ft_inden(int	key, int x, int y, t_world *world)
 				-(double)(x - MLX_WIDTH / 2) / MLX_WIDTH / 2);
 	}
 	set_cam(cam, cam->origin, cam->orientation, cam->degrees);
-	ft_make_mlx_imige(world);
+	ft_make_mlx_imiges(world);
 	return (0);
 }

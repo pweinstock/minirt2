@@ -19,7 +19,9 @@ NAME = shapes.a
 all: $(NAME)
 
 $(NAME): ../libray/libray.a ../libmat/libmat.a $(OBJ)
-		libtool -static -o $(NAME)  $(OBJ)
+		ar rcs $(NAME)  $(OBJ)
+
+#/*libtool -static  -o*/
 
 # ../libmat/libmat.a ../libray/libray.a
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/07 22:17:52 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 16:08:56 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vec3	ray_color_ph(t_ray r, t_world *world, int depth)
 	local_color = setvec(0, 0, 0);
 	if (!hit(r, world, INFINITY, &rec))
 		return (world->backround);
-	local_color = multiply_vec_doub(rec.material->color,
+	local_color = multiply_vec_vec(rec.material->color,
 			ComputeLightning(world, &rec, &r));
 	if (depth <= 0)
 		return (local_color);

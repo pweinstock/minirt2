@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:38:38 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/05 19:52:27 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/08 21:00:30 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	sphere(char *line, t_world *world)
 	world->hittabels[world->n_hittabels].hit = hit_sphere;
 	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
 	world->hittabels[world->n_hittabels].mat.specular = -1;
-	world->hittabels[world->n_hittabels].mat.reflective = 0.5;
+	world->hittabels[world->n_hittabels].mat.reflective = 0;
 	world->hittabels[world->n_hittabels].mat.ir = 1.5;
 	free(data);
 	return (1);
@@ -45,6 +45,11 @@ int	plane(char *line, t_world *world)
 	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
 	world->hittabels[world->n_hittabels].mat.specular = -1;
 	world->hittabels[world->n_hittabels].mat.reflective = 0;
+	world->hittabels[world->n_hittabels].mat1.color = setvec(1,1,1);
+	world->hittabels[world->n_hittabels].mat1.scatter = scatter_lambertian;
+	world->hittabels[world->n_hittabels].mat1.specular = -1;
+	world->hittabels[world->n_hittabels].mat1.reflective = 0;
+	world->hittabels[world->n_hittabels].mat1.ir = 1.5;
 	free(data);
 	return (0);
 }

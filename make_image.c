@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 22:19:58 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 19:10:28 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 21:52:42 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ void	ft_start_threads(t_world *world)
 				ft_make_mlx_imige, world) != 0)
 			break ;
 		i++;
-		usleep(100);
 	}
 	i--;
-	while (i > 0)
+	while (i >= 0)
 	{
 		pthread_join(thread[i], NULL);
 		i--;
@@ -66,10 +65,8 @@ void	ft_make_mlx_imiges(t_world *world)
 	world->cam.img.addr = mlx_get_data_addr(world->cam.img.img,
 			&world->cam.img.bits_per_pixel, &world->cam.img.line_length,
 			&world->cam.img.endian);
-	pthread_mutex_init(&world->hight_mutex, NULL);
 	ft_start_threads(world);
 	mlx_put_image_to_window(world->mlx, world->mlx_win,
 		world->cam.img.img, 0, 0);
-	pthread_mutex_destroy(&world->hight_mutex);
 	mlx_destroy_image(world->mlx, world->cam.img.img);
 }

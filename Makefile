@@ -11,10 +11,10 @@ SRC=./hit.c\
 		./make_image.c
 
 
-FLAGS = -Wall -Wextra -Werror -g
-# -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -O2
+# -fsanitize=address -fsanitize=thread
 
-MLXFLAGS =		./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
+MLXFLAGS =	./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 
 all: $(NAME)
 

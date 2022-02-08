@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 15:44:30 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 22:30:44 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vec3	ray_color_ph(t_ray r, t_world *world, int depth)
 	local_color = setvec(0, 0, 0);
 	if (!hit(r, world, INFINITY, &rec))
 		return (world->backround);
-	local_color = multiply_vec_doub(rec.material->color,
+	local_color = multiply_vec_vec(rec.material->color,
 			ComputeLightning(world, &rec, &r));
 	if (depth <= 0)
 		return (local_color);
@@ -54,8 +54,10 @@ t_color	ray_average_color(t_world *world, t_picture_part *part,
 	color = setvec(0, 0, 0);
 	while (i < samples_per_pixel)
 	{
-		u = (double)(part->x.current + random_double()) / (part->x.to - 1);
-		v = (double)(part->y.current + random_double()) / (part->ges_y.to - 1);
+		// u = (double)(part->x.current + random_double()) / (part->x.to - 1);
+		// v = (double)(part->y.current + random_double()) / (part->ges_y.to - 1);
+		u = (double)(part->x.current) / (part->x.to - 1);
+		v = (double)(part->y.current) / (part->ges_y.to - 1);
 		r = get_ray(world->cam, u, v);
 		color = plus_vec_vec(color, ray_color_ph(r, world, max_depth));
 		i++;

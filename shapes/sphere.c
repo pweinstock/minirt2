@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:17:31 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/03 11:41:28 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 21:00:50 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ t_bool	hit_sphere(t_ray r, t_object *object, double t_max, t_hit_record *rec)
 	set_face_normal(rec, r,
 		division(minus_vec_vec(rec->p, object->center), object->radius));
 	rec->material = &object->mat;
+	// checkerboard(rec, object);
 	return (TRUE);
 }

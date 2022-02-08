@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/07 16:08:56 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 20:35:25 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char *argv[])
 	world.mlx = mlx_init();
 	world.mlx_win = mlx_new_window(world.mlx, MLX_WIDTH, MLX_HIGHT, "miniRT");
 	parser(argv[1], &world);
+	pthread_mutex_init(&world.hight_mutex, NULL);
 	ft_make_mlx_imiges(&world);
 	mlx_hook(world.mlx_win, 17, 0, ft_free_all, &world);
 	mlx_hook(world.mlx_win, 04, 0, ft_inden, &world);

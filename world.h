@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:54:53 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 19:10:55 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 21:57:38 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@
 
 # ifndef MLX_HIGHT
 // #  define MLX_HIGHT 600
-#  define MLX_HIGHT (HIGHT/5)
+#  define MLX_HIGHT (HIGHT/4)
 # endif
 
 # ifndef MLX_WIDTH
 // #  define MLX_WIDTH 600
-#  define MLX_WIDTH (WIDTH/5)
+#  define MLX_WIDTH (WIDTH/4)
 # endif
 
 # ifndef SAMPLES_PER_PIXEL
-#  define SAMPLES_PER_PIXEL 5
+#  define SAMPLES_PER_PIXEL 1
 # endif
 
 # ifndef MLX_SAMPLES_PER_PIXEL
@@ -55,7 +55,7 @@
 # endif
 
 # ifndef MLX_MAX_DEPTH
-#  define MLX_MAX_DEPTH 3
+#  define MLX_MAX_DEPTH 2
 # endif
 
 # ifndef MLX_THREADS
@@ -125,7 +125,7 @@ int		create_trgb(int t, t_color color);
 t_bool	hit(t_ray r, t_world *world, double t_max, t_hit_record *rec);
 t_color	ray_average_color(t_world *world, t_picture_part *part,
 			size_t samples_per_pixel, int max_depth);
-double	ComputeLightning(t_world *world, t_hit_record *rec, t_ray *ray);
+t_color	ComputeLightning(t_world *world, t_hit_record *rec, t_ray *ray);
 void	write_color(t_vec3 color, int fd);
 void	ft_make_bmp(int *arr);
 int		ft_inden(int key, int x, int y, t_world *world);

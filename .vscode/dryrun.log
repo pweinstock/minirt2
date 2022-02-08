@@ -8,6 +8,6 @@ make -C ./libmath
 make -C ./libray
 make -C ./libvec
 make -C ./shapes
-gcc ./parser/parser.a ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a ./hit.c ./light.c ./main.c ./plot_scene.c ./ray_color.c ./bit_map.c ./hooks.c ./free_all.c -Wall -Wextra -Werror -g ./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
+gcc ./parser/parser.a ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a ./hit.c ./light.c ./main.c ./plot_scene.c ./ray_color.c ./bit_map.c ./hooks.c ./free_all.c ./make_image.c -Wall -Wextra -Werror -g ./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 make: Leaving directory `/Users/shackbei/Documents/code/Projects/miniRT'
  

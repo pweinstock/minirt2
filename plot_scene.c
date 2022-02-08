@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 17:03:27 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/02 20:43:49 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:03:03 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	create_trgb(int t, t_color color)
 	r = (int)(256 * clamp(color.v[0], 0.0, 0.999));
 	g = (int)(256 * clamp(color.v[1], 0.0, 0.999));
 	b = (int)(256 * clamp(color.v[2], 0.0, 0.999));
-	if (color.col.r > 255) /// in der specular berechnung ändern;
+	if (color.col.r > 255)
 		color.col.r = 255;
 	if (color.col.g > 255)
 		color.col.g = 255;

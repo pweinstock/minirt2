@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:44:09 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/05 20:04:41 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:47:46 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	parser(char *file, t_world *world)
 	int	fd;
 
 	world->n_hittabels = 0;
-	world->n_cam = 0;
 	world->n_lights = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -57,7 +56,6 @@ int	parser(char *file, t_world *world)
 	close(fd);
 	init_array(world);
 	world->n_hittabels = 0;
-	world->n_cam = 0;
 	world->n_lights = 0;
 	fd = open(file, O_RDONLY);
 	fil_world(world, fd);

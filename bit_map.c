@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 20:47:35 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/07 22:16:51 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:20:09 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	set_values(struct s_bitmap_header *header, struct s_bitmap_inf *info)
 	info->biClrImportant = 0;
 }
 
-void	ft_set_name(char *file, FILE *out)
+void	ft_set_name(char *file, FILE **out)
 {
 	file[0] = '.';
 	file[1] = '/';
@@ -39,8 +39,7 @@ void	ft_set_name(char *file, FILE *out)
 	file[6] = 'm';
 	file[7] = 'p';
 	file[8] = '\0';
-	chdir("./pictures");
-	while (out == NULL)
+	while (*out == NULL)
 	{
 		file[3]++;
 		if (file[3] == 'Z' && file[2] != 'Z')
@@ -49,22 +48,23 @@ void	ft_set_name(char *file, FILE *out)
 			file[3] = 'A';
 		}
 		if (file[2] == 'Z' && file[3] == 'Z')
-			out = fopen(file, "wb");
+			*out = fopen(file, "wb");
 		else
-			out = fopen(file, "wx");
+			*out = fopen(file, "wx");
 	}
 }
 
-void	ft_make_bmp(int (*arr)[HIGHT][WIDTH])
+void	ft_make_bmp(int *arr)
 {
 	struct s_bitmap_header	header;
 	struct s_bitmap_inf		info;
 	FILE					*out;
 	char					file[9];
-	const unsigned int		imagesize = WIDTH * 32 * HIGHT;
+	const unsigned int		imagesize = WIDTH * 4 * HIGHT;
 
 	out = NULL;
-	ft_set_name(file, out);
+	chdir("./pictures");
+	ft_set_name(file, &out);
 	header.bfSize = 54 + imagesize;
 	info.biSizeImage = imagesize;
 	set_values(&header, &info);

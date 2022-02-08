@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Mon Feb  7 22:18:33 2022
+# Make data base, printed on Tue Feb  8 14:34:28 2022
 
 # Variables
 
@@ -39,7 +39,7 @@ MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cc9m00332d/T/vscode-ipc-27b77d0e-ba47-4c90-a3d2-a1400d3a8873.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cc9m00332d/T/vscode-ipc-5b6c7bd2-f677-419b-bb1d-c24546435448.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -47,7 +47,7 @@ PATH = /Users/shackbei/.brew/bin:/Users/shackbei/.brew/bin:/Users/shackbei/.brew
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-LaunchInstanceID = 2608330B-BEBE-457D-AC89-10A4013AF85F
+LaunchInstanceID = 984B3085-4A47-48FA-B767-4EA4D6324F8D
 # environment
 VSCODE_LOG_STACK = false
 # environment
@@ -55,10 +55,10 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.pJXCh67H0B/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.GWIDR6oTGE/Listeners
 # automatic
 %F = $(notdir $%)
-# makefile (from `Makefile', line 16)
+# makefile (from `Makefile', line 17)
 MLXFLAGS = ./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 # environment
 VSCODE_PIPE_LOGGING = true
@@ -155,7 +155,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 2557
+VSCODE_PID = 53850
 # variable set hash-table stats:
 # Load=72/1024=7%, Rehash=0, Collisions=2/101=2%
 
@@ -165,9 +165,9 @@ VSCODE_PID = 2557
 
 # Directories
 
-# . (device 16777225, inode 1938541): 32 files, no impossibilities.
+# . (device 16777225, inode 1938541): 33 files, no impossibilities.
 
-# 32 files, no impossibilities in 1 directories.
+# 33 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -193,7 +193,7 @@ all: a.out
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-07 22:18:28
+#  Last modified 2022-02-08 14:32:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -201,12 +201,12 @@ Makefile:
 
 a.out: lib
 #  Implicit rule search has not been done.
-#  Last modified 2022-02-07 22:16:35
+#  Last modified 2022-02-08 14:32:06
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/2=0%
-#  commands to execute (from `Makefile', line 21):
+#  commands to execute (from `Makefile', line 22):
 	gcc ./parser/parser.a ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a $(SRC) $(FLAGS) $(MLXFLAGS)
 	
 
@@ -214,7 +214,7 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 45):
+#  commands to execute (from `Makefile', line 46):
 	make fclean -C ./parser
 	make fclean -C ./libcam
 	make fclean -C ./libmat
@@ -248,7 +248,7 @@ lib:
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/10=10%
-#  commands to execute (from `Makefile', line 25):
+#  commands to execute (from `Makefile', line 26):
 	make -C ./parser
 	make -C ./libcam
 	make -C ./libmat
@@ -273,7 +273,7 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 35):
+#  commands to execute (from `Makefile', line 36):
 	rm -f ./a.out
 	make clean -C ./parser
 	make clean -C ./libcam
@@ -297,6 +297,6 @@ clean:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Feb  7 22:18:33 2022
+# Finished Make data base on Tue Feb  8 14:34:28 2022
 
  

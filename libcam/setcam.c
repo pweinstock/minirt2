@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:53:09 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 17:58:39 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 14:30:54 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	set_cam(t_camera *cam, t_vec3 origin,
 	theta = degrees_to_radians(cam->degrees);
 	h = tan(theta / 2);
 	viewport_height = 2 * h;
-	viewport_width = (double)WIDTH / HIGHT * viewport_height;
+	viewport_width = (double)WIDTH / (double)HIGHT * viewport_height;
 	cam->w = invert(orientation);
 	cam->u = unit_vector(cross(setvec(0, 1, 0), cam->w));
 	cam->v = cross(cam->w, cam->u);

@@ -12,6 +12,7 @@ SRC=./hit.c\
 
 
 FLAGS = -Wall -Wextra -Werror -g
+# -fsanitize=address
 
 MLXFLAGS =		./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 

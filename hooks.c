@@ -6,29 +6,35 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:44:51 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/07 21:52:15 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 15:46:12 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "world.h"
+#include <stdio.h>
 
 static void	make_pictur(t_world *world)
 {
-	int				arr[HIGHT][WIDTH];
 	t_picture_part	part;
+	int				*arr;
 
-	part.x.from = 0;
-	part.x.to = WIDTH;
-	part.x.current = 0;
-	part.y.from = 0;
-	part.y.to = HIGHT;
-	part.y.current = HIGHT;
-	part.ges_y.from = 0;
-	part.ges_y.to = HIGHT;
-	part.ges_y.current = HIGHT;
-	count_pixel(world, &part, &arr, NULL);
-	ft_make_bmp(&arr);
+	arr = malloc(sizeof(int) * HIGHT * WIDTH);
+	if (arr != NULL)
+	{
+		part.x.from = 0;
+		part.x.to = WIDTH;
+		part.x.current = 0;
+		part.y.from = 0;
+		part.y.to = HIGHT;
+		part.y.current = HIGHT;
+		part.ges_y.from = 0;
+		part.ges_y.to = HIGHT;
+		part.ges_y.current = HIGHT;
+		count_pixel(world, &part, arr, NULL);
+		ft_make_bmp(arr);
+		free(arr);
+	}
 	ft_free_all(world);
 }
 

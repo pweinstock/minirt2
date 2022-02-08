@@ -11,7 +11,7 @@ SRC=./hit.c\
 		./make_image.c
 
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 # -fsanitize=address
 
 MLXFLAGS =		./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit

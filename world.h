@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:54:53 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 17:27:58 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:34:06 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,25 @@
 # include <pthread.h>
 
 # ifndef WIDTH
-#  define WIDTH 5120/2
+#  define WIDTH (5120/2)
 # endif
 
 # ifndef HIGHT
-#  define HIGHT 2880/2
+#  define HIGHT (2880/2)
 # endif
 
 # ifndef MLX_HIGHT
 // #  define MLX_HIGHT 600
-#  define MLX_HIGHT (HIGHT/5)
+#  define MLX_HIGHT (HIGHT/2)
 # endif
 
 # ifndef MLX_WIDTH
 // #  define MLX_WIDTH 600
-#  define MLX_WIDTH (WIDTH/5)
+#  define MLX_WIDTH (WIDTH/2)
 # endif
 
 # ifndef SAMPLES_PER_PIXEL
-#  define SAMPLES_PER_PIXEL 5
+#  define SAMPLES_PER_PIXEL 1
 # endif
 
 # ifndef MLX_SAMPLES_PER_PIXEL
@@ -59,7 +59,7 @@
 # endif
 
 # ifndef MLX_THREADS
-#  define MLX_THREADS 11
+#  define MLX_THREADS 2
 # endif
 
 # define KEY_W 13

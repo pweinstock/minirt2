@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 22:19:58 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 15:45:04 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:33:40 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	ft_start_threads(t_world *world)
 		i++;
 	}
 	i--;
-	while (i > 0)
+		usleep(10000);
+	while (i >= 0)
 	{
 		pthread_join(thread[i], NULL);
 		i--;

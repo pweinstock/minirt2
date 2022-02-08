@@ -6,11 +6,12 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 22:19:58 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 15:45:04 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:10:28 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
+#include <stdio.h>
 
 void	*ft_make_mlx_imige(void *tmp_world)
 {
@@ -49,6 +50,7 @@ void	ft_start_threads(t_world *world)
 				ft_make_mlx_imige, world) != 0)
 			break ;
 		i++;
+		usleep(100);
 	}
 	i--;
 	while (i > 0)

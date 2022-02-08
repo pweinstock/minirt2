@@ -1,9 +1,9 @@
-make all --dry-run --keep-going --print-directory
+make all --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/shackbei/Documents/code/Projects/miniRT'
 make -C ./parser
 make -C ./libcam
- 
 make -C ./libmat
+ 
 make -C ./libmath
 make -C ./libray
 make -C ./libvec

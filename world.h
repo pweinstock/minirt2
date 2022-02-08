@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:54:53 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 16:10:42 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:10:55 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # include <pthread.h>
 
 # ifndef WIDTH
-#  define WIDTH 5120/2
+#  define WIDTH (5120/2)
 # endif
 
 # ifndef HIGHT
-#  define HIGHT 2880/2
+#  define HIGHT (2880/2)
 # endif
 
 # ifndef MLX_HIGHT

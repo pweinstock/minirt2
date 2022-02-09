@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:54:53 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 14:21:20 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:03:19 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # endif
 
 # ifndef MAX_DEPTH
-#  define MAX_DEPTH 3
+#  define MAX_DEPTH 10
 # endif
 
 # ifndef MLX_MAX_DEPTH

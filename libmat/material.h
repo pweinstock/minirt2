@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:52:11 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 11:39:02 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:19:36 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_material
 	double	ir;
 	double	specular;
 	double	reflective;
+	int		checkerboard;
 	t_bool (*scatter)(t_ray in, struct s_hit_record rec,
 		t_vec3 * attenuation, t_ray * scattered);
 }				t_material;

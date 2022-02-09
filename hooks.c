@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:44:51 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 15:46:12 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:36:30 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	make_pictur(t_world *world)
 	t_picture_part	part;
 	int				*arr;
 
-	arr = malloc(sizeof(int) * HIGHT * WIDTH);
+	arr = (int *)malloc(sizeof(int) * HIGHT * WIDTH);
 	if (arr != NULL)
 	{
 		part.x.from = 0;
@@ -36,34 +36,6 @@ static void	make_pictur(t_world *world)
 		free(arr);
 	}
 	ft_free_all(world);
-}
-
-int	key_hook(int keycode, t_world *world)
-{
-	int			pid;
-	t_camera	*ca;
-
-	ca = &world->cam;
-	if (keycode == KEY_W)
-		ca->origin = plus_vec_vec(ca->origin, multiply_vec_doub(ca->v, 0.5));
-	else if (keycode == KEY_S)
-		ca->origin = minus_vec_vec(ca->origin, multiply_vec_doub(ca->v, 0.5));
-	else if (keycode == KEY_A)
-		ca->origin = minus_vec_vec(ca->origin, multiply_vec_doub(ca->u, 0.5));
-	else if (keycode == KEY_D)
-		ca->origin = plus_vec_vec(ca->origin, multiply_vec_doub(ca->u, 0.5));
-	else if (keycode == KEY_ESC)
-		ft_free_all(world);
-	set_cam(ca, ca->origin, ca->orientation, ca->degrees);
-	if (keycode == KEY_P)
-	{
-		pid = fork();
-		if (pid == 0)
-			make_pictur(world);
-	}
-	else
-		ft_make_mlx_imiges(world);
-	return (0);
 }
 
 static t_vec3	ft_rx(t_vec3 in, double deg)
@@ -84,6 +56,45 @@ static t_vec3	ft_ry(t_vec3 in, double deg)
 	ret.vec.y = in.vec.y;
 	ret.vec.z = -in.vec.x * sin(deg) + in.vec.z * cos(deg);
 	return (ret);
+}
+
+void	arrow(int keycode, t_camera	*ca)
+{
+	if (keycode == KEY_UP)
+		ca->origin = plus_vec_vec(ca->origin, multiply_vec_doub(ca->v, 0.5));
+	else if (keycode == KEY_DOWN)
+		ca->origin = minus_vec_vec(ca->origin, multiply_vec_doub(ca->v, 0.5));
+	else if (keycode == KEY_LEFT)
+		ca->origin = minus_vec_vec(ca->origin, multiply_vec_doub(ca->u, 0.5));
+	else if (keycode == KEY_RIGHT)
+		ca->origin = plus_vec_vec(ca->origin, multiply_vec_doub(ca->u, 0.5));
+}
+
+int	key_hook(int keycode, t_world *world)
+{
+	t_camera	*ca;
+
+	ca = &world->cam;
+	if (keycode == KEY_W)
+		ca->origin = plus_vec_vec(ca->origin,
+		multiply_vec_doub(ca->orientation, 0.5));
+	else if (keycode == KEY_S)
+		ca->origin = minus_vec_vec(ca->origin,
+		multiply_vec_doub(ca->orientation, 0.5));
+	else if (keycode == KEY_A)
+		ca->orientation = ft_ry(ca->orientation, 0.1);
+	else if (keycode == KEY_D)
+				ca->orientation = ft_ry(ca->orientation, -0.1);
+	else if (keycode == KEY_ESC)
+		ft_free_all(world);
+	else
+		arrow(keycode, ca);
+	set_cam(ca, ca->origin, ca->orientation, ca->degrees);
+		if (keycode == KEY_P && fork() == 0)
+			make_pictur(world);
+	else
+		ft_make_mlx_imiges(world);
+	return (0);
 }
 
 int	ft_inden(int	key, int x, int y, t_world *world)

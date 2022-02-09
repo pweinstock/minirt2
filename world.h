@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:54:53 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 16:06:39 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:10:54 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # include <pthread.h>
 
 # ifndef WIDTH
-#  define WIDTH (2560/2)
+#  define WIDTH 2560
 # endif
 
 # ifndef HIGHT
-#  define HIGHT (1440/2)
+#  define HIGHT 1440
 # endif
 
 # ifndef MLX_HIGHT
@@ -68,6 +68,10 @@
 # define KEY_D 2
 # define KEY_ESC 53
 # define KEY_P 35
+# define KEY_UP 126
+# define KEY_LEFT 123
+# define KEY_DOWN 125
+# define KEY_RIGHT 124
 
 enum e_light_typ
 {

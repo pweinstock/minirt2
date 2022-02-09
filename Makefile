@@ -16,14 +16,14 @@ LIB = 	./.minilibx_macos/libmlx.a ./parser/parser.a ./libcam/libcam.a ./libmat/l
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -O2
+CFLAGS = -Wall -Wextra -Werror -O2
 
 MLXFLAGS = -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJ) world.h bit_map.h
-	cc $(LIB) $(OBJ) $(FLAGS) $(MLXFLAGS) -o $(NAME)
+	cc $(LIB) $(OBJ) $(CFLAGS) $(MLXFLAGS) -o $(NAME)
 
 $(LIB):
 	make -C ./.minilibx_macos

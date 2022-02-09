@@ -6,13 +6,13 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 22:19:58 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 14:41:43 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:46:39 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
 
-void	*ft_make_mlx_imige(void *tmp_world)
+static void	*ft_make_mlx_imige(void *tmp_world)
 {
 	t_world			*world;
 	t_picture_part	part;
@@ -37,7 +37,7 @@ void	*ft_make_mlx_imige(void *tmp_world)
 	return (0);
 }
 
-void	ft_start_threads(t_world *world)
+static void	ft_start_threads(t_world *world)
 {
 	pthread_t	thread[MLX_THREADS];
 	int			i;

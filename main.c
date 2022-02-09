@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 16:58:13 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:47:30 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char *argv[])
 		printf("wrong input");
 		return (1);
 	}
-	printf("%d, %d", MLX_WIDTH, MLX_HIGHT);
 	world.name = argv[1];
 	world.mlx = mlx_init();
 	world.mlx_win = mlx_new_window(world.mlx, MLX_WIDTH, MLX_HIGHT, "miniRT");

@@ -8,7 +8,8 @@ SRC=./hit.c\
 		./bit_map.c\
 		./hooks.c\
 		./free_all.c\
-		./make_image.c
+		./make_image.c\
+		./make_picture.c
 
 # -fsanitize=address -fsanitize=thread
 

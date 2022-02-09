@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:44:09 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/07 12:47:46 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:19:49 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ int	parser(char *file, t_world *world)
 	fil_world(world, fd);
 	close(fd);
 	world->backround = setvec(1, 1, 1);
-	printf("vertig %zu\n", world->n_hittabels);
 	return (1);
 }

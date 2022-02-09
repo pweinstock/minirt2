@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:38:38 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/09 14:24:29 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:12:33 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	cylinder(char *line, t_world *world)
 	world->hittabels[world->n_hittabels].mat.specular = ft_atof(data[6]);
 	world->hittabels[world->n_hittabels].mat.reflective = ft_atof(data[7]);
 	world->hittabels[world->n_hittabels].mat.ir = 1.5;
+	world->hittabels[world->n_hittabels].mat.emitted = emitted_color;
 	if (line[1] == 'o')
 	{
 		world->hittabels[world->n_hittabels].hit = hit_cone;

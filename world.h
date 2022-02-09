@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:54:53 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 17:10:54 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:45:36 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # endif
 
 # ifndef MAX_DEPTH
-#  define MAX_DEPTH 3
+#  define MAX_DEPTH 10
 # endif
 
 # ifndef MLX_MAX_DEPTH
@@ -127,8 +127,6 @@ typedef struct s_world
 void	my_mlx_pixel_put(t_data *data, int x, int y, t_color color);
 int		create_trgb(int t, t_color color);
 t_bool	hit(t_ray r, t_world *world, double t_max, t_hit_record *rec);
-t_color	ray_average_color(t_world *world, t_picture_part *part,
-			size_t samples_per_pixel, int max_depth);
 t_color	ComputeLightning(t_world *world, t_hit_record *rec, t_ray *ray);
 void	write_color(t_vec3 color, int fd);
 void	ft_make_bmp(int *arr);
@@ -138,5 +136,6 @@ int		ft_free_all(t_world *world);
 void	count_pixel(t_world *w, t_picture_part *part,
 			int *arr, t_data *img);
 void	ft_make_mlx_imiges(t_world *world);
+void	make_pictur(t_world *world);
 
 #endif

@@ -12,6 +12,8 @@ SRC=./hit.c\
 
 
 FLAGS = -Wall -Wextra -Werror -O2
+
+OBJ = $(SRC:.c=.o)
 # -fsanitize=address -fsanitize=thread
 
 MLXFLAGS =	./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
@@ -19,8 +21,7 @@ MLXFLAGS =	./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 all: $(NAME)
 
 $(NAME): lib $(OBJ)
-	gcc ./parser/parser.a ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a $(SRC) $(FLAGS) $(MLXFLAGS)
-#	./a.out test1.rt
+	gcc ./parser/parser.a ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a $(OBJ) $(FLAGS) $(MLXFLAGS)
 
 lib:
 	make -C ./parser

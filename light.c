@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 14:33:28 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:17:23 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_color	ComputeLightning(t_world *world, t_hit_record *rec, t_ray *ray)
 		if (length_squared(&tmp_inten) == 0)
 			continue ;
 		intensity = plus_vec_vec(intensity, tmp_inten);
-		if (rec->material->specular != -1)
+		if (rec->material->specular > 0)
 			intensity = plus_vec_doub(intensity, \
 			Compute_spec(world->lights[i].intensity, rec, ray, &L));
 	}

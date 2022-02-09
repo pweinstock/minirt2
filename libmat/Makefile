@@ -1,4 +1,4 @@
-CC=gcc
+CC=cc
 
 SRC=./dielectric.c\
 	./helper.c\
@@ -13,19 +13,23 @@ CFLAGS += -Wall -Wextra -Werror
 
 NAME = libmat.a
 
+LIB = ../libray/libray.a
+
 all: $(NAME)
 
-$(NAME): ../libray/libray.a $(OBJ) mat.h material.h
+$(NAME): $(LIB) $(OBJ) mat.h material.h
 		ar rcs  $(NAME) $(OBJ) ../libray/libray.a
 
-../libray/libray.a:
+$(LIB):
 	make -C ../libray
 
 clean :
 	rm -f $(OBJ)
+	make clean -C ../libray
 
 fclean :	clean
 	rm -f $(NAME)
+	make fclean -C ../libray
 
 re : fclean $(NAME)
 

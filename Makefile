@@ -1,4 +1,4 @@
-NAME=a.out
+NAME=miniRT.out
 
 SRC=./hit.c\
 		./light.c\
@@ -10,20 +10,23 @@ SRC=./hit.c\
 		./free_all.c\
 		./make_image.c
 
+# -fsanitize=address -fsanitize=thread
+
+LIB = 	./.minilibx_macos/libmlx.a ./parser/parser.a ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a
+
+OBJ = $(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror -O2
 
-OBJ = $(SRC:.c=.o)
-# -fsanitize=address -fsanitize=thread
-
-MLXFLAGS =	./.minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
+MLXFLAGS = -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
-$(NAME): lib $(OBJ)
-	gcc ./parser/parser.a ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a $(OBJ) $(FLAGS) $(MLXFLAGS)
+$(NAME): $(LIB) $(OBJ) world.h bit_map.h
+	cc $(LIB) $(OBJ) $(FLAGS) $(MLXFLAGS) -o $(NAME)
 
-lib:
+$(LIB):
+	make -C ./.minilibx_macos
 	make -C ./parser
 	make -C ./libcam
 	make -C ./libmat
@@ -34,7 +37,8 @@ lib:
 
 
 clean:
-	rm -f ./a.out
+	rm -f $(NAME)
+	make clean -C ./.minilibx_macos
 	make clean -C ./parser
 	make clean -C ./libcam
 	make clean -C ./libmat
@@ -44,6 +48,7 @@ clean:
 	make clean -C ./shapes
 
 fclean: clean
+	rm -f $(OBJ)
 	make fclean -C ./parser
 	make fclean -C ./libcam
 	make fclean -C ./libmat

@@ -1,4 +1,4 @@
-CC=gcc
+CC=cc
 
 SRC=./set_face_normal.c\
 	./sphere.c\
@@ -16,26 +16,26 @@ CFLAGS += -Wall -Wextra -Werror
 
 NAME = shapes.a
 
+LIB = ../libray/libray.a ../libmat/libmat.a
+
 all: $(NAME)
 
-$(NAME): ../libray/libray.a ../libmat/libmat.a $(OBJ)
+$(NAME): $(LIB) $(OBJ)
 		ar rcs $(NAME)  $(OBJ)
 
-#/*libtool -static  -o*/
-
-# ../libmat/libmat.a ../libray/libray.a
-
-../libray/libray.a:
+$(LIB):
 	make -C ../libray
-
-../libmat/libmat.a:
 	make -C ../libmat
 
 clean :
 	rm -f $(OBJ)
+	make clean -C ../libray
+	make clean -C ../libmat
 
 fclean :	clean
 	rm -f $(NAME)
+	make fclean -C ../libray
+	make fclean -C ../libmat
 
 re : fclean $(NAME)
 

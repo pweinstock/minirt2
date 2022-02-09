@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bit_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 20:47:35 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 17:31:30 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:14:07 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_make_bmp(int *arr)
 	struct s_bitmap_inf		info;
 	FILE					*out;
 	char					file[9];
-	const unsigned int		imagesize = WIDTH * HIGHT * 4; //auf geheis von tim
+	const unsigned int		imagesize = WIDTH * HIGHT * 4;
 
 	out = NULL;
 	chdir("./pictures");

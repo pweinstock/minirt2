@@ -1,4 +1,4 @@
-CC=gcc
+CC=cc
 
 SRC=./get_ray.c\
 	./setcam.c
@@ -9,25 +9,29 @@ CFLAGS += -Wall -Wextra -Werror
 
 NAME = libcam.a
 
+LIB = ../libray/libray.a ../libmath/libmath.a ../libvec/libvec.a
+
 all: $(NAME)
 
-$(NAME): ../libray/libray.a ../libmath/libmath.a ../libvec/libvec.a $(OBJ)
-		ar rcs  $(NAME) $(OBJ) ../libray/libray.a ../libmath/libmath.a
+$(NAME): $(LIB) $(OBJ) cam.h
+		ar rcs  $(NAME) $(OBJ) $(LIB)
 
-../libray/libray.a:
+$(LIB):
 	make -C ../libray
-
-../libmath/libmath.a:
 	make -C ../libmath
-
-../libvec/libvec.a:
 	make -C ../libvec
 
 clean :
 	rm -f $(OBJ)
+	make clean -C ../libray
+	make clean -C ../libmath
+	make clean -C ../libvec
 
 fclean :	clean
 	rm -f $(NAME)
+	make fclean -C ../libray
+	make fclean -C ../libmath
+	make fclean -C ../libvec
 
 re : fclean $(NAME)
 

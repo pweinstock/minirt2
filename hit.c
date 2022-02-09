@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 21:02:48 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:15:07 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_bool	hit(t_ray r, t_world *world, double t_max, t_hit_record *rec)
 			closest_so_far = temp_rec.t;
 			transphere(rec, &temp_rec);
 			rec->p = plus_vec_vec(rec->p, multiply_vec_doub(rec->normal, 0.0));
-			// rec->material = &world->hittabels[i].mat;
 		}
 		i++;
 	}

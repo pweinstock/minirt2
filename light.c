@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 16:25:50 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:33:28 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ t_color	ComputeLightning(t_world *world, t_hit_record *rec, t_ray *ray)
 	t_color			intensity;
 	t_ray			L;
 	t_color			tmp_inten;
-	(void)ray;
+
 	i = -1;
-	intensity.col.r = 0;
-	intensity.col.g = 0;
-	intensity.col.b = 0;
+	intensity = setvec(0, 0, 0);
 	while (++i < world->n_lights)
 	{
 		if (world->lights[i].type == AMBIENT)
 		{
-			intensity = plus_vec_vec(intensity, multiply_vec_doub(world->lights[i].color, world->lights[i].intensity));
+			intensity = plus_vec_vec(intensity, \
+			multiply_vec_doub(world->lights[i].color, \
+			world->lights[i].intensity));
 			continue ;
 		}
 		tmp_inten = Compute_D_L(world, rec, &L, &world->lights[i]);
@@ -77,7 +77,8 @@ t_color	ComputeLightning(t_world *world, t_hit_record *rec, t_ray *ray)
 			continue ;
 		intensity = plus_vec_vec(intensity, tmp_inten);
 		if (rec->material->specular != -1)
-			intensity = plus_vec_doub(intensity, Compute_spec(world->lights[i].intensity, rec, ray, &L));
+			intensity = plus_vec_doub(intensity, \
+			Compute_spec(world->lights[i].intensity, rec, ray, &L));
 	}
 	return (intensity);
 }

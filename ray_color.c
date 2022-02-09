@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 11:41:17 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:17:55 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vec3	ray_color_ph(t_ray r, t_world *world, int depth)
 	local_color = setvec(0, 0, 0);
 	if (!hit(r, world, INFINITY, &rec))
 		return (world->backround);
-	local_color = multiply_vec_vec(rec.material->color1,
+	local_color = multiply_vec_vec(rec.material->emitted(&rec),
 			ComputeLightning(world, &rec, &r));
 	if (depth <= 0)
 		return (local_color);
@@ -54,8 +54,6 @@ t_color	ray_average_color(t_world *world, t_picture_part *part,
 	color = setvec(0, 0, 0);
 	while (i < samples_per_pixel)
 	{
-		// u = (double)(part->x.current + random_double()) / (part->x.to - 1);
-		// v = (double)(part->y.current + random_double()) / (part->ges_y.to - 1);
 		u = (double)(part->x.current) / (part->x.to - 1);
 		v = (double)(part->y.current) / (part->ges_y.to - 1);
 		r = get_ray(world->cam, u, v);

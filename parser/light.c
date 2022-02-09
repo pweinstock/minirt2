@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:29:15 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/08 16:54:06 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:29:11 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	ambient(char *line, t_world *world)
 	world->lights[world->n_lights].type = AMBIENT;
 	light_intensity_ceck(world);
 	free(data);
-	//world->A_flag = TRUE;
 	return (0);
 }
 
@@ -49,7 +48,6 @@ int	light_l(char *line, t_world *world)
 	world->lights[world->n_lights].type = POINT;
 	light_intensity_ceck(world);
 	free(data);
-	//world->L_flag = TRUE;
 	return (0);
 }
 

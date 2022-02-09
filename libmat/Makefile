@@ -4,7 +4,8 @@ SRC=./dielectric.c\
 	./helper.c\
 	./lambertian.c\
 	./metal.c\
-	./light.c
+	./light.c\
+	./emitted.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -14,7 +15,7 @@ NAME = libmat.a
 
 all: $(NAME)
 
-$(NAME): ../libray/libray.a $(OBJ)
+$(NAME): ../libray/libray.a $(OBJ) mat.h material.h
 		ar rcs  $(NAME) $(OBJ) ../libray/libray.a
 
 ../libray/libray.a:

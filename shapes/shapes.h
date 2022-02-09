@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:32:52 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 11:42:22 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:19:50 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,5 @@ t_bool	hit_cone_plane(t_ray r, t_object *object,
 void	fill_t_p(t_hit_record *rec, double t, t_ray r);
 t_vec3	uni_vec_to_global(t_object *object, t_vec3 *p);
 t_vec3	uni_vec_to_local(t_object *object, t_vec3 *p);
-void	checkerboard(t_hit_record *p, t_object *object);
 
 #endif

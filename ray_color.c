@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 22:30:44 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:18:07 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vec3	ray_color_ph(t_ray r, t_world *world, int depth)
 	local_color = setvec(0, 0, 0);
 	if (!hit(r, world, INFINITY, &rec))
 		return (world->backround);
-	local_color = multiply_vec_vec(rec.material->color,
+	local_color = multiply_vec_vec(rec.material->emitted(&rec),
 			ComputeLightning(world, &rec, &r));
 	if (depth <= 0)
 		return (local_color);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   metal.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:55:48 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/03 12:14:25 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:40:56 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ t_bool	scatter_metal(t_ray in, struct s_hit_record rec,
 				random_in_unit_sphere(), 1 - rec.material->reflective));
 	transmitted(&scattered->dir, &scatt_tmp);
 	transmitted(&scattered->origin, &rec.p);
-	transmitted(attenuation, &rec.material->color);
+	transmitted(attenuation, &rec.material->color1);
 	return (dot(scattered->dir, rec.normal) > 0);
 }

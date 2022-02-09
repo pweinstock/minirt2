@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:32:52 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 22:01:16 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:19:50 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_object
 	t_bool (*hit)(t_ray r, struct s_object * object,
 		double t_max, t_hit_record * rec);
 	t_material	mat;
-	t_material	mat1;
 	t_vec3		center;
 	double		radius;
 	double		hight;
@@ -61,6 +60,5 @@ t_bool	hit_cone_plane(t_ray r, t_object *object,
 void	fill_t_p(t_hit_record *rec, double t, t_ray r);
 t_vec3	uni_vec_to_global(t_object *object, t_vec3 *p);
 t_vec3	uni_vec_to_local(t_object *object, t_vec3 *p);
-void	checkerboard(t_hit_record *p, t_object *object);
 
 #endif

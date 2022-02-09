@@ -6,43 +6,13 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:38:44 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 22:50:33 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:21:05 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shapes.h"
 #include <math.h>
 #include <stdio.h>
-
-void	checkerboard(t_hit_record *p, t_object *object)
-{
-	// t_vec3	coords;
-	// t_vec3	val;
-	long		test[3];
-	int		XOR;
-
-	// coords.vec.x = abs((int)floor(p->p.vec.x));
-	// coords.vec.y = abs((int)floor(p->p.vec.y));
-	// coords.vec.z = abs((int)floor(p->p.vec.z));
-	test[0] = labs((long)floorl(p->p.vec.x));
-	test[1] = labs((long)floorl(p->p.vec.y));
-	test[2] = labs((long)floorl(p->p.vec.z));
-
-	// val.vec.x = (int)coords.vec.x % 2;
-	// val.vec.y = (int)coords.vec.y % 2;
-	// val.vec.z = (int)coords.vec.z % 2;
-
-	// XOR = ((int)val.vec.x ^ (int)val.vec.y) ^ (int)val.vec.z;
-	XOR = (test[0]%2 ^ test[1]%2) ^ test[2]%2;
-	if (XOR)
-		p->material = &object->mat;
-	else
-	{
-		p->material = &object->mat1;
-	}
-	return ;
-	//global geadnert
-}
 
 t_bool	hit_plane(t_ray r, t_object *object, double t_max, t_hit_record *rec)
 {
@@ -66,7 +36,6 @@ t_bool	hit_plane(t_ray r, t_object *object, double t_max, t_hit_record *rec)
 	outward_normal = object->orientation;
 	set_face_normal(rec, r, outward_normal);
 	rec->material = &object->mat;
-	checkerboard(rec, object);
 	return (TRUE);
 }
 

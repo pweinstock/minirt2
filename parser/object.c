@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:38:38 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/08 21:00:30 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:40:03 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	sphere(char *line, t_world *world)
 	ft_array_length(data, 4, "sp");
 	world->hittabels[world->n_hittabels].center = strtovec(data[1]);
 	world->hittabels[world->n_hittabels].radius = ft_atof(data[2]) / 2;
-	world->hittabels[world->n_hittabels].mat.color \
+	world->hittabels[world->n_hittabels].mat.color1 \
 	= division(strtovec(data[3]), 255);
 	world->hittabels[world->n_hittabels].hit = hit_sphere;
 	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
@@ -39,17 +39,17 @@ int	plane(char *line, t_world *world)
 	ft_array_length(data, 4, "pl");
 	world->hittabels[world->n_hittabels].center = strtovec(data[1]);
 	world->hittabels[world->n_hittabels].orientation = strtovec(data[2]);
-	world->hittabels[world->n_hittabels].mat.color \
+	world->hittabels[world->n_hittabels].mat.color1 \
 	= division(strtovec(data[3]), 255);
 	world->hittabels[world->n_hittabels].hit = hit_plane;
 	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
 	world->hittabels[world->n_hittabels].mat.specular = -1;
 	world->hittabels[world->n_hittabels].mat.reflective = 0;
-	world->hittabels[world->n_hittabels].mat1.color = setvec(1,1,1);
-	world->hittabels[world->n_hittabels].mat1.scatter = scatter_lambertian;
-	world->hittabels[world->n_hittabels].mat1.specular = -1;
-	world->hittabels[world->n_hittabels].mat1.reflective = 0;
-	world->hittabels[world->n_hittabels].mat1.ir = 1.5;
+	world->hittabels[world->n_hittabels].mat.color2 = setvec(1,1,1);
+	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
+	world->hittabels[world->n_hittabels].mat.specular = -1;
+	world->hittabels[world->n_hittabels].mat.reflective = 0;
+	world->hittabels[world->n_hittabels].mat.ir = 1.5;
 	free(data);
 	return (0);
 }
@@ -64,7 +64,7 @@ int	cylinder(char *line, t_world *world)
 	world->hittabels[world->n_hittabels].orientation = strtovec(data[2]);
 	world->hittabels[world->n_hittabels].radius = ft_atof(data[3]) / 2;
 	world->hittabels[world->n_hittabels].hight = ft_atof(data[4]);
-	world->hittabels[world->n_hittabels].mat.color \
+	world->hittabels[world->n_hittabels].mat.color1 \
 	= division(strtovec(data[5]), 255);
 	world->hittabels[world->n_hittabels].hit = hit_cylinder;
 	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;

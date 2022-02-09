@@ -1,4 +1,4 @@
-CC=gcc
+CC=cc
 
 SRC=./cross.c\
 	./division.c\

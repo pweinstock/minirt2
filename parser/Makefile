@@ -1,4 +1,4 @@
-CC=gcc
+CC=cc
 
 SRC =	./parser.c \
 		./parser_helper.c \
@@ -13,7 +13,6 @@ SRC =	./parser.c \
 		./libft/ft_strlen.c \
 		./libft/ft_substr.c \
 		./get_next_line/get_next_line.c \
-#		get_next_line/get_next_line.h \
 
 OBJ = $(SRC:.c=.o)
 

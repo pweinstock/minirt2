@@ -6,12 +6,11 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 22:19:58 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 21:52:42 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:41:43 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "world.h"
-#include <stdio.h>
 
 void	*ft_make_mlx_imige(void *tmp_world)
 {
@@ -25,7 +24,8 @@ void	*ft_make_mlx_imige(void *tmp_world)
 	part.x.from = 0;
 	part.x.to = MLX_WIDTH;
 	part.x.current = 0;
-	pthread_mutex_lock(&world->hight_mutex);
+	if (pthread_mutex_lock(&world->hight_mutex) != 0)
+		return (0);
 	part.y.to = world->picture_part_hight;
 	part.y.current = world->picture_part_hight;
 	world->picture_part_hight -= (MLX_HIGHT / MLX_THREADS) + 1;
@@ -46,7 +46,7 @@ void	ft_start_threads(t_world *world)
 	world->picture_part_hight = MLX_HIGHT;
 	while (i < MLX_THREADS)
 	{
-		if (pthread_create(&thread[MLX_THREADS - 1 - i], NULL,
+		if (pthread_create(&thread[i], NULL,
 				ft_make_mlx_imige, world) != 0)
 			break ;
 		i++;

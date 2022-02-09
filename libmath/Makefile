@@ -1,4 +1,4 @@
-CC=gcc
+CC=cc
 
 SRC=./clamp.c\
 	./degrees_to_radians.c

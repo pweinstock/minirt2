@@ -1,4 +1,4 @@
-CC=gcc
+CC=cc
 
 SRC=./at.c\
 	./set_ray.c
@@ -19,11 +19,11 @@ $(NAME): ../libvec/libvec.a $(OBJ)
 
 clean :
 	rm -f $(OBJ)
-
+	make clean -C ../libvec
 
 fclean :	clean
 	rm -f $(NAME)
-
+	make fclean -C ../libvec
 
 re : fclean $(NAME)
 

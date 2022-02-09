@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:38:38 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/09 11:40:03 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:22:49 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,10 @@ int	plane(char *line, t_world *world)
 	= division(strtovec(data[3]), 255);
 	world->hittabels[world->n_hittabels].hit = hit_plane;
 	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
-	world->hittabels[world->n_hittabels].mat.specular = -1;
-	world->hittabels[world->n_hittabels].mat.reflective = 0;
-	world->hittabels[world->n_hittabels].mat.color2 = setvec(1,1,1);
-	world->hittabels[world->n_hittabels].mat.scatter = scatter_lambertian;
-	world->hittabels[world->n_hittabels].mat.specular = -1;
-	world->hittabels[world->n_hittabels].mat.reflective = 0;
-	world->hittabels[world->n_hittabels].mat.ir = 1.5;
+	world->hittabels[world->n_hittabels].mat.specular = ft_atof(data[4]);
+	world->hittabels[world->n_hittabels].mat.reflective = ft_atof(data[5]);
+	world->hittabels[world->n_hittabels].mat.checkerboard = ft_atof(data[6]);
+	world->hittabels[world->n_hittabels].mat.color2 = strtovec(data[7]);
 	free(data);
 	return (0);
 }

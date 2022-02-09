@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:32:52 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 22:01:16 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:42:22 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_object
 	t_bool (*hit)(t_ray r, struct s_object * object,
 		double t_max, t_hit_record * rec);
 	t_material	mat;
-	t_material	mat1;
 	t_vec3		center;
 	double		radius;
 	double		hight;

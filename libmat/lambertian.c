@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lambertian.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:58:26 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 17:52:23 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:40:35 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_bool	scatter_lambertian(t_ray in, struct s_hit_record rec,
 		scatter_direction = rec.normal;
 	transmitted(&scattered->origin, &rec.p);
 	transmitted(&scattered->dir, &scatter_direction);
-	transmitted(attenuation, &rec.material->color);
+	transmitted(attenuation, &rec.material->color1);
 	(void)in;
 	return (TRUE);
 }

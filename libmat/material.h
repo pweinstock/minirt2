@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   material.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:52:11 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 20:49:41 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:39:02 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ struct	s_hit_record;
 
 typedef struct s_material
 {
-	t_vec3	color;
+	t_color	color1;
+	t_color color2;
 	double	ir;
 	double	specular;
 	double	reflective;

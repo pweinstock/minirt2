@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:38:44 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 22:50:33 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:41:58 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	checkerboard(t_hit_record *p, t_object *object)
 		p->material = &object->mat;
 	else
 	{
-		p->material = &object->mat1;
+		p->material = &object->mat;
 	}
 	return ;
 	//global geadnert

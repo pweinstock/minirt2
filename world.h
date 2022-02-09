@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:54:53 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 14:21:20 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:06:39 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # include <pthread.h>
 
 # ifndef WIDTH
-#  define WIDTH 2560
+#  define WIDTH (2560/2)
 # endif
 
 # ifndef HIGHT
-#  define HIGHT 1440
+#  define HIGHT (1440/2)
 # endif
 
 # ifndef MLX_HIGHT

@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 14:41:30 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:49:43 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char *argv[])
 	ft_make_mlx_imiges(&world);
 	mlx_hook(world.mlx_win, 17, 0, ft_free_all, &world);
 	mlx_hook(world.mlx_win, 04, 0, ft_inden, &world);
-	mlx_key_hook(world.mlx_win, key_hook, &world);
+	mlx_hook(world.mlx_win, 2, 1L << 0, key_hook, &world);
 	mlx_loop(world.mlx);
 	ft_free_all(&world);
 	return (1);

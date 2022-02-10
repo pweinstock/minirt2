@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 21:27:57 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 13:42:39 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 19:50:30 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *str);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
+void	ft_free_arr(char **arr);
 
 #endif

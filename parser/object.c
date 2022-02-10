@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:38:38 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/09 15:12:33 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 19:44:16 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	sphere(char *line, t_world *world)
 	world->hittabels[world->n_hittabels].mat.reflective = ft_atof(data[5]);
 	world->hittabels[world->n_hittabels].mat.emitted = emitted_color;
 	world->hittabels[world->n_hittabels].mat.ir = 1.5;
-	free(data);
+	ft_free_arr(data);
 	return (1);
 }
 
@@ -55,7 +55,7 @@ int	plane(char *line, t_world *world)
 	}
 	else
 		world->hittabels[world->n_hittabels].mat.emitted = emitted_color;
-	free(data);
+	ft_free_arr(data);
 	return (0);
 }
 
@@ -84,6 +84,6 @@ int	cylinder(char *line, t_world *world)
 		world->hittabels[world->n_hittabels].hit = hit_cone;
 		world->hittabels[world->n_hittabels].hight *= 2;
 	}
-	free(data);
+	ft_free_arr(data);
 	return (0);
 }

@@ -1,17 +1,15 @@
-NAME=miniRT.out
+NAME=miniRT
 
 SRC=./hit.c\
-		./light.c\
-		./main.c\
-		./plot_scene.c\
-		./ray_color.c\
-		./bit_map.c\
-		./hooks.c\
-		./free_all.c\
-		./make_image.c\
-		./make_picture.c
-
-# -fsanitize=address -fsanitize=thread
+	./light.c\
+	./main.c\
+	./plot_scene.c\
+	./ray_color.c\
+	./bit_map.c\
+	./hooks.c\
+	./free_all.c\
+	./make_image.c\
+	./make_picture.c
 
 LIB = 	./.minilibx_macos/libmlx.a ./parser/parser.a ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a
 
@@ -21,12 +19,14 @@ CFLAGS = -Wall -Wextra -Werror -O2
 
 MLXFLAGS = -framework OpenGL -framework AppKit
 
-all: $(NAME)
+all: lib $(NAME)
+
+bonus: all
 
 $(NAME): $(LIB) $(OBJ) world.h bit_map.h
 	cc $(LIB) $(OBJ) $(CFLAGS) $(MLXFLAGS) -o $(NAME)
 
-$(LIB):
+lib:
 	make -C ./.minilibx_macos
 	make -C ./parser
 	make -C ./libcam
@@ -58,4 +58,4 @@ fclean: clean
 	make fclean -C ./libvec
 	make fclean -C ./shapes
 
-re: clean all
+re: fclean all

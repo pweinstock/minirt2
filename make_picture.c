@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 17:44:02 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 17:44:08 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:14:01 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,8 @@ void	make_pictur(t_world *world)
 		ft_make_bmp(arr);
 		free(arr);
 	}
-	ft_free_all(world);
+	free(world->hittabels);
+	free(world->lights);
+	pthread_mutex_destroy(&world->hight_mutex);
+	exit(EXIT_SUCCESS);
 }

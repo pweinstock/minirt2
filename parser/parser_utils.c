@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:25:10 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/05 19:54:23 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 19:38:28 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ t_vec3	strtovec(char *str)
 	vec.v[0] = ft_atof(data[0]);
 	vec.v[1] = ft_atof(data[1]);
 	vec.v[2] = ft_atof(data[2]);
+	free(data[0]);
+	free(data[1]);
+	free(data[2]);
+	free(data);
 	return (vec);
 }
 

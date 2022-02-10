@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_all.c                                         :+:      :+:    :+:   */
+/*   ft_free_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/05 20:48:50 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/10 10:15:16 by shackbei         ###   ########.fr       */
+/*   Created: 2022/02/09 19:43:18 by shackbei          #+#    #+#             */
+/*   Updated: 2022/02/09 19:50:19 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "world.h"
+#include <stdlib.h>
 
-int	ft_free_all(t_world *world)
+void	ft_free_arr(char **arr)
 {
-	int	pid;
+	int	i;
 
-	pid = 0;
-	free(world->hittabels);
-	free(world->lights);
-	mlx_destroy_window(world->mlx, world->mlx_win);
-	pthread_mutex_destroy(&world->hight_mutex);
-	while (pid != -1)
-		pid = wait(NULL);
-	exit(EXIT_SUCCESS);
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }

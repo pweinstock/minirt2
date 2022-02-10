@@ -12,6 +12,7 @@ SRC =	./parser.c \
 		./libft/ft_split_space.c \
 		./libft/ft_strlen.c \
 		./libft/ft_substr.c \
+		./libft/ft_free_arr.c \
 		./get_next_line/get_next_line.c \
 
 OBJ = $(SRC:.c=.o)

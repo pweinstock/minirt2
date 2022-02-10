@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 17:47:30 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:18:01 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		printf("wrong input");
+		printf("Error\nWrong number of arguments\n");
 		return (1);
 	}
 	world.name = argv[1];

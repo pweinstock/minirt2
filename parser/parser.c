@@ -6,7 +6,7 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:44:09 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/09 16:19:49 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:44:18 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	identifier(char *line, t_world *world)
 		cylinder(line, world);
 	else
 	{
-		printf("Error\n%s: No such identifier", ft_split_space(line)[0]);
+		printf("Error\n%c: No such identifier", line[0]);
 		exit(0);
 	}
 	count_object(world, line);

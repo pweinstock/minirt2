@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:29:15 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/09 14:29:11 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 19:48:00 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ambient(char *line, t_world *world)
 	world->lights[world->n_lights].color = division(strtovec(data[2]), 255);
 	world->lights[world->n_lights].type = AMBIENT;
 	light_intensity_ceck(world);
-	free(data);
+	ft_free_arr(data);
 	return (0);
 }
 
@@ -47,7 +47,7 @@ int	light_l(char *line, t_world *world)
 	world->lights[world->n_lights].color = division(strtovec(data[3]), 255);
 	world->lights[world->n_lights].type = POINT;
 	light_intensity_ceck(world);
-	free(data);
+	ft_free_arr(data);
 	return (0);
 }
 
@@ -62,6 +62,6 @@ int	light_d(char *line, t_world *world)
 	world->lights[world->n_lights].color = division(strtovec(data[3]), 255);
 	world->lights[world->n_lights].type = DIRECTIONAL;
 	light_intensity_ceck(world);
-	free(data);
+	ft_free_arr(data);
 	return (0);
 }

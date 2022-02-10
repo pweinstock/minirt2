@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:54:53 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 17:30:18 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:45:36 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # include <pthread.h>
 
 # ifndef WIDTH
-#  define WIDTH (2560/2)
+#  define WIDTH 2560
 # endif
 
 # ifndef HIGHT
-#  define HIGHT (1440/2)
+#  define HIGHT 1440
 # endif
 
 # ifndef MLX_HIGHT
@@ -68,6 +68,10 @@
 # define KEY_D 2
 # define KEY_ESC 53
 # define KEY_P 35
+# define KEY_UP 126
+# define KEY_LEFT 123
+# define KEY_DOWN 125
+# define KEY_RIGHT 124
 
 enum e_light_typ
 {
@@ -123,8 +127,6 @@ typedef struct s_world
 void	my_mlx_pixel_put(t_data *data, int x, int y, t_color color);
 int		create_trgb(int t, t_color color);
 t_bool	hit(t_ray r, t_world *world, double t_max, t_hit_record *rec);
-t_color	ray_average_color(t_world *world, t_picture_part *part,
-			size_t samples_per_pixel, int max_depth);
 t_color	ComputeLightning(t_world *world, t_hit_record *rec, t_ray *ray);
 void	write_color(t_vec3 color, int fd);
 void	ft_make_bmp(int *arr);
@@ -134,5 +136,6 @@ int		ft_free_all(t_world *world);
 void	count_pixel(t_world *w, t_picture_part *part,
 			int *arr, t_data *img);
 void	ft_make_mlx_imiges(t_world *world);
+void	make_pictur(t_world *world);
 
 #endif

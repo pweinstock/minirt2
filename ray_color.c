@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 14:17:55 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:45:53 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "./world.h"
 #include "parser/parser.h"
 
-t_vec3	ray_color_ph(t_ray r, t_world *world, int depth)
+static t_vec3	ray_color_ph(t_ray r, t_world *world, int depth)
 {
 	t_hit_record	rec;
 	t_color			local_color;
@@ -41,7 +41,7 @@ t_vec3	ray_color_ph(t_ray r, t_world *world, int depth)
 				rec.material->reflective)));
 }
 
-t_color	ray_average_color(t_world *world, t_picture_part *part,
+static t_color	ray_average_color(t_world *world, t_picture_part *part,
 			size_t samples_per_pixel, int max_depth)
 {
 	t_color	color;
@@ -66,7 +66,7 @@ t_color	ray_average_color(t_world *world, t_picture_part *part,
 	return (color);
 }
 
-void	set_pixel(int *arr, int y, int x, int color)
+static void	set_pixel(int *arr, int y, int x, int color)
 {
 	arr[y * WIDTH + x] = color;
 }

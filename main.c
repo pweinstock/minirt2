@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 14:49:43 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:47:30 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char *argv[])
 		printf("wrong input");
 		return (1);
 	}
-	printf("%d, %d", MLX_WIDTH, MLX_HIGHT);
 	world.name = argv[1];
 	world.mlx = mlx_init();
 	world.mlx_win = mlx_new_window(world.mlx, MLX_WIDTH, MLX_HIGHT, "miniRT");
@@ -35,7 +34,7 @@ int	main(int argc, char *argv[])
 	ft_make_mlx_imiges(&world);
 	mlx_hook(world.mlx_win, 17, 0, ft_free_all, &world);
 	mlx_hook(world.mlx_win, 04, 0, ft_inden, &world);
-	mlx_hook(world.mlx_win, 2, 1L << 0, key_hook, &world);
+	mlx_hook(world.mlx_win, 2, 0, key_hook, &world);
 	mlx_loop(world.mlx);
 	ft_free_all(&world);
 	return (1);

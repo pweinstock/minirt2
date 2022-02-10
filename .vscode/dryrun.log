@@ -1,0 +1,31 @@
+make: Entering directory `/Users/shackbei/Documents/code/Projects/miniRT'
+make -C ./.minilibx_macos
+make -C ./parser
+make -C ./libcam
+make -C ./libmat
+ 
+make -C ./libmath
+make -C ./libray
+make -C ./libvec
+make -C ./shapes
+cc -Wall -Wextra -Werror -O2   -c -o hit.o hit.c
+cc -Wall -Wextra -Werror -O2   -c -o light.o light.c
+cc -Wall -Wextra -Werror -O2   -c -o main.o main.c
+cc -Wall -Wextra -Werror -O2   -c -o plot_scene.o plot_scene.c
+cc -Wall -Wextra -Werror -O2   -c -o ray_color.o ray_color.c
+cc -Wall -Wextra -Werror -O2   -c -o bit_map.o bit_map.c
+cc -Wall -Wextra -Werror -O2   -c -o hooks.o hooks.c
+cc -Wall -Wextra -Werror -O2   -c -o free_all.o free_all.c
+cc -Wall -Wextra -Werror -O2   -c -o make_image.o make_image.c
+cc -Wall -Wextra -Werror -O2   -c -o make_picture.o make_picture.c
+make: Leaving directory `/Users/shackbei/Documents/code/Projects/miniRT'
+ 
+make: *** No rule to make target `.minilibx_macos/libmlx.a', needed by `miniRT'.
+make: *** No rule to make target `parser/parser.a', needed by `miniRT'.
+make: *** No rule to make target `libcam/libcam.a', needed by `miniRT'.
+make: *** No rule to make target `libmat/libmat.a', needed by `miniRT'.
+make: *** No rule to make target `libmath/libmath.a', needed by `miniRT'.
+make: *** No rule to make target `shapes/shapes.a', needed by `miniRT'.
+make: *** No rule to make target `libray/libray.a', needed by `miniRT'.
+make: *** No rule to make target `libvec/libvec.a', needed by `miniRT'.
+ 

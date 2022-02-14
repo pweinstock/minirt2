@@ -5,13 +5,13 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE.
 
+ 
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Thu Feb 10 14:38:38 2022
+# Make data base, printed on Mon Feb 14 15:54:01 2022
 
 # Variables
- 
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
@@ -44,15 +44,15 @@ MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cc9m00332d/T/vscode-ipc-7a8f6171-8b80-42e3-98a8-65009c5943e0.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cc9m00332d/T/vscode-ipc-86400237-f6a6-4759-9c24-028dbc5394fa.sock
 # environment
-VSCODE_CWD = /Users/shackbei/Documents/code/Projects
+VSCODE_CWD = /
 # environment
 PATH = /Users/shackbei/.brew/bin:/Users/shackbei/.brew/bin:/Users/shackbei/.brew/bin:/Users/shackbei/.brew/bin:/Users/shackbei/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-LaunchInstanceID = 199B93A1-79A5-4876-8E7D-2D287B23E750
+LaunchInstanceID = A586301D-262A-4427-94D9-5F7EFAB9EFB0
 # environment
 VSCODE_LOG_STACK = false
 # environment
@@ -62,7 +62,7 @@ LIB = ./.minilibx_macos/libmlx.a ./parser/parser.a ./libcam/libcam.a ./libmat/li
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.ITVsuZgdeK/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.6eHM942ixG/Listeners
 # automatic
 %F = $(notdir $%)
 # makefile (from `Makefile', line 20)
@@ -93,24 +93,18 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
 XPC_FLAGS = 0x0
-# environment
-COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
 # environment
-LC_TERMINAL = iTerm2
-# environment
-SHLVL = 2
+SHLVL = 1
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = shackbei
 # makefile
 .DEFAULT_GOAL := all
-# default
-MAKECMDGOALS := all
-# environment
-TERM_SESSION_ID = w0t0p0:70514A32-A4BB-4240-8591-4622C5554D4A
 # makefile (from `Makefile', line 1)
 NAME = miniRT
 # environment
@@ -119,8 +113,6 @@ LESS = -R
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
-# environment
-TERM_PROGRAM = iTerm.app
 # default
 .VARIABLES := 
 # environment
@@ -136,19 +128,11 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 3.4.8
-# environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.7156.DD77FAEF-E4E8-42CE-BAF3-517A45AC5972
-# environment
-LC_TERMINAL_VERSION = 3.4.8
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
-# environment
-ITERM_SESSION_ID = w0t0p0:70514A32-A4BB-4240-8591-4622C5554D4A
-# environment
-COLORFGBG = 7;0
 # environment
 __CF_USER_TEXT_ENCODING = 0x18C4D:0x0:0x0
 # environment
@@ -157,8 +141,6 @@ COMMAND_MODE = unix2003
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
-# environment
-ITERM_PROFILE = Default
 # environment
 PAGER = less
 # environment
@@ -176,11 +158,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-TERM = xterm-256color
-# environment
-VSCODE_PID = 7674
+VSCODE_PID = 1801
 # variable set hash-table stats:
-# Load=83/1024=8%, Rehash=0, Collisions=6/114=5%
+# Load=73/1024=7%, Rehash=0, Collisions=3/104=3%
 
 # Pattern-specific Variable Values
 
@@ -188,9 +168,9 @@ VSCODE_PID = 7674
 
 # Directories
 
-# . (device 16777225, inode 1938541): 30 files, no impossibilities.
+# . (device 16777225, inode 1938541): 28 files, no impossibilities.
 
-# 30 files, no impossibilities in 1 directories.
+# 28 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -329,7 +309,6 @@ lib:
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/10=10%
 #  commands to execute (from `Makefile', line 30):
- 
 	make -C ./.minilibx_macos
 	make -C ./parser
 	make -C ./libcam
@@ -352,6 +331,7 @@ bit_map.h:
 #  Modification time never checked.
 #  File has not been updated.
 
+ 
 # Not a target:
 light.o:
 #  Implicit rule search has not been done.
@@ -446,6 +426,6 @@ hooks.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Feb 10 14:38:38 2022
+# Finished Make data base on Mon Feb 14 15:54:01 2022
 
  

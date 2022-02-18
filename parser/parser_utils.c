@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:25:10 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/09 19:38:28 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 10:41:38 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_array_length(char **array, int j, char *str)
 		i++;
 	if (i != j)
 	{
-		printf("Error\n%s: Wrong number of information", str);
+		printf("Error\n%s: Wrong number of information\n", str);
 		exit(0);
 	}
 }

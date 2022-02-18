@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 17:17:23 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:59:47 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,23 @@
 #include "./world.h"
 #include "parser/parser.h"
 
-double	Compute_spec(double intensity, t_hit_record *rec,
+double	compute_spec(double intensity, t_hit_record *rec,
 			t_ray *ray, t_ray *L)
 {
-	t_vec3	V;
-	t_vec3	R;
+	t_vec3	v;
+	t_vec3	r;
 	double	r_dot_v;
 
-	V = invert(ray->dir);
-	R = reflect(L->dir, rec->normal);
-	r_dot_v = dot(R, V);
+	v = invert(ray->dir);
+	r = reflect(L->dir, rec->normal);
+	r_dot_v = dot(r, v);
 	if (r_dot_v > 0)
-		return (intensity * pow(r_dot_v / (length(&R) * length(&V)),
+		return (intensity * pow(r_dot_v / (length(&r) * length(&v)),
 				rec->material->specular));
 	return (0);
 }
 
-t_color	Compute_D_L(t_world *world, t_hit_record *rec, t_ray *L, t_light *light)
+t_color	compute_d_l(t_world *world, t_hit_record *rec, t_ray *L, t_light *light)
 {
 	t_vec3			r_l;
 	double			n_dot_l;
@@ -54,11 +54,11 @@ t_color	Compute_D_L(t_world *world, t_hit_record *rec, t_ray *L, t_light *light)
 	return (multiply_vec_doub(light->color, 0));
 }
 
-t_color	ComputeLightning(t_world *world, t_hit_record *rec, t_ray *ray)
+t_color	computelightning(t_world *world, t_hit_record *rec, t_ray *ray)
 {
 	size_t			i;
 	t_color			intensity;
-	t_ray			L;
+	t_ray			l;
 	t_color			tmp_inten;
 
 	i = -1;
@@ -72,13 +72,13 @@ t_color	ComputeLightning(t_world *world, t_hit_record *rec, t_ray *ray)
 			world->lights[i].intensity));
 			continue ;
 		}
-		tmp_inten = Compute_D_L(world, rec, &L, &world->lights[i]);
+		tmp_inten = compute_d_l(world, rec, &l, &world->lights[i]);
 		if (length_squared(&tmp_inten) == 0)
 			continue ;
 		intensity = plus_vec_vec(intensity, tmp_inten);
 		if (rec->material->specular > 0)
 			intensity = plus_vec_doub(intensity, \
-			Compute_spec(world->lights[i].intensity, rec, ray, &L));
+			compute_spec(world->lights[i].intensity, rec, ray, &l));
 	}
 	return (intensity);
 }

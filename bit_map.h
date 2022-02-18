@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:50:02 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 20:06:12 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 13:48:18 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,24 @@
 
 struct s_bitmap_header
 {
-	unsigned int	bfSize;
-	unsigned int	bfReserved;
-	unsigned int	bfOffBits;
+	unsigned int	bfsize;
+	unsigned int	bfreserved;
+	unsigned int	bfoffbits;
 };
 
 struct s_bitmap_inf
 {
-	unsigned int	biSize;
-	unsigned int	biWidth;
-	unsigned int	biHeight;
-	uint16_t		biPlanes;
-	uint16_t		biBitCount;
-	unsigned int	biCompression;
-	unsigned int	biSizeImage;
-	unsigned int	biXPelsPerMeter;
-	unsigned int	biYPelsPerMeter;
-	unsigned int	biClrUsed;
-	unsigned int	biClrImportant;
+	unsigned int	bisize;
+	unsigned int	biwidth;
+	unsigned int	biheight;
+	uint16_t		biplanes;
+	uint16_t		bibitcount;
+	unsigned int	bicompression;
+	unsigned int	bisizeimage;
+	unsigned int	bixpelspermeter;
+	unsigned int	biypelspermeter;
+	unsigned int	biclrused;
+	unsigned int	biclrimportant;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:29:15 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/09 19:48:00 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:58:17 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ int	ambient(char *line, t_world *world)
 {
 	char	**data;
 
-	if (world->A_flag == TRUE)
-	{
-		printf("Error\nAmbient lighting already exists\n");
-		exit(0);
-	}
 	data = ft_split_space(line);
 	ft_array_length(data, 3, "A");
 	world->lights[world->n_lights].intensity = ft_atof(data[1]);
@@ -35,11 +30,6 @@ int	light_l(char *line, t_world *world)
 {
 	char	**data;
 
-	if (world->L_flag == TRUE)
-	{
-		printf("Error\nlighting already exists\n");
-		exit(0);
-	}
 	data = ft_split_space(line);
 	ft_array_length(data, 4, "L");
 	world->lights[world->n_lights].position = strtovec(data[1]);

@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 20:47:35 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/10 10:09:59 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 13:49:27 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	set_values(struct s_bitmap_header *header, struct s_bitmap_inf *info)
 {
-	header->bfReserved = 0;
-	header->bfOffBits = 54;
-	info->biSize = 40;
-	info->biWidth = WIDTH;
-	info->biHeight = HIGHT;
-	info->biPlanes = 1;
-	info->biBitCount = 32;
-	info->biCompression = 0;
-	info->biXPelsPerMeter = 0;
-	info->biYPelsPerMeter = 0;
-	info->biClrUsed = 0;
-	info->biClrImportant = 0;
+	header->bfreserved = 0;
+	header->bfoffbits = 54;
+	info->bisize = 40;
+	info->biwidth = WIDTH;
+	info->biheight = HIGHT;
+	info->biplanes = 1;
+	info->bibitcount = 32;
+	info->bicompression = 0;
+	info->bixpelspermeter = 0;
+	info->biypelspermeter = 0;
+	info->biclrused = 0;
+	info->biclrimportant = 0;
 }
 
 void	ft_set_name(char *file, FILE **out)
@@ -65,8 +65,8 @@ void	ft_make_bmp(int *arr)
 	out = NULL;
 	chdir("./pictures");
 	ft_set_name(file, &out);
-	header.bfSize = 54 + imagesize;
-	info.biSizeImage = imagesize;
+	header.bfsize = 54 + imagesize;
+	info.bisizeimage = imagesize;
 	set_values(&header, &info);
 	fwrite("BM", 2, 1, out);
 	fwrite(&header, sizeof(header), 1, out);

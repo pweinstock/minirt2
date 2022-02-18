@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   emitted.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 14:34:22 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/09 14:34:24 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:50:50 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_color	emitted_color(struct s_hit_record *rec)
 t_color	emitted_checkerboard(struct s_hit_record *rec)
 {
 	long	test[3];
-	int		XOR;
+	int		xor;
 
 	test[0] = labs((long)floorl(rec->p.vec.x));
 	test[1] = labs((long)floorl(rec->p.vec.y));
@@ -34,8 +34,8 @@ t_color	emitted_checkerboard(struct s_hit_record *rec)
 		test[1] = 0;
 	else if (floorl(rec->normal.v[2]))
 		test[2] = 0;
-	XOR = test[0] ^ test[1] ^ test[2];
-	if (XOR)
+	xor = test[0] ^ test[1] ^ test[2];
+	if (xor)
 		return (rec->material->color1);
 	else
 		return (rec->material->color2);

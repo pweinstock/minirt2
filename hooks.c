@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 19:44:51 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 17:41:18 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:53:28 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	key_hook(int keycode, t_world *world)
 	return (0);
 }
 
-int	ft_inden(int	key, int x, int y, t_world *world)
+int	ft_inden(int key, int x, int y, t_world *world)
 {
 	t_camera	*cam;
 	int			vor;

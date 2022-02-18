@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_space.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:57:11 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/05 19:47:02 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:43:22 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
+
 static size_t	ft_count_strings(char const *s)
 {
 	size_t	i;

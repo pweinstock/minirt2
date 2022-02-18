@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   metal.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:55:48 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 11:40:56 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:44:17 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_vec3	t_reflect(t_vec3 v, t_vec3 n)
 }
 
 t_bool	scatter_metal(t_ray in, struct s_hit_record rec,
-					 t_vec3 *attenuation, t_ray *scattered)
+					t_vec3 *attenuation, t_ray *scattered)
 {
 	t_vec3	reflected;
 	t_vec3	scatt_tmp;

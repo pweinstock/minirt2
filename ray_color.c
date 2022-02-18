@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:05:42 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 17:45:53 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 15:01:12 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_vec3	ray_color_ph(t_ray r, t_world *world, int depth)
 	if (!hit(r, world, INFINITY, &rec))
 		return (world->backround);
 	local_color = multiply_vec_vec(rec.material->emitted(&rec),
-			ComputeLightning(world, &rec, &r));
+			computelightning(world, &rec, &r));
 	if (depth <= 0)
 		return (local_color);
 	if (!rec.material->scatter(r, rec, &attenuation, &scattered))
@@ -87,7 +87,7 @@ void	count_pixel(t_world *w, t_picture_part *part,
 				col = ray_average_color(w, part, MLX_SAMPLES_PER_PIXEL,
 						MLX_MAX_DEPTH);
 				my_mlx_pixel_put(img,
-					 part->x.current, MLX_HIGHT - 1 - part->y.current, col);
+					part->x.current, MLX_HIGHT - 1 - part->y.current, col);
 			}
 			else
 			{

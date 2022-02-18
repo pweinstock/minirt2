@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   t_vec3.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 21:13:08 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 15:40:37 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:43:45 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	 T_VEC3_H
-# define	T_VEC3_H
+#ifndef T_VEC3_H
+# define T_VEC3_H
 
 # include <stdint.h>
 # include <stdlib.h>

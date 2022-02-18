@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 13:42:24 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/03 11:41:28 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:43:08 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 double	hit_cone_coat(t_ray r, t_object *object, double t_max)
 {
 	double	a_b_c[3];
-	double	R;
+	double	t;
 	double	sqrt_ret;
 	double	x[2];
 
-	R = pow(object->radius / (object->hight / 2), 2);
-	a_b_c[0] = pow(r.dir.v[0], 2) + pow(r.dir.v[1], 2) - pow(r.dir.v[2], 2) * R;
+	t = pow(object->radius / (object->hight / 2), 2);
+	a_b_c[0] = pow(r.dir.v[0], 2) + pow(r.dir.v[1], 2) - pow(r.dir.v[2], 2) * t;
 	a_b_c[1] = 2 * (r.origin.v[0] * r.dir.v[0] + r.origin.v[1] * r.dir.v[1]);
-	a_b_c[1] -= 2 * r.origin.v[2] * r.dir.v[2] * R;
+	a_b_c[1] -= 2 * r.origin.v[2] * r.dir.v[2] * t;
 	a_b_c[2] = pow(r.origin.v[0], 2) + pow(r.origin.v[1], 2);
-	a_b_c[2] -= pow(r.origin.v[2], 2) * R;
+	a_b_c[2] -= pow(r.origin.v[2], 2) * t;
 	sqrt_ret = sqrt(a_b_c[1] * a_b_c[1] - 4 * a_b_c[0] * a_b_c[2]);
 	if (sqrt_ret != sqrt_ret || sqrt_ret == 0 || a_b_c[0] == 0)
 		return (t_max);

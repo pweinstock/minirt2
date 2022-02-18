@@ -6,12 +6,12 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:56:03 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/03 11:41:28 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:50:22 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	 MAT_H
-# define	MAT_H
+#ifndef MAT_H
+# define MAT_H
 
 # include "../libvec/t_vec3.h"
 # include "../shapes/shapes.h"

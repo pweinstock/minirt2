@@ -6,7 +6,7 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 17:53:09 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/08 14:30:54 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:51:04 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 	// cam->w = unit_vector(minus_vec_vec(cam->origin, orientation));
 void	set_cam(t_camera *cam, t_vec3 origin,
-			 t_vec3 orientation, double degrees)
+			t_vec3 orientation, double degrees)
 {
 	double	theta;
 	double	h;

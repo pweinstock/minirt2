@@ -6,12 +6,12 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 18:54:53 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/10 10:13:01 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 15:00:27 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	 WORLD_H
-# define	WORLD_H
+#ifndef WORLD_H
+# define WORLD_H
 
 # include <stdint.h>
 # include <stdlib.h>
@@ -116,9 +116,6 @@ typedef struct s_world
 	char			*name;
 	pthread_mutex_t	hight_mutex;
 	int				picture_part_hight;
-	t_bool			A_flag;
-	t_bool			L_flag;
-	t_bool			C_flag;
 	double			r;
 	double			g;
 	double			b;
@@ -127,7 +124,7 @@ typedef struct s_world
 void	my_mlx_pixel_put(t_data *data, int x, int y, t_color color);
 int		create_trgb(int t, t_color color);
 t_bool	hit(t_ray r, t_world *world, double t_max, t_hit_record *rec);
-t_color	ComputeLightning(t_world *world, t_hit_record *rec, t_ray *ray);
+t_color	computelightning(t_world *world, t_hit_record *rec, t_ray *ray);
 void	write_color(t_vec3 color, int fd);
 void	ft_make_bmp(int *arr);
 int		ft_inden(int key, int x, int y, t_world *world);

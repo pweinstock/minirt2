@@ -6,11 +6,24 @@
 /*   By: pweinsto <pweinsto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:44:09 by pweinsto          #+#    #+#             */
-/*   Updated: 2022/02/10 15:34:00 by pweinsto         ###   ########.fr       */
+/*   Updated: 2022/02/18 10:48:03 by pweinsto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+int	extension(char *str)
+{
+	size_t	len;
+
+	len = ft_strlen(str);
+	if (len < 3)
+		return (0);
+	if (str[len - 1] != 't' || str[len - 2] != 'r' || str[len - 3] != '.')
+		return (0);
+	else
+		return (1);
+}
 
 int	identifier(char *line, t_world *world)
 {
@@ -33,7 +46,7 @@ int	identifier(char *line, t_world *world)
 		cylinder(line, world);
 	else
 	{
-		printf("Error\n%c: No such identifier", line[0]);
+		printf("Error\n%c: No such identifier\n", line[0]);
 		exit(0);
 	}
 	count_object(world, line);
@@ -44,6 +57,11 @@ int	parser(char *file, t_world *world)
 {
 	int	fd;
 
+	if (!extension(file))
+	{
+		printf("Error\n%s: Is not a valid .rt file\n", file);
+		exit(0);
+	}
 	world->n_hittabels = 0;
 	world->n_lights = 0;
 	fd = open(file, O_RDONLY);

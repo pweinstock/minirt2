@@ -6,12 +6,12 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:48:54 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/05 17:59:38 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:51:16 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	 CAM_H
-# define	CAM_H
+#ifndef CAM_H
+# define CAM_H
 
 # include "../libray/ray.h"
 

@@ -6,12 +6,12 @@
 /*   By: shackbei <shackbei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:32:52 by shackbei          #+#    #+#             */
-/*   Updated: 2022/02/09 12:19:50 by shackbei         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:34:53 by shackbei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	 SHAPES_H
-# define	SHAPES_H
+#ifndef SHAPES_H
+# define SHAPES_H
 
 # include "../libray/ray.h"
 # include "../libmat/material.h"
@@ -29,10 +29,17 @@ typedef struct s_hit_record
 	t_bool		front_face;
 }	t_hit_record;
 
+struct					s_object;
+
+typedef t_bool			(*t_hit)(
+		t_ray			r,
+		struct			s_object *object,
+		double			t_max,
+		t_hit_record	*rec);
+
 typedef struct s_object
 {
-	t_bool (*hit)(t_ray r, struct s_object * object,
-		double t_max, t_hit_record * rec);
+	t_hit		hit;
 	t_material	mat;
 	t_vec3		center;
 	double		radius;

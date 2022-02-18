@@ -4,7 +4,6 @@ make -C ./.minilibx_macos
 make -C ./parser
 make -C ./libcam
 make -C ./libmat
- 
 make -C ./libmath
 make -C ./libray
 make -C ./libvec
@@ -19,14 +18,6 @@ cc -Wall -Wextra -Werror -O2   -c -o hooks.o hooks.c
 cc -Wall -Wextra -Werror -O2   -c -o free_all.o free_all.c
 cc -Wall -Wextra -Werror -O2   -c -o make_image.o make_image.c
 cc -Wall -Wextra -Werror -O2   -c -o make_picture.o make_picture.c
+cc ./.minilibx_macos/libmlx.a ./parser/parser.a ./libcam/libcam.a ./libmat/libmat.a ./libmath/libmath.a ./shapes/shapes.a ./libray/libray.a ./libvec/libvec.a ./hit.o ./light.o ./main.o ./plot_scene.o ./ray_color.o ./bit_map.o ./hooks.o ./free_all.o ./make_image.o ./make_picture.o -Wall -Wextra -Werror -O2 -framework OpenGL -framework AppKit -o miniRT
 make: Leaving directory `/Users/shackbei/Documents/code/Projects/miniRT'
- 
-make: *** No rule to make target `.minilibx_macos/libmlx.a', needed by `miniRT'.
-make: *** No rule to make target `parser/parser.a', needed by `miniRT'.
-make: *** No rule to make target `libcam/libcam.a', needed by `miniRT'.
-make: *** No rule to make target `libmat/libmat.a', needed by `miniRT'.
-make: *** No rule to make target `libmath/libmath.a', needed by `miniRT'.
-make: *** No rule to make target `shapes/shapes.a', needed by `miniRT'.
-make: *** No rule to make target `libray/libray.a', needed by `miniRT'.
-make: *** No rule to make target `libvec/libvec.a', needed by `miniRT'.
  
